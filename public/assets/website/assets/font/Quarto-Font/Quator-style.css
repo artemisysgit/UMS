@@ -1,0 +1,62 @@
+@font-face {
+    font-family: 'Quatro';
+    src: url('Quatro-Regular.eot');
+    src: local('Quatro Regular'), local('Quatro-Regular'),
+        url('Quatro-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Quatro-Regular.woff2') format('woff2'),
+        url('Quatro-Regular.woff') format('woff'),
+        url('Quatro-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quatro';
+    src: url('Quatro-SemiBold.eot');
+    src: local('Quatro SemiBold'), local('Quatro-SemiBold'),
+        url('Quatro-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('Quatro-SemiBold.woff2') format('woff2'),
+        url('Quatro-SemiBold.woff') format('woff'),
+        url('Quatro-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quatro';
+    src: url('Quatro-Medium.eot');
+    src: local('Quatro Medium'), local('Quatro-Medium'),
+        url('Quatro-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Quatro-Medium.woff2') format('woff2'),
+        url('Quatro-Medium.woff') format('woff'),
+        url('Quatro-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Quatro';
+    src: url('Quatro-Bold.eot');
+    src: local('Quatro Bold'), local('Quatro-Bold'),
+        url('Quatro-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Quatro-Bold.woff2') format('woff2'),
+        url('Quatro-Bold.woff') format('woff'),
+        url('Quatro-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: 'Quatro';
+    src: url('Quatro-Light.eot');
+    src: local('Quatro Light'), local('Quatro-Light'),
+        url('Quatro-Light.eot?#iefix') format('embedded-opentype'),
+        url('Quatro-Light.woff2') format('woff2'),
+        url('Quatro-Light.woff') format('woff'),
+        url('Quatro-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+

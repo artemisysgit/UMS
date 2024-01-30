@@ -1,0 +1,4576 @@
+@font-face {
+    font-family: 'Quarto';
+    src: url('../font/quarto-medium-webfont.woff2') format('woff2'),
+        url('../font/quarto-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'GT America Trial rg';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/GT-America/GT-America-Standard-Regular-Trial.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'GT America Trial bl';
+    font-style: normal;
+    font-weight: bold;
+    src: url('../font/GT-America/GT-America-Standard-Bold-Trial.woff') format('woff');
+}
+
+/* Global */
+
+:root {
+    --clr-gray: #3C3C3C;
+    --clr-orange: #DD9F00;
+    --clr-black: #393939;
+    --clr-body: #595959;
+    --clr-white: #fff;
+    --clr-purple: #4E2895;
+    --gradient: linear-gradient(90deg, #2B62DE 4.71%, #824AE1 96.18%);
+    --hover-gradient: linear-gradient(90deg, #27B1FF 4.71%, #B366FF 96.18%);
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'GT America Trial', sans-serif;
+    /* font-family: 'Quarto'; */
+    overflow-x: hidden !important;
+    color: var(--clr-body);
+    font-size: 18px;
+    font-weight: 400;
+}
+
+ul li,
+ol li {
+    list-style: none;
+}
+
+ul {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+a {
+    text-decoration: none !important;
+    transition: all .3s ease-in-out;
+}
+
+img {
+    width: auto;
+    height: auto;
+    max-width: 100%;
+}
+
+.mb {
+    margin-bottom: 100px;
+}
+
+.mbl {
+    margin-bottom: 150px;
+}
+
+.py {
+    padding: 100px 0;
+}
+
+.container-fluid {
+    padding: 0 170px;
+}
+
+.heading {
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 50px;
+}
+
+.heading h5 {
+    color: var(--clr-black);
+    font-family: GT America Trial rg;
+    font-size: 20px;
+    font-weight: 500;
+    position: relative;
+    z-index: 9;
+    display: inline-block;
+    padding: 7px 25px;
+    font-style: normal;
+    margin-bottom: 10px;
+}
+
+.heading h2 {
+    color: var(--clr-black);
+    font-family: Quarto;
+    font-size: 40px;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.heading p {
+    color: var(--clr-gray);
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+.heading h5 .sub-heading-bg {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.btn-main {
+    margin-top: 50px;
+}
+
+.btn-main a {
+    display: inline-block;
+}
+
+.master-btn button svg {
+    margin-left: 10px;
+}
+
+.btn-main button {
+    position: relative;
+    padding: 15px 40px;
+    border: 0;
+    overflow: hidden;
+    z-index: 2;
+    color: var(--clr-white);
+    border-radius: 35px;
+    font-size: 16px;
+    font-family: GT America Trial rg;
+    background-image: var(--gradient);
+}
+
+.btn-main button::before {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: -1;
+    background-image: var(--hover-gradient);
+    transition: all 0.3s ease-in-out;
+    content: "";
+}
+
+.btn-main .master-btn:hover button::before {
+    opacity: 1;
+    transition: all 0.3s ease-in-out;
+}
+
+.slick-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: -35px;
+}
+
+.slick-dots li button::before {
+    font-size: 0;
+}
+
+.slick-dots li button {
+    width: auto;
+    height: auto;
+}
+
+.slick-dots li {
+    width: 10px;
+    height: 10px;
+    border: solid 2px var(--clr-purple);
+    background-color: transparent;
+    border-radius: 100%;
+}
+
+.slick-dots .slick-active {
+    width: 8px;
+    height: 8px;
+    border: solid 2px transparent;
+    background: var(--gradient);
+    border-radius: 100%;
+}
+
+.slick-prev {
+    left: -75px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    border: solid 1px #E7E7E7;
+    background: transparent;
+    transition: all .3s ease-in-out;
+}
+
+.slick-next {
+    right: -75px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    border: solid 1px #E7E7E7;
+    background: transparent;
+    transition: all .3s ease-in-out;
+}
+
+.slick-prev::before,
+.slick-next::before {
+    display: none;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background: #FFEECE;
+    border: solid 1px #FFEECE;
+}
+
+
+/* Header */
+
+
+header {
+    z-index: 999;
+    position: absolute;
+    width: 100%;
+}
+
+header .container-fluid {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 170px;
+}
+
+header .navigation .main-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.login a,
+.registration a {
+    display: inline-flex;
+}
+
+.login a svg,
+.registration a svg {
+    margin-right: 5px;
+}
+
+header .navigation .main-menu li {
+    position: relative;
+    padding: 10px 0;
+    transition: all .3s ease-in-out;
+}
+
+header .navigation .main-menu>li {
+    margin: 10px;
+}
+
+header .navigation .main-menu>li a {
+    position: relative;
+}
+
+header .navigation .main-menu>li>a::before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--clr-orange);
+    content: "";
+    z-index: 99;
+    transition: all .3s ease-in-out;
+}
+
+header .navigation .main-menu>li>a.active::before {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--clr-orange);
+    content: "";
+    z-index: 99;
+    transition: all .3s ease-in-out;
+}
+
+header .navigation .main-menu>li:hover>a::before {
+    width: 100%;
+}
+
+header .navigation .sub-menu {
+    position: absolute;
+    top: 140%;
+    left: 10px;
+    width: 200px;
+    height: auto;
+    opacity: 0;
+    pointer-events: none;
+    background-color: var(--clr-white);
+    transition: all .5s ease-in-out;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px 5px rgba(186, 186, 186, 0.15);
+}
+
+header .navigation .main-menu>li:hover .sub-menu {
+    opacity: 1;
+    pointer-events: auto;
+    top: 100%;
+}
+
+
+.hamburger {
+    display: none;
+}
+
+.hamburger .line {
+    width: 50px;
+    height: 5px;
+    background-color: var(--clr-white);
+    display: block;
+    margin: 8px auto;
+    -webkit-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+}
+
+.hamburger:hover {
+    cursor: pointer;
+}
+
+#hamburger-1.is-active .line:nth-child(2) {
+    opacity: 0;
+}
+
+#hamburger-1.is-active .line:nth-child(1) {
+    -webkit-transform: translateY(13px) rotate(45deg);
+    -ms-transform: translateY(13px) rotate(45deg);
+    -o-transform: translateY(13px) rotate(45deg);
+    transform: translateY(13px) rotate(45deg);
+}
+
+#hamburger-1.is-active .line:nth-child(3) {
+    -webkit-transform: translateY(-13px) rotate(-45deg);
+    -ms-transform: translateY(-13px) rotate(-45deg);
+    -o-transform: translateY(-13px) rotate(-45deg);
+    transform: translateY(-13px) rotate(-45deg);
+}
+
+.arrow {
+    position: absolute;
+    width: 11px;
+    height: 11px;
+    top: -5.5px;
+    left: 32px;
+    background-color: var(--clr-white);
+    transform: rotate(45deg);
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+    z-index: -1;
+}
+
+header .navigation .sub-menu li {
+    padding: 10px 15px;
+    transition: all .3s ease-in-out;
+    border-radius: 5px;
+}
+
+header .navigation .sub-menu li:hover {
+    background-color: var(--clr-orange);
+}
+
+.main-menu>li a.active {
+    color: var(--clr-orange);
+}
+
+header .navigation .sub-menu li:first-child:hover~.arrow {
+    background-color: var(--clr-orange);
+}
+
+header .navigation li a {
+    color: var(--clr-white);
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px;
+}
+
+header .navigation li:hover a {
+    color: var(--clr-orange);
+}
+
+header .navigation .main-menu>li:hover .sub-menu li a {
+    color: var(--clr-orange);
+}
+
+header .navigation .main-menu>li .sub-menu li:hover a {
+    color: var(--clr-white);
+}
+
+header .navigation .dropdown svg path {
+    transition: all .3s ease-in-out;
+    stroke: var(--clr-white);
+}
+
+header .navigation .dropdown:hover svg path {
+    stroke: var(--clr-orange);
+}
+
+header .navigation .main-menu .login a {
+    padding: 15px 25px;
+    color: var(--clr-white);
+    background-color: transparent;
+    border-radius: 5px;
+    border-radius: 35px;
+    border: solid 1px var(--clr-white);
+}
+
+header .navigation .main-menu .registration a {
+    padding: 15px 25px;
+    color: var(--clr-white);
+    background-color: var(--clr-orange);
+    border-radius: 5px;
+    border-radius: 35px;
+    border: solid 1px var(--clr-orange);
+}
+
+header .navigation .main-menu .login a:hover {
+    color: var(--clr-orange);
+    background: var(--clr-white);
+}
+
+header .navigation .main-menu .registration a:hover {
+    color: var(--clr-orange);
+    background: var(--clr-white);
+    border: solid 1px var(--clr-white);
+}
+
+header .navigation .main-menu .login a svg path,
+header .navigation .main-menu .registration a svg path {
+    transition: all .3s ease-in-out;
+}
+
+header .navigation .main-menu .login a svg path,
+header .navigation .main-menu .registration a svg path {
+    stroke: var(--clr-white);
+}
+
+header .navigation .main-menu .login a:hover svg path,
+header .navigation .main-menu .registration a:hover svg path {
+    stroke: var(--clr-orange);
+}
+
+header .navigation .main-menu>.dropdown>a::before,
+header .navigation .main-menu>.login>a::before,
+header .navigation .main-menu>.registration>a::before {
+    display: none;
+}
+
+
+
+/* Banner */
+
+.progress circle {
+    fill: #796BFF !important;
+}
+
+.progress {
+    display: flex;
+    height: inherit;
+    overflow: hidden;
+    font-size: inherit;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.banner-slide-main {
+    background: url(../images/banner/banner-bg.png) no-repeat center;
+    background-size: cover;
+}
+
+.banner {
+    position: relative;
+}
+
+.banner .container-fluid {
+    padding: 140px 170px 50px;
+    width: 100%;
+    height: 100vh;
+}
+
+.banner-slider-sub {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.banner-slider-sub .banner-img1 {
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+    z-index: 9;
+    animation: zoom-ani 1s;
+}
+
+.banner-slider-sub .banner-img2 {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+    z-index: 9;
+    animation: zoom-ani 1.2s;
+}
+
+.banner-slider-sub .banner-img3 {
+    position: absolute;
+    top: 80px;
+    right: 225px;
+    z-index: 9;
+    animation: zoom-ani 1.8s;
+}
+
+.banner-download {
+    position: absolute;
+    bottom: -40px;
+    left: 460px;
+    z-index: 10;
+    width: 10%;
+}
+
+.banner-download .dropdown-img {
+    position: relative;
+}
+
+.banner-download .dropdown-img .download-icon {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    animation: up-down 4s infinite;
+}
+
+.banner-text {
+    width: 55%;
+    position: absolute;
+    top: 46%;
+    left: 54%;
+    color: var(--clr-white);
+    z-index: 90;
+    transform: translate(-47%, -54%);
+}
+
+.banner-text h2 {
+    font-family: Quarto;
+    font-size: 65px;
+    font-weight: 300;
+    padding-left: 150px;
+    animation: zoom-ani .8s;
+}
+
+.banner-text h1 {
+    text-shadow: 0px 24px 20px rgba(0, 0, 0, 0.07);
+    font-family: Quarto;
+    font-size: 280px;
+    font-weight: 300;
+    letter-spacing: -2.8px;
+    line-height: 220px;
+    animation: zoom-ani .8s;
+}
+
+.banner-text p {
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+    padding-left: 150px;
+    padding-right: 70px;
+    animation: zoom-ani .8s;
+    margin-top: 50px;
+    padding-right: 100px;
+}
+
+#slick-1 {
+    position: relative;
+}
+
+.progress-round__wrap {
+    position: absolute;
+    bottom: 50px;
+    right: 70px;
+}
+
+
+/* Categories */
+
+.categories {
+    text-align: center;
+    position: relative;
+}
+
+.categories-box {
+    background: linear-gradient(180deg, rgba(245, 245, 245, 0.90) 0%, rgba(255, 255, 255, 0.90) 100%);
+    backdrop-filter: blur(10px);
+    padding: 50px;
+    transition: all .3s ease-in-out;
+    height: 100%;
+}
+
+.categories-icon {
+    margin-bottom: 20px;
+    position: relative;
+    height: 88px;
+}
+
+.categories-icon .categories-icon-normal {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 1;
+    transform: translateX(-50%);
+    transition: all .3s ease-in-out;
+}
+
+.categories-icon .categories-icon-hover {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
+
+.categories-box:hover .categories-icon .categories-icon-normal {
+    opacity: 0;
+}
+
+.categories-box:hover .categories-icon .categories-icon-hover {
+    opacity: 1;
+}
+
+.categories-text {
+    position: relative;
+}
+
+.categories-box h3 {
+    color: var(--clr-black);
+    font-family: Quarto;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 15px;
+}
+
+.categories-box p {
+    color: var(--clr-body);
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 27px;
+    margin-bottom: 25px;
+}
+
+.categories-box h6 {
+    color: #2E2E2E;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 0;
+    justify-content: center;
+    transition: all .3s ease-in-out;
+}
+
+.categories-box h6 .btn-right {
+    margin-left: -10px;
+    opacity: 0;
+    transition: all .3s ease-in-out;
+}
+
+.categories-box:hover h6 .btn-right {
+    margin-left: 10px;
+    opacity: 1;
+}
+
+.categories-box:hover h6 {
+    color: var(--clr-purple);
+}
+
+.categories-box:hover {
+    background: linear-gradient(180deg, rgba(248, 243, 255, 0.90) 0%, rgba(255, 255, 255, 0.90) 76.87%);
+    box-shadow: 10px 90px 90px 0px rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(10px);
+}
+
+.categories .categories4 {
+    position: absolute;
+    top: 50px;
+    left: 250px;
+    z-index: 9;
+}
+
+.categories .categories5 {
+    position: absolute;
+    bottom: -20px;
+    right: 0;
+    z-index: 9;
+}
+
+
+/* Courses */
+
+.courses {
+    background: linear-gradient(180deg, #F8F5FF 9.51%, rgba(248, 245, 255, 0.00) 65.89%);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    position: relative;
+}
+
+.courses4 {
+    position: absolute;
+    top: -20px;
+    left: 180px;
+    z-index: 9;
+}
+
+.courses .heading {
+    text-align: center;
+}
+
+.courses .tab {
+    overflow: hidden;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.courses .tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 35px;
+    color: #7A7A7A;
+    font-family: GT America Trial rg;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: inline-block;
+    border-radius: 35px;
+}
+
+.courses .tab button.active {
+    background: var(--gradient);
+    color: var(--clr-white);
+}
+
+.courses .tabcontent {
+    display: none;
+}
+
+.courses-slider-img {
+    width: 100%;
+}
+
+.courses-slider-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.courses-slide {
+    padding: 10px;
+}
+
+.courses-slide-main {
+    padding: 15px;
+    background-color: var(--clr-white);
+    /* box-shadow: 0px 0px 15px 0px rgba(145, 145, 145, 0.11); */
+}
+
+.courses-slider-text {
+    padding: 20px 10px;
+}
+
+.courses-slider-text .course-detail {
+    margin-bottom: 20px;
+}
+
+.courses-slider-text .course-detail li {
+    color: #717171;
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+}
+
+.courses-slider-text .course-detail li svg {
+    margin-right: 5px;
+}
+
+.courses-slider-text a {
+    color: #3D3D3D;
+    font-family: Quarto;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 30px;
+    margin-bottom: 20px;
+    display: inline-block;
+    transition: all .3s ease-in-out;
+}
+
+.courses-slider-text a:hover {
+    color: var(--clr-purple);
+}
+
+.courses-rateing {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.courses-rateing li {
+    color: #6F6F6F;
+    font-family: GT America Trial rg;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.course-fee {
+    color: #696969;
+    font-family: GT America Trial rg;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.course-fee span {
+    color: #3D3D3D;
+    font-family: GT America Trial rg;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.courses .btn-main {
+    text-align: center;
+    margin-top: 80px;
+}
+
+/* Admissions */
+
+.admissions {
+    background: url(../images/admissions/admissions-bg.png) no-repeat center;
+    padding: 75px 0;
+    position: relative;
+    background-size: cover;
+}
+
+.admissions::before {
+    background: url(../images/admissions/Admissions-model.png) no-repeat center;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    background-size: cover;
+    position: absolute;
+    z-index: 9;
+    content: "";
+}
+
+.admissions .admissions-sub1 {
+    width: 100%;
+    text-align: left;
+    color: var(--clr-white);
+}
+
+.admissions .admissions-sub1 .heading {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+.admissions .admissions-sub1 .heading h5 {
+    padding: 0;
+    color: var(--clr-white);
+}
+
+.admissions .admissions-sub1 .heading h2 {
+    color: var(--clr-white);
+}
+
+.admissions .admissions-sub1 .heading p {
+    text-align: left;
+    color: var(--clr-white);
+}
+
+.admissions .admissions-sub1 ul {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.admissions .admissions-sub1 ul li {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-bottom: 20px;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.admissions .admissions-sub1 ul li svg {
+    margin-right: 10px;
+}
+
+.admissions .admissions-sub1 .admissions-sub-btn {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.admissions .admissions-sub1 .admissions-sub-btn a {
+    background-color: var(--clr-white);
+    color: #6952E1;
+    padding: 15px 40px;
+    border-radius: 35px;
+    transition: all .3s ease-in-out;
+    border: solid 1px var(--clr-white);
+    font-size: 16px;
+    font-family: GT America Trial rg;
+}
+
+.admissions .admissions-sub1 .admissions-sub-btn a svg {
+    margin-left: 10px;
+}
+
+.admissions .admissions-sub1 .admissions-sub-btn:hover a {
+    background-color: transparent;
+    color: var(--clr-white);
+}
+
+.admissions .admissions-sub1 .admissions-sub-btn a svg path {
+    transition: all .3s ease-in-out;
+}
+
+.admissions .admissions-sub1 .admissions-sub-btn:hover a svg path {
+    stroke: var(--clr-white);
+}
+
+.admissions .admissions-sub2 {
+    width: 85%;
+    float: right;
+    background-color: var(--clr-white);
+    padding: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.admissions .admissions-sub2 .admissions-form h3 {
+    color: #3F3F3F;
+    text-align: center;
+    font-family: Quarto;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 30px;
+}
+
+.admissions .admissions-sub2 .admissions-form form input {
+    color: #717171;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+    border: solid 1px #EBEBEB;
+    text-indent: 15px;
+    line-height: 50px;
+    margin-bottom: 15px;
+}
+
+.admissions .admissions-sub2 .admissions-form form textarea {
+    color: #717171;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    width: 100%;
+    border: solid 1px #EBEBEB;
+    text-indent: 15px;
+    line-height: 50px;
+    margin-bottom: 15px;
+    height: 120px;
+    resize: none;
+}
+
+.admissins-date {
+    position: relative;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.admissins-date #date-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 9;
+}
+
+.admissions-form .btn-main {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.ui-datepicker-title {
+    font-family: GT America Trial rg;
+}
+
+.ui-datepicker table {
+    font-family: GT America Trial rg;
+}
+
+.Admissions1 {
+    position: absolute;
+    top: -25px;
+    right: -25px;
+    z-index: 9;
+}
+
+.Admissions2 {
+    position: absolute;
+    bottom: -15px;
+    left: 50px;
+    z-index: 9;
+}
+
+.Admissions4 {
+    position: absolute;
+    top: 150px;
+    left: 180px;
+    z-index: 9;
+}
+
+.Admissions5 {
+    position: absolute;
+    bottom: -130px;
+    left: 0;
+    z-index: 9;
+}
+
+/* Introduce */
+
+.introduce {
+    position: relative;
+}
+
+.Introduce-icon2 {
+    position: absolute;
+    right: 150px;
+    top: 150px;
+    z-index: 9;
+}
+
+.Introduce-icon3 {
+    position: absolute;
+    right: 250px;
+    bottom: 150px;
+    z-index: 9;
+}
+
+.Introduce-icon4 {
+    position: absolute;
+    left: 250px;
+    bottom: 150px;
+    z-index: 9;
+}
+
+.Introduce-icon5 {
+    position: absolute;
+    left: 40%;
+    top: -50px;
+    z-index: 9;
+}
+
+.introduce-team {
+    margin: 20px 0;
+}
+
+.introduce-team-img {
+    position: relative;
+}
+
+.introduce-team-img img {
+    margin: 0 auto;
+    display: table;
+}
+
+.introduce-team-img::before {
+    width: 100%;
+    height: 90%;
+    left: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: linear-gradient(180deg, #F5EFFF 0%, #F9F9F9 101.59%);
+}
+
+.introduce-team-img::after {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    background: linear-gradient(180deg, #FFF7DC 0%, #F9F9F9 101.59%);
+    transition: all .3s ease-in-out;
+    visibility: visible;
+}
+
+.introduce .introduce-team:hover .introduce-team-img::after {
+    opacity: 1;
+}
+
+.introduce .introduce-team:hover .introduce-team-img::before {
+    opacity: 0;
+}
+
+.introduce .heading h5 .sub-heading-bg {
+    top: 5px;
+}
+
+.introduce .heading p {
+    text-align: left;
+}
+
+.introduce .heading {
+    margin: 20px 0;
+}
+
+.introduce-team-text {
+    margin-top: 15px;
+}
+
+.introduce-team-text h4 {
+    color: #323232;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.introduce-team-text p {
+    margin-bottom: 0;
+    color: #686868;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.introduce-team-text p span {
+    color: #DD9F00;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+
+/* reviews */
+
+
+.reviews .reviews-sec {
+    background: #FFF;
+    padding: 100px 0 0;
+    box-shadow: 0px -170px 180px 0px rgba(0, 0, 0, 0.05);
+    margin: 0 170px;
+}
+
+.reviews .reviews-sec .heading h2 {
+    text-align: center;
+}
+
+.reviews .reviews-slider .slick-dots {
+    display: none !important;
+}
+
+.reviews-slide {
+    text-align: center;
+    margin: 15px;
+    padding: 25px;
+    background: #FFF;
+    box-shadow: 0px 0px 20px 0px rgba(120, 120, 120, 0.1);
+}
+
+.reviews-slide .reviews-img {
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.reviews-slide .reviews-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.reviewer {
+    margin-bottom: 20px;
+}
+
+.reviewer h4 {
+    color: #3D3D3D;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 5px;
+}
+
+.reviewer h6 {
+    color: #777;
+    font-family: GT America Trial rg;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.reviews-detail p {
+    color: #696969;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 5px;
+    line-height: 20px;
+}
+
+.reviews-detail ul {
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.reviews-detail ul li {
+    margin: 0 2px;
+}
+
+.reviews .btn-main {
+    margin-top: 50px;
+    position: relative;
+    z-index: 99;
+    text-align: center;
+}
+
+.reviewicon1 {
+    position: absolute;
+    right: 100px;
+    top: -250px;
+    z-index: 9;
+}
+
+.reviewicon {
+    position: absolute;
+    left: 150px;
+    bottom: -20px;
+    z-index: 9;
+}
+
+/* experience */
+
+.experience .container {
+    position: relative;
+}
+
+.experience .heading {
+    text-align: center;
+}
+
+.experience .experience-icon {
+    position: absolute;
+    top: -50px;
+    right: -135px;
+    z-index: 9;
+}
+
+.experience-video {
+    background: #FFF;
+    box-shadow: 0px 0px 145px 0px #E0E0E0;
+    position: relative;
+    padding: 20px;
+}
+
+.experience-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.exp-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9;
+    cursor: pointer;
+}
+
+.experience-text {
+    width: 90%;
+    float: right;
+}
+
+.experience-text h3 {
+    color: #393939;
+    font-family: Quarto;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 20px;
+}
+
+.experience-text p {
+    color: #3C3C3C;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 29px;
+    margin-bottom: 0;
+}
+
+.experience-text .btn-main {
+    margin-top: 25px;
+}
+
+.modal-dialog.modal-dialog-centered {
+    width: 60%;
+    max-width: none;
+}
+
+.modal {
+    background: #000000b0;
+}
+
+
+/* agency */
+
+.agency {
+    background: url(../images/agency/agency1-bg.png) no-repeat center;
+    background-attachment: fixed;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.agency::before {
+    position: absolute;
+    background: linear-gradient(105deg, rgba(31, 71, 160, 0.80) 14.65%, rgba(98, 54, 174, 0.80) 58.03%, rgba(106, 51, 200, 0.80) 96.78%);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: "";
+    z-index: 9;
+}
+
+.agency::after {
+    position: absolute;
+    bottom: -80%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 700px;
+    content: "";
+    z-index: 9;
+    border-radius: 714px;
+    background: rgba(47, 92, 193, 0.50);
+    mix-blend-mode: plus-lighter;
+    filter: blur(192px);
+}
+
+.agency .container {
+    padding: 120px 0;
+    position: relative;
+    z-index: 15;
+    text-align: center;
+}
+
+.agency .container .heading {
+    margin-bottom: 0;
+}
+
+.agency .heading {
+    width: 100%;
+}
+
+.agency .heading h2 {
+    color: var(--clr-white);
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+.agency .heading .agency-contact {
+    font-size: 45px;
+    font-family: GT America Trial rg;
+    margin-bottom: 0;
+}
+
+.agency .heading h3 {
+    color: #FFF;
+    font-family: GT America Trial rg;
+    font-size: 35px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 20px;
+}
+
+.agency .agency-sub-btn {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.agency .agency-sub-btn a {
+    background-color: var(--clr-white);
+    color: #6952E1;
+    padding: 15px 40px;
+    border-radius: 35px;
+    transition: all .3s ease-in-out;
+    border: solid 1px var(--clr-white);
+    font-size: 16px;
+    font-family: GT America Trial rg;
+}
+
+.agency .agency-sub-btn a svg {
+    margin-left: 10px;
+}
+
+.agency .agency-sub-btn:hover a {
+    background-color: transparent;
+    color: var(--clr-white);
+}
+
+.agency .agency-sub-btn a svg path {
+    transition: all .3s ease-in-out;
+}
+
+.agency .agency-sub-btn:hover a svg path {
+    stroke: var(--clr-white);
+}
+
+
+/* parents-testimonial */
+
+.parents-testimonial {
+    position: relative;
+    background: linear-gradient(180deg, #F0E8FF 0%, rgba(240, 232, 255, 0.00) 60.38%);
+    text-align: center;
+    padding: 100px 0;
+}
+
+.parents-testimonial-slider .slick-dots {
+    display: none !important;
+}
+
+.parents-testimonial-slider.slick-initialized.slick-slider.slick-dotted {
+    margin-bottom: 0;
+}
+
+.parents-testimonial-slide {
+    border: solid 1px transparent;
+    margin: 0 10px;
+    transition: all .3s ease-in-out;
+    background: #fff;
+    padding: 40px 30px;
+    position: relative;
+}
+
+.parents-testimonial-slide a {
+    position: relative;
+    z-index: 9;
+}
+
+.parents-testimonial-slide::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(138deg, #3564CF -3.63%, #824AE1 88.38%);
+    z-index: 5;
+    opacity: 0;
+    content: "";
+    transition: all .3s ease-in-out;
+}
+
+.parents-testimonial-slide:hover::before {
+    opacity: 1;
+}
+
+.parents-testimonial-slider {
+    filter: drop-shadow(10px 15px 34px rgba(142, 163, 175, 0.17));
+}
+
+.parents-testimonial-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.parents-testimonial-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.parents-testimonial-text h3 {
+    color: #3D3D3D;
+    text-align: center;
+    font-family: Quarto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    transition: all .3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.parents-testimonial-text .cut {
+    text-align: left;
+}
+
+.parents-testimonial-text p {
+    color: #5B5B5B;
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 27px;
+    transition: all .3s ease-in-out;
+    margin-bottom: 30px;
+}
+
+.parents-testimonial-text a {
+    color: var(--clr-gray);
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 27px;
+    transition: all .3s ease-in-out;
+    margin-bottom: 0;
+    text-align: center;
+    display: inline-block;
+}
+
+.parents-testimonial-text a svg {
+    margin-left: 5px;
+}
+
+.parents-testimonial-slide:hover .parents-testimonial-text h3 {
+    color: var(--clr-white);
+}
+
+.parents-testimonial-slide:hover .parents-testimonial-text p {
+    color: var(--clr-white);
+}
+
+.parents-testimonial-slide:hover .parents-testimonial-text a {
+    color: var(--clr-white);
+}
+
+.parents-testimonial-slide .parents-testimonial-text a svg path {
+    transition: all .3s ease-in-out;
+}
+
+.parents-testimonial-slide:hover .parents-testimonial-text a svg path {
+    stroke: var(--clr-white);
+}
+
+
+/* Subscribe */
+
+.subscribe {
+    position: relative;
+}
+
+.subscribe::before {
+    position: absolute;
+    background: #F9F9FF;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 150%;
+    content: "";
+    z-index: -1;
+}
+
+.subscribe .container {
+    position: relative;
+    padding: 25px 25px 25px 70px;
+    background-color: var(--clr-white);
+    background: #FFF;
+    box-shadow: 0px 0px 150px 0px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.subscribe .container .subscribe-des {
+    position: absolute;
+    top: -50px;
+    left: 0;
+    z-index: 1;
+}
+
+.subscribe-img-main {
+    width: 80%;
+    float: right;
+    height: auto;
+    position: relative;
+}
+
+.subscribe-img-sub {
+    position: absolute;
+    top: 0;
+    left: -125px;
+    z-index: 9;
+}
+
+.subscribe-text {
+    position: relative;
+    z-index: 10;
+}
+
+.subscribe-text h3 {
+    color: #393939;
+    font-family: Quarto;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 10px;
+}
+
+.subscribe-text p {
+    color: #3C3C3C;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+    margin-bottom: 20px;
+}
+
+.subscribe-text .subscribe-form {
+    position: relative;
+}
+
+.subscribe-text .subscribe-form input {
+    text-indent: 85px;
+    position: relative;
+    font-size: 16px;
+    line-height: 70px;
+    border: solid 1px #E8E8E8;
+    border-radius: 100px;
+    width: 100%;
+}
+
+.subscribe-text .subscribe-form .mail-icon {
+    top: 20px;
+    left: 20px;
+    z-index: 2;
+    position: absolute;
+}
+
+.subscribe-text .subscribe-form .btn-main {
+    top: 9px;
+    right: 9px;
+    z-index: 2;
+    position: absolute;
+    margin-top: 0;
+}
+
+.subscribe-text .subscribe-form .btn-main button {
+    padding: 15px 25px;
+}
+
+
+/* News */
+
+.news .container {
+    position: relative;
+}
+
+.news .news-icon {
+    position: absolute;
+    top: -40px;
+    left: 200px;
+    z-index: 9;
+}
+
+.news-slide {
+    margin: 0 10px;
+    transition: all .3s ease-in-out;
+    background: #fff;
+}
+
+.news-slide .news-img {
+    position: relative;
+}
+
+.news-slide .news-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-slide .news-img .news-img-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    border-radius: 25px;
+    color: var(--clr-white);
+    z-index: 9;
+    padding: 10px;
+}
+
+.news-slide .news-text {
+    padding: 20px 0;
+}
+
+.news-slide .news-text h3 {
+    color: #393939;
+    font-family: Quarto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+    margin-bottom: 0;
+}
+
+.news-slide .news-text .news-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #737373;
+    font-family: GT America Trial rg;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.news-slide .news-text .news-detail .news-publisher,
+.news-slide .news-text .news-detail .news-date {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.news-slide .news-text .news-detail svg {
+    margin-right: 5px;
+}
+
+.news-slide:hover h3 {
+    background: var(--Gra1, linear-gradient(90deg, #2B62DE 4.71%, #824AE1 96.18%));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.news .btn-main {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.news-slider .slick-dots {
+    bottom: -65px;
+}
+
+.news .heading {
+    text-align: center;
+}
+
+
+/* footer */
+
+footer {
+    padding-top: 100px;
+    background: linear-gradient(107deg, #2B62DE -3.45%, #824AE1 64.98%, #824AE1 92.63%);
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.footer-des {
+    width: 23%;
+}
+
+.footer-des .footer-logo {
+    margin-left: -10px;
+    margin-bottom: 10px;
+}
+
+.footer-des p {
+    color: #FFF;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 21px;
+    /* 150% */
+    margin-bottom: 20px;
+
+}
+
+.footer-des ul {
+    display: flex;
+    align-items: center;
+}
+
+.footer-des ul li {
+    margin-right: 15px;
+}
+
+.footer-des ul li a {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    border: solid 1px #E9E9E9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-des ul li:hover a {
+    background: #DD9F00;
+    border: solid 1px #DD9F00;
+}
+
+.footer-des ul li a svg path {
+    transition: all .3s ease-in-out;
+}
+
+.footer-des ul li a svg path {
+    stroke: var(--clr-white);
+}
+
+.footer-des ul li:nth-child(2) a svg path {
+    fill: var(--clr-white);
+}
+
+.footer-content {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.footer-content .footer-content-sub {
+    width: 25%;
+}
+
+.footer-content .footer-content-sub h3 {
+    color: var(--clr-white);
+    font-family: Quarto;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 35px;
+}
+
+.footer-content .footer-content-sub ul li a {
+    color: var(--clr-white);
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 30px;
+}
+
+.footer-content .footer-content-sub ul .footer-last-icon {
+    color: #FFF;
+    font-family: GT America Trial;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 23px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.footer-content .footer-content-sub ul .footer-last-icon:last-child {
+    margin-bottom: 0;
+}
+
+.footer-content .footer-content-sub ul .footer-last-icon svg {
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+}
+
+.footer-content .footer-content-sub ul .footer-last-icon:first-child svg {
+    width: 25px;
+    height: 25px;
+}
+
+.footer-content .footer-content-sub ul li a:hover {
+    color: #FFCB45;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-top: 1px solid #FFFFFF1A;
+}
+
+.footer-bottom-left p {
+    color: #D4CFFF;
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 0;
+}
+
+.footer-content-sub ul li {
+    line-height: 30px;
+}
+
+.footer-bottom-right a {
+    display: inline-block;
+    margin-left: 10px;
+    color: #D4CFFF;
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 0;
+}
+
+.footer-bottom-right a:hover {
+    color: #DD9F00;
+}
+
+
+/* scrollToTop */
+
+.scrollToTop {
+    background-color: #fff;
+    border: 1px solid #f2f2f2;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(5px);
+    transition: all 0.15s ease;
+}
+
+.scrollToTop .scrollToTop-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 101;
+    transform: translate(-50%, -50%);
+}
+
+.scrollToTop.showBtn {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scrollToTop #progress-bar {
+    --scrollAmount: 0px;
+}
+
+.scrollToTop #progress-bar svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58px;
+    height: 58px;
+    transform: rotate(90deg);
+}
+
+.scrollToTop #progress-bar svg path {
+    stroke-width: 2px;
+    stroke-dasharray: 154;
+    stroke-dashoffset: calc(-154px + var(--scrollAmount));
+    animation-fill-mode: forwards;
+}
+
+
+
+
+
+
+
+
+
+
+/* ---------- About Us ---------- */
+
+
+
+/* About us banner */
+
+.innere-banner {
+    background-size: cover !important;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 170px 0 100px;
+}
+
+.about-banner {
+    background: url(../images/inner-banner/about-us.png) no-repeat center;
+}
+
+.innere-banner .container {
+    position: relative;
+    text-align: center;
+}
+
+.innere-banner .container h1 {
+    color: var(--clr-white);
+    font-family: Quarto;
+    font-size: 65px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+}
+
+.innere-banner .container p {
+    color: var(--clr-white);
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+    margin-bottom: 50px;
+}
+
+.innere-banner .container span {
+    color: #EEE8FF;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.innere-banner .container span a {
+    color: var(--clr-white);
+    font-size: 17px;
+    font-weight: 500 !important;
+    margin-right: 10px;
+}
+
+.innere-banner .container span a svg {
+    margin-left: 10px;
+}
+
+/* about counter */
+
+.about-counter {
+    margin-top: -50px;
+    position: relative;
+}
+
+.about-counter .container {
+    background: var(--clr-white);
+    box-shadow: 0px 4px 134px 0px rgba(0, 0, 0, 0.08);
+    padding: 40px 0;
+}
+
+.about-counter-sub {
+    width: 33%;
+    border-left: 1px solid #ECECEC;
+}
+
+.about-counter-sub:first-child {
+    border-left: none;
+}
+
+.about-counter-sub-box {
+    margin: 0 auto;
+    width: 75%;
+}
+
+.about-counter-sub-text {
+    margin-left: 20px;
+}
+
+.about-counter-sub-text h3 {
+    color: #393939;
+    font-family: GT America Trial bl;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 0;
+}
+
+.about-counter-sub-text p {
+    color: #393939;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 0;
+}
+
+
+.about-univercity-img {
+    width: 95%;
+    height: auto;
+    position: relative;
+}
+
+.about-univercity-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-univercity-icon1 {
+    position: absolute;
+    top: -10px;
+    z-index: 1;
+    left: 43%;
+}
+
+.about-univercity-icon2 {
+    position: absolute;
+    bottom: 10px;
+    z-index: 1;
+    right: 130px;
+    width: 50px;
+}
+
+.about-univercity-text .heading {
+    margin-bottom: 30px;
+    width: 98%;
+}
+
+.about-univercity-text .heading p {
+    text-align: left;
+}
+
+.about-univercity-text ul {
+    width: 98%;
+    margin: 0 auto;
+    display: table;
+}
+
+.about-univercity-text ul li {
+    padding: 15px;
+    background: #FFF;
+    box-shadow: 0px 24px 34px 0px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+    color: #323232;
+    font-family: Quarto;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: 0.26px;
+}
+
+.about-univercity-text ul li .about-univercity-count {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    background-color: #FFF5E1;
+    color: #393939;
+    font-family: GT America Trial rg;
+    font-size: 23px;
+    font-weight: 500;
+    margin-right: 20px;
+}
+
+/* Scholarship */
+
+.scholarship .container {
+    background: url(../images/scholarship/Scholarship-bg.png) no-repeat center;
+    background-attachment: fixed;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 75px;
+}
+
+.scholarship .container::before {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    background: linear-gradient(105deg, rgba(28, 61, 133, 0.75) 8.47%, rgba(126, 53, 182, 0.75) 60.48%, rgba(135, 51, 220, 0.75) 96.78%);
+    z-index: 1;
+}
+
+.scholarship-text {
+    position: relative;
+    color: var(--clr-white);
+    z-index: 9;
+    width: 65%;
+}
+
+.scholarship-text h2 {
+    font-family: Quarto;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.scholarship-text p {
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    /* 155.556% */
+}
+
+.scholarship .scholarship-sub-btn {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.scholarship .scholarship-sub-btn a {
+    background-color: var(--clr-white);
+    color: #6952E1;
+    padding: 15px 40px;
+    border-radius: 35px;
+    transition: all .3s ease-in-out;
+    border: solid 1px var(--clr-white);
+    font-size: 16px;
+    font-family: GT America Trial rg;
+}
+
+.scholarship .scholarship-sub-btn a svg {
+    margin-left: 10px;
+}
+
+.scholarship .scholarship-sub-btn:hover a {
+    background-color: transparent;
+    color: var(--clr-white);
+}
+
+.scholarship .scholarship-sub-btn a svg path {
+    transition: all .3s ease-in-out;
+}
+
+.scholarship .scholarship-sub-btn:hover a svg path {
+    stroke: var(--clr-white);
+}
+
+.scholarship-img {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 9;
+    width: 38%;
+}
+
+/* professor */
+
+.professor {
+    position: relative;
+}
+
+.professor .heading {
+    text-align: center;
+}
+
+.professor-team-img {
+    position: relative;
+    transition: all .3s ease-in-out;
+}
+
+.professor-team-img img {
+    margin: 0 auto;
+    display: table;
+}
+
+.professor-team-img::before {
+    width: 100%;
+    height: 90%;
+    left: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background: linear-gradient(180deg, #F5EFFF 0%, #F9F9F9 101.59%);
+    transition: all .3s ease-in-out;
+}
+
+.professor-team-img::after {
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    content: "";
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    background: linear-gradient(180deg, #FFF7DC 0%, #F9F9F9 101.59%);
+    transition: all .3s ease-in-out;
+    visibility: visible;
+}
+
+.professor .professor-slide a:hover .professor-team-img::after {
+    opacity: 1;
+}
+
+.professor .professor-slide a:hover .professor-team-img::before {
+    opacity: 0;
+}
+
+.professor-team-text {
+    margin-top: 15px;
+}
+
+.professor-team-text h4 {
+    color: #323232;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.professor-team-text p {
+    margin-bottom: 0;
+    color: #686868;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.professor-team-text p span {
+    color: #DD9F00;
+    font-family: GT America Trial rg;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.professor .professor-slider .slick-dots {
+    display: none !important;
+}
+
+.professor .professor-slide {
+    padding: 0 10px;
+}
+
+.professor .btn-main {
+    text-align: center;
+}
+
+.professor-icon {
+    position: absolute;
+    bottom: 0;
+    left: 100px;
+    z-index: 9;
+}
+
+
+/* Campus */
+
+.campus .container {
+    height: 500px;
+}
+
+.campus-img {
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.campus-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.campus-text {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(107deg, #36569F 0%, #7934EE 66.48%, #7630EE 93.63%);
+    padding: 40px;
+}
+
+.campus-heading h5 {
+    color: #FFF;
+    font-family: GT America Trial rg;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.campus-heading h2 {
+    color: #FFF;
+    font-family: Quarto;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.campus-heading h2 span {
+    color: #FFE500;
+}
+
+.campus-heading p {
+    color: #FFF;
+    font-family: GT America Trial;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    /* 155.556% */
+}
+
+.campus .campus-sub-btn {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.campus .campus-sub-btn a {
+    background-color: var(--clr-white);
+    color: #6952E1;
+    padding: 15px 40px;
+    border-radius: 35px;
+    transition: all .3s ease-in-out;
+    border: solid 1px var(--clr-white);
+    font-size: 16px;
+    font-family: GT America Trial rg;
+}
+
+.campus .campus-sub-btn a svg {
+    margin-left: 10px;
+}
+
+.campus .campus-sub-btn:hover a {
+    background-color: transparent;
+    color: var(--clr-white);
+}
+
+.campus .campus-sub-btn a svg path {
+    transition: all .3s ease-in-out;
+}
+
+.campus .campus-sub-btn:hover a svg path {
+    stroke: var(--clr-white);
+}
+
+.about-subscribe::before {
+    display: none;
+}
+
+
+
+
+
+
+
+
+
+
+/* ---------- Contact Us ---------- */
+
+
+
+/* Contact us banner */
+
+.contact-banner {
+    background: url(../images/inner-banner/contact-banner.png) no-repeat center;
+    margin-bottom: 100px;
+}
+
+
+.contact-message .container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+}
+
+.contact-message .container .message-form {
+    width: 59.5%;
+    padding: 50px;
+    border: solid 1px #E5E5E5;
+    background-color: #fff;
+    box-shadow: 30px 24px 124px 0px rgba(0, 0, 0, 0.05);
+}
+
+.contact-message .container .message-form h3 {
+    color: #393939;
+    text-align: center;
+    font-family: Quarto;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.contact-message .container .message-form p {
+    color: #3C3C3C;
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    /* 155.556% */
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+
+.contact-message .container .message-form input {
+    width: 100%;
+    line-height: 65px !important;
+    color: #707070;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-indent: 30px;
+    margin-bottom: 25px;
+    border: solid 1px #D4D4D4;
+}
+
+.contact-message .container .message-form textarea {
+    width: 100%;
+    line-height: 65px !important;
+    color: #707070;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-indent: 30px;
+    height: 175px;
+    resize: none;
+    margin-bottom: 25px;
+    border: solid 1px #D4D4D4;
+}
+
+.contact-message .container .message-form input[type="checkbox"] {
+    width: 22px;
+    /*Desired width*/
+    height: 22px;
+    /*Desired height*/
+}
+
+.contact-message .container .message-form .form-check-label p {
+    margin-bottom: 0;
+    padding: 0;
+    padding-left: 15px;
+}
+
+.contact-message .container .message-form .form-check-label {
+    font-size: 16px;
+}
+
+.contact-message .container .message-form button {
+    border-radius: 29.331px;
+    background: linear-gradient(90deg, #2B62DE 4.71%, #824AE1 96.18%);
+    padding: 16px;
+    width: 100%;
+    border: none;
+    text-align: center;
+    justify-content: center;
+    color: #fff;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.contact-message .container .message-form button svg {
+    margin-left: 10px;
+}
+
+
+.contact-message .container .touch-form {
+    width: 40%;
+    background: url(../images/contact-form/get-touch-bg.png) no-repeat center;
+    background-size: cover;
+    padding: 35px 50px;
+    position: relative;
+}
+
+.touch-form h3 {
+    color: #FFF;
+    text-align: center;
+    font-family: Quarto;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.touch-form p {
+    color: #FFF;
+    text-align: center;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    position: relative;
+    padding-bottom: 30px;
+    margin-bottom: 40px;
+}
+
+.touch-form p::before {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 50px;
+    height: 1.5px;
+    background: var(--clr-white);
+    content: "";
+}
+
+.touch-form .location-detail li {
+    color: #FFF;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 23px;
+    /* 127.778% */
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.touch-form .location-detail li svg {
+    margin-right: 10px;
+}
+
+.touch-form .location-detail {
+    margin-bottom: 60px;
+}
+
+.touch-form .icon-detail {
+    display: flex;
+    align-items: center;
+}
+
+.touch-form h4 {
+    color: #FFF;
+    font-family: Quarto;
+    font-size: 23px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 15px;
+}
+
+.touch-form .icon-detail li {
+    margin-right: 15px;
+}
+
+.touch-form .icon-detail li a {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    border: solid 1px #E9E9E9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.touch-form .icon-detail li:hover a {
+    background: var(--clr-white);
+    border: solid 1px var(--clr-white);
+}
+
+.touch-form .icon-detail li a svg path {
+    transition: all .3s ease-in-out;
+}
+
+.touch-form .icon-detail li a svg path {
+    stroke: var(--clr-white);
+}
+
+.touch-form .icon-detail li:hover a svg path {
+    stroke: var(--clr-black);
+}
+
+.touch-form .icon-detail li:nth-child(2) a svg path {
+    fill: var(--clr-black);
+}
+
+.tuch-icon {
+    position: absolute;
+    bottom: 65px;
+    right: -80px;
+    z-index: 1;
+
+}
+
+.map {
+    width: 100%;
+    height: 700px;
+}
+
+
+
+
+
+
+
+
+
+
+/* ---------- Course-Details ---------- */
+
+
+
+/* Course-Details */
+
+.course-banner {
+    background: url(../images/inner-banner/course-banner.png) no-repeat center;
+    margin-bottom: 100px;
+    padding: 125px 0 35px;
+    margin-bottom: 50px !important;
+}
+
+.course-banner .innere-banner-text {
+    text-align: left;
+}
+
+.course-banner .innere-banner-text h1 {
+    color: #FFF;
+    font-family: Quarto;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    margin-bottom: 20px;
+}
+
+.course-banner .innere-banner-text p {
+    color: #FFF;
+    font-family: GT America Trial rg;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 32px;
+    /* 160% */
+    text-align: left;
+}
+
+.course-description {
+    padding: 30px 40px;
+    border: solid 1px #D3D3D3;
+    margin-bottom: 50px;
+}
+
+.course-description h3 {
+    color: #393939;
+    font-family: Quarto;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 25px;
+}
+
+
+.course-description P {
+    color: #3C3C3C;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 28px;
+    /* 155.556% */
+}
+
+.course-description .course-description-points {
+    padding: 25px 0;
+}
+
+.course-description .course-description-points li {
+    display: flex;
+    align-items: center;
+    color: #3C3C3C;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+}
+
+.course-description .course-description-points li svg {
+    margin-right: 10px;
+}
+
+.semester #accordionExample .btn.btn-link {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    text-decoration: none;
+}
+
+.semester .card-body {
+    padding: 25px 25px 25px 95px;
+    padding-top: 0;
+}
+
+.semester .btn-link:hover {
+    text-decoration: none;
+}
+
+.semester .accordionExample-title {
+    color: #3D3D3D;
+    font-family: GT America Trial rg;
+    font-size: 20px;
+    font-style: normal;
+    text-transform: capitalize;
+    font-weight: 600;
+}
+
+.semester .accordionExample-title span {
+    background: linear-gradient(139deg, #2B62DE -32.05%, #824AE1 80.61%);
+    width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    color: #FFF;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.semester .card-header {
+    padding: 25px 30px;
+}
+
+.semester .card-body p {
+    color: #3C3C3C;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 29px;
+    /* 161.111% */
+    margin-bottom: 15px !important;
+}
+
+.semester .card-body p:last-child {
+    margin-bottom: 0 !important;
+}
+
+.semester .card {
+    border: none;
+    margin-bottom: 20px;
+    box-shadow: 0px 0px 84px 0px rgba(0, 0, 0, 0.06);
+}
+
+.semester h3 {
+    color: #393939;
+    font-family: Quarto;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 25px;
+}
+
+.semester {
+    margin-bottom: 50px;
+}
+
+.requirements h3 {
+    color: #393939;
+    font-family: Quarto;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 25px;
+}
+
+.requirements ul li {
+    color: #3C3C3C;
+    font-family: GT America Trial rg;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+    /* 222.222% */
+}
+
+.requirements ul li svg {
+    margin-right: 10px;
+}
+
+
+.course-sub-sec {
+    background: none;
+    padding: 0 170px;
+}
+
+.course-sub-sec .container-fluid {
+    background: #fff;
+    box-shadow: 0px -170px 180px 0px rgba(0, 0, 0, 0.05);
+}
+
+.course-sub-sec h3 {
+    color: #393939;
+    font-family: Quarto;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 25px;
+    padding-left: 15px;
+}
+
+.courses-slider {
+    filter: drop-shadow(10px 15px 34px rgba(142, 163, 175, 0.17));
+}
+
+.sub-details-course {
+    background: #FFF;
+    box-shadow: 0px 4px 134px 0px rgba(0, 0, 0, 0.08);
+    margin-top: -325px;
+}
+
+.sub-details-course h4 {
+    color: #323232;
+    font-family: Quarto;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 15px;
+}
+
+.sub-details-course .sub-details-course-details li {
+    color: #595959;
+    font-family: GT America Trial rg;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 10px 0;
+}
+
+.sub-details-course .sub-details-course-details {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #EDEDED;
+}
+
+.sub-details-course p {
+    color: #3C3C3C;
+    font-family: GT America Trial rg;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px; /* 162.5% */
+    margin-bottom: 25px;
+}
+
+.sub-details-course .sub-details-course-details li svg {
+    margin-right: 10px;
+}
+.sub-details-course-form{
+    position: relative;
+}
+.sub-details-course .sub-details-course-form input {
+    text-indent: 70px;
+    position: relative;
+    font-size: 16px;
+    line-height: 60px;
+    border: solid 1px #E8E8E8;
+    border-radius: 100px;
+    width: 100%;
+}
+
+.sub-details-course .mail-icon {
+    top: 12px;
+    left: 20px;
+    z-index: 2;
+    position: absolute;
+}
+
+.sub-details-course .mail-icon svg {
+    width: 40px;
+    height: 40px;
+}
+
+.sub-details-course .btn-main {
+    position: relative;
+    z-index: 9;
+    margin-top: 20px;
+}
+
+.sub-details-course .btn-main button {
+    padding: 15px 25px;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+/* .course-sec{
+    position: relative;
+} */
+
+.sub-details-course {
+    position: static;
+    z-index: 99;
+}
+
+.sub-details-course.sticky {
+    position: static;
+    top: 0;
+}
+
+
+
+/*
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+nav {
+    width: 100%;
+    height: 60px;
+    background: #292f36;
+    position: fixed;
+    z-index: 10;
+}
+
+nav div {
+    color: white;
+    font-size: 2rem;
+    line-height: 60px;
+    position: absolute;
+    top: 0;
+    left: 2%;
+    visibility: hidden;
+}
+.visible-title {
+    visibility: visible;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Animation */
+
+
+@keyframes up-down {
+    0% {
+        top: 30%;
+    }
+
+    50% {
+        top: 50%;
+    }
+
+    100% {
+        top: 30%;
+    }
+}
+
+@keyframes zoom-ani {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+body {
+    max-width: 1920px !important;
+    width: 100%;
+    margin: 0 auto;
+}
+
+
+
+
+/* Responsive */
+
+
+@media only screen and (max-width: 1600px) and (min-width: 1200px) {
+    header .container-fluid {
+        padding: 20px 100px;
+    }
+
+    header .navigation .main-menu>li {
+        margin: 5px;
+    }
+
+    header .navigation li a {
+        font-size: 15px;
+    }
+
+    header .navigation .login {
+        margin-right: 15px !important;
+    }
+
+    .banner .container-fluid {
+        padding: 140px 100px 60px;
+        height: 110vh;
+    }
+
+    .square_icon {
+        top: 120px;
+        left: 65px;
+    }
+
+    .mobile-app .container-fluid {
+        padding: 0 50px;
+    }
+
+    .mobileapp3 {
+        position: absolute;
+        right: 400px;
+    }
+
+    .mobileapp6 {
+        right: 350px;
+    }
+
+    .mobileapp2 {
+        right: 480px;
+    }
+
+    .rounded_icon {
+        right: 60px;
+    }
+
+    .Management-img1 {
+        top: -40px;
+    }
+
+    .experience5 {
+        left: 100px;
+    }
+
+    header .navigation .main-menu .registration a,
+    header .navigation .main-menu .login a {
+        padding: 12px 25px;
+    }
+
+    .banner-slider-sub .banner-img1 {
+        width: 30%;
+    }
+
+    .banner-text {
+        top: 45%;
+        left: 54%;
+        transform: translate(-46%, -55%);
+    }
+
+    .banner-text h1 {
+        font-size: 220px;
+        line-height: 160px;
+    }
+
+    .banner-download {
+        bottom: -45px;
+        left: 370px;
+        width: 9%;
+    }
+
+    .download-icon svg {
+        width: 35px;
+        height: 36px;
+    }
+
+    .banner-text h2 {
+        font-size: 50px;
+        padding-left: 120px;
+    }
+
+    .banner-text p {
+        font-size: 17px;
+        padding-left: 115px;
+        margin-top: 25px;
+    }
+
+    .banner-slider-sub .banner-img3 {
+        width: 9%;
+        top: 65px;
+        right: 250px;
+    }
+
+    .banner-slider-sub .banner-img2 {
+        width: 15%;
+        right: 75px;
+    }
+
+    .progress-round__wrap {
+        right: 50px;
+    }
+
+    .reviewicon1 {
+        position: absolute;
+        right: 100px;
+        top: -175px;
+        z-index: 9;
+        width: 20%;
+    }
+
+    .slick-prev {
+        left: -90px;
+    }
+
+    .slick-next {
+        right: -90px;
+    }
+
+    .exp-icon {
+        width: 10%;
+    }
+
+    .categories .categories4 {
+        position: absolute;
+        top: 0;
+        left: 100px;
+        z-index: 9;
+    }
+
+    .courses4 {
+        position: absolute;
+        top: -15px;
+        left: 125px;
+        z-index: 9;
+        width: 3%;
+    }
+
+    .Admissions4 {
+        left: 100px;
+    }
+
+    .Introduce-icon5 {
+        position: absolute;
+        left: 30%;
+        top: -50px;
+        z-index: 9;
+        width: 4%;
+    }
+
+    .Introduce-icon2 {
+        position: absolute;
+        right: 100px;
+        top: 100px;
+        z-index: 9;
+        width: 4%;
+    }
+
+    .Introduce-icon3 {
+        position: absolute;
+        right: 200px;
+        bottom: 200px;
+        z-index: 9;
+        width: 4%;
+    }
+
+    .Introduce-icon4 {
+        position: absolute;
+        left: 150px;
+        bottom: 150px;
+        z-index: 9;
+        width: 5%;
+    }
+
+    .reviews .reviews-sec {
+        background: #FFF;
+        padding: 100px 0 0;
+        box-shadow: 0px -325px 180px 0px rgba(0, 0, 0, 0.05);
+        margin: 0 170px;
+    }
+
+    .reviewer h4 {
+        color: #3D3D3D;
+        font-size: 17px;
+        font-weight: 500;
+    }
+
+    .reviewicon {
+        position: absolute;
+        left: 70px;
+        bottom: -15px;
+        z-index: 9;
+        width: 3%;
+    }
+
+    .agency .heading {
+        width: 95%;
+    }
+
+    .news .news-icon {
+        position: absolute;
+        top: -50px;
+        left: 200px;
+        z-index: 9;
+        width: 5%;
+    }
+
+}
+
+
+@media only screen and (max-width: 1200px) and (min-width: 995px) {
+    header .container-fluid {
+        padding: 20px;
+    }
+
+    header .navigation .main-menu>li {
+        margin: 5px;
+    }
+
+    header .navigation li a {
+        font-size: 13px;
+        padding: 5px;
+    }
+
+    header .navigation .main-menu .registration a,
+    header .navigation .main-menu .login a {
+        padding: 12px 15px;
+    }
+
+    .logo {
+        width: 15%;
+    }
+
+    .login a svg,
+    .registration a svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    header .navigation .sub-menu li {
+        padding: 7px 10px;
+    }
+
+    .scrollToTop {
+        bottom: 50px;
+        right: 50px;
+    }
+
+    .courses-slider-text {
+        padding: 20px 0;
+    }
+
+    .courses-slider-text .course-detail li {
+        font-size: 12px;
+    }
+
+    .courses-slider-text a {
+        font-size: 20px;
+    }
+
+    .course-fee span {
+        font-size: 18px;
+    }
+
+    .categories-box {
+        padding: 25px;
+    }
+
+    .categories-box h3 {
+        font-size: 25px;
+    }
+
+    .admissions .admissions-sub2 {
+        padding: 20px;
+    }
+
+    .Admissions4 {
+        top: 120px;
+        left: 50px;
+    }
+
+    .Introduce-icon3 {
+        position: absolute;
+        right: 150px;
+        bottom: 100px;
+        z-index: 9;
+        width: 6%;
+    }
+
+    .Introduce-icon2 {
+        position: absolute;
+        right: 40px;
+        top: 100px;
+        z-index: 9;
+        width: 6%;
+    }
+
+    .Introduce-icon5 {
+        position: absolute;
+        left: 35%;
+        top: -50px;
+        z-index: 9;
+        width: 6%;
+    }
+
+    .reviewicon1 {
+        position: absolute;
+        right: 100px;
+        top: -165px;
+        z-index: 9;
+        width: 25%;
+    }
+
+    .experience .experience-icon {
+        position: absolute;
+        top: -50px;
+        right: -15px;
+        z-index: 9;
+        width: 8%;
+    }
+
+    .reviewicon {
+        position: absolute;
+        left: 80px;
+        bottom: -20px;
+        z-index: 9;
+    }
+
+    .footer-des ul li {
+        margin-right: 10px;
+    }
+
+    .reviews .reviews-sec {
+        margin: 0 70px;
+    }
+
+    .slick-next {
+        right: -50px;
+    }
+
+    .slick-prev {
+        left: -50px;
+    }
+
+    .categories .categories4 {
+        position: absolute;
+        top: 0;
+        left: 50px;
+        z-index: 9;
+        width: 8%;
+    }
+
+    .banner .container-fluid {
+        padding: 140px 50px 90px;
+    }
+
+    .banner-slider-sub .banner-img1 {
+        position: absolute;
+        bottom: 20px;
+        left: 15px;
+        z-index: 9;
+        animation: zoom-ani 1s;
+        width: 35%;
+    }
+
+    .banner-download {
+        position: absolute;
+        bottom: -55px;
+        left: 315px;
+        z-index: 10;
+        width: 12%;
+    }
+
+    .banner-slider-sub .banner-img2 {
+        position: absolute;
+        bottom: 0;
+        right: 20px;
+        z-index: 9;
+        animation: zoom-ani 1.2s;
+        width: 20%;
+    }
+
+    .progress-round__wrap {
+        position: absolute;
+        bottom: 30px;
+        right: 40px;
+    }
+
+    .banner-slider-sub .banner-img3 {
+        position: absolute;
+        top: 40px;
+        right: 170px;
+        z-index: 9;
+        animation: zoom-ani 1.8s;
+        width: 12%;
+    }
+
+    .banner-text {
+        width: 60%;
+        position: absolute;
+        top: 46%;
+        left: 56%;
+        color: var(--clr-white);
+        z-index: 90;
+        transform: translate(-44%, -54%);
+    }
+
+    .banner-text h2 {
+        font-family: Quarto;
+        font-size: 50px;
+        font-weight: 300;
+        padding-left: 115px;
+        animation: zoom-ani .8s;
+    }
+
+    .banner-text h1 {
+        text-shadow: 0px 24px 20px rgba(0, 0, 0, 0.07);
+        font-family: Quarto;
+        font-size: 175px;
+        font-weight: 300;
+        letter-spacing: -2.8px;
+        line-height: 130px;
+        animation: zoom-ani .8s;
+    }
+
+    .banner-text p {
+        color: #FFF;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        padding-left: 115px;
+        padding-right: 70px;
+        animation: zoom-ani .8s;
+        margin-top: 20px;
+        padding-right: 100px;
+    }
+
+    .banner-download svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+
+@media only screen and (max-width: 1100px) and (min-width: 995px) {
+    .banner-text {
+        width: 65%;
+        position: absolute;
+        top: 50%;
+        left: 56%;
+        color: var(--clr-white);
+        z-index: 90;
+        transform: translate(-44%, -50%);
+    }
+
+    .banner-slider-sub .banner-img3 {
+        position: absolute;
+        top: 90px;
+        right: 140px;
+        z-index: 9;
+        animation: zoom-ani 1.8s;
+        width: 12%;
+    }
+
+    .banner-download {
+        position: absolute;
+        bottom: -50px;
+        left: 300px;
+        z-index: 10;
+        width: 12%;
+    }
+}
+
+
+@media only screen and (max-width: 993px) {
+    .navigation .main-menu {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        padding: 10px;
+    }
+
+    header .menu {
+        transition: all 0.3s linear;
+    }
+
+    header .menu .main-menu {
+        margin: 0;
+        padding-left: 0;
+        width: 0;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        opacity: 0;
+        height: 100%;
+        display: block;
+        background: #000000;
+        transition: all 0.3s linear;
+        overflow-x: hidden;
+    }
+
+    header .menu .main-menu li {
+        width: 100%;
+    }
+
+    header .menu .menu-active {
+        width: 50%;
+        opacity: 1;
+        transition: all 0.5s linear;
+        height: 100vh;
+        padding: 50px;
+        top: 0;
+    }
+
+    .hamburger .line {
+        width: 40px;
+        height: 4px;
+    }
+
+    #hamburger-1.is-active .line:nth-child(1) {
+        -webkit-transform: translateY(11px) rotate(45deg);
+        -ms-transform: translateY(11px) rotate(45deg);
+        -o-transform: translateY(11px) rotate(45deg);
+        transform: translateY(11px) rotate(45deg);
+    }
+
+    header .navigation .sub-menu {
+        top: 75px;
+    }
+
+    header .navigation .main-menu>li:hover .sub-menu {
+        position: relative;
+        top: 15px;
+    }
+
+    header .navigation .main-menu .registration a,
+    header .navigation .main-menu .login a {
+        padding: 12px 25px;
+    }
+
+    header .container-fluid {
+        padding: 20px;
+    }
+
+    .admissions::before {
+        display: none;
+    }
+
+    .Admissions4 {
+        position: absolute;
+        top: 40px;
+        left: 30px;
+        z-index: 9;
+    }
+
+    .admissions .admissions-sub2 {
+        width: 100%;
+        float: right;
+        background-color: var(--clr-white);
+        padding: 40px;
+        position: relative;
+        z-index: 10;
+        margin-top: 50px;
+    }
+
+    .Admissions5 {
+        display: none;
+    }
+
+    .reviewicon1 {
+        position: absolute;
+        right: 25px;
+        top: -126px;
+        z-index: 9;
+        width: 25%;
+    }
+
+    .slick-next {
+        right: -45px;
+    }
+
+    .slick-prev {
+        left: -45px;
+    }
+
+    .reviews .reviews-sec {
+        margin: 0 50px;
+    }
+
+    .reviewicon {
+        position: absolute;
+        left: 70px;
+        bottom: -20px;
+        z-index: 9;
+        width: 5%;
+    }
+
+    .experience-text {
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    .agency .heading h2 {
+        color: var(--clr-white);
+        font-size: 45px;
+        margin-bottom: 20px;
+    }
+
+    .agency .heading h3 {
+        color: var(--clr-white);
+        font-size: 32px;
+        margin-bottom: 20px;
+    }
+
+    .subscribe-img {
+        margin-top: 50px;
+    }
+
+    .news .news-icon {
+        position: absolute;
+        top: -60px;
+        left: 50px;
+        z-index: 9;
+        width: 10%;
+    }
+
+    .footer-des {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .footer-content {
+        width: 100%;
+    }
+
+    .categories .categories4 {
+        position: absolute;
+        top: -30px;
+        left: 50px;
+        z-index: 9;
+        width: 8%;
+    }
+
+    .scrollToTop {
+        right: 50px;
+        bottom: 50px;
+    }
+
+    footer {
+        padding-top: 60px;
+    }
+
+    .banner .container-fluid {
+        padding: 140px 50px 100px;
+        height: auto;
+    }
+
+    .banner-slider-sub .banner-img2 {
+        display: none !important;
+    }
+
+    .banner-slider-sub .banner-img1 {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        z-index: 9;
+        animation: zoom-ani 1s;
+        width: 65%;
+    }
+
+    .banner-text h2 {
+        font-family: Quarto;
+        font-size: 55px;
+        font-weight: 300;
+        padding-left: 0;
+        animation: zoom-ani .8s;
+    }
+
+    .banner-text {
+        width: 100%;
+        position: inherit;
+        transform: inherit;
+        top: inherit;
+        left: inherit;
+        text-align: center;
+    }
+
+    .banner-slider-sub .banner-img1 {
+        width: 50%;
+        position: relative;
+        transform: inherit;
+        bottom: inherit;
+        left: inherit;
+        margin: 0 auto;
+    }
+
+    .banner-text h1 {
+        font-size: 200px;
+        line-height: 150px;
+    }
+
+    .banner-text p {
+        padding: 0;
+    }
+
+    .banner-slider-sub .banner-img3 {
+        display: none !important;
+    }
+
+    .progress-round__wrap {
+        display: none !important;
+    }
+
+    .banner-download {
+        position: absolute;
+        bottom: -85px;
+        left: 70%;
+        z-index: 10;
+        width: 23%;
+    }
+
+    .download-icon svg {
+        width: 45px;
+        height: 45px;
+    }
+
+}
+
+
+@media only screen and (max-width: 600px) {
+    .hamburger .line {
+        width: 35px;
+        height: 3px;
+        margin: 7px auto;
+    }
+
+    #hamburger-1.is-active .line:nth-child(1) {
+        -webkit-transform: translateY(7px) rotate(45deg);
+        -ms-transform: translateY(7px) rotate(45deg);
+        -o-transform: translateY(7px) rotate(45deg);
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .square_icon {
+        width: 15px;
+        height: 15px;
+    }
+
+    .banner .container-fluid p {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .rounded_icon {
+        width: 13px;
+        height: 13px;
+    }
+
+    .triangle_icon {
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 16px solid var(--clr-b-hov);
+        right: 20px;
+    }
+
+    .courses4 {
+        position: absolute;
+        top: -15px;
+        left: 50px;
+        z-index: 9;
+        width: 8%;
+    }
+
+    .btn-main {
+        margin-top: 25px;
+    }
+
+    .mb {
+        margin-bottom: 75px;
+    }
+
+    .categories .categories4 {
+        width: 10%;
+    }
+
+    .heading h2 {
+        font-size: 32px;
+    }
+
+    .heading h5 {
+        font-size: 18px;
+    }
+
+    .heading p {
+        font-size: 17px;
+    }
+
+    .py {
+        padding: 70px 0;
+    }
+
+    .courses .tab button {
+        padding: 10px 25px;
+        font-size: 15px;
+    }
+
+    .footer-content .footer-content-sub {
+        width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .footer-content .footer-content-sub ul .footer-last-icon:first-child svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .footer-top {
+        margin-bottom: 20px;
+    }
+
+    .footer-bottom-left p {
+        font-size: 12px;
+    }
+
+    .footer-bottom-right a {
+        font-size: 12px;
+    }
+
+    .news-slider .slick-dots {
+        bottom: -35px;
+    }
+
+    .news .btn-main {
+        text-align: center;
+        margin-top: 65px;
+    }
+
+    .news .news-icon {
+        top: -45px;
+    }
+
+    .experience-text h3 {
+        color: #393939;
+        font-family: Quarto;
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin-bottom: 15px;
+    }
+
+    .agency .container {
+        padding: 75px 10px;
+        position: relative;
+        z-index: 15;
+        text-align: center;
+    }
+
+    .agency .heading h2 {
+        color: var(--clr-white);
+        font-size: 35px;
+        margin-bottom: 20px;
+    }
+
+    .agency .heading h3 {
+        color: var(--clr-white);
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .reviews .reviews-sec {
+        padding: 40px 0 0;
+    }
+
+    .reviewicon1 {
+        position: absolute;
+        right: 25px;
+        top: -125px;
+        z-index: 9;
+        width: 35%;
+    }
+
+    .Introduce-icon5 {
+        width: 10%;
+    }
+
+    .Introduce-icon2 {
+        position: absolute;
+        right: 50px;
+        top: 50px;
+        z-index: 9;
+        width: 10%;
+    }
+
+    .Introduce-icon4 {
+        display: none;
+    }
+
+    .Introduce-icon3 {
+        display: none;
+    }
+
+    .reviews-slider .slick-next {
+        right: 25px;
+    }
+
+    .reviews-slider .slick-prev {
+        left: 25px;
+        z-index: 9;
+    }
+
+    .parents-testimonial-slider .slick-dots {
+        display: block !important;
+    }
+
+    .admissions .admissions-sub2 {
+        width: 90%;
+        margin: 0 auto;
+        display: table;
+        margin-top: 50px;
+        float: none;
+    }
+
+    .mail-icon svg {
+        width: 40px;
+        height: 26px;
+    }
+
+    .subscribe-text .subscribe-form .mail-icon {
+        top: 23px;
+        left: 17px;
+        z-index: 2;
+        position: absolute;
+    }
+
+    .subscribe-text .subscribe-form input {
+        text-indent: 65px;
+    }
+
+    header .menu .menu-active {
+        width: 100%;
+        opacity: 1;
+        transition: all 0.5s linear;
+        height: 100vh;
+        padding: 50px;
+        top: 0;
+    }
+
+    .banner-text h1 {
+        font-size: 150px;
+        line-height: 110px;
+    }
+
+    .banner-text h2 {
+        font-size: 40px;
+    }
+
+    .banner .container-fluid p {
+        font-size: 15px;
+        line-height: 25px;
+        margin-top: 20px;
+    }
+
+    .banner-slider-sub .banner-img1 {
+        width: 75%;
+    }
+
+    .banner-download {
+        bottom: -60px;
+        left: 70%;
+    }
+
+    .download-icon svg {
+        width: 25px;
+        height: 25px;
+    }
+
+    .experience .experience-icon {
+        display: none;
+    }
+
+    /*
+    header{
+        display: none;
+    } */
+}
+
+
+@media only screen and (max-width: 480px) {
+    .logo {
+        width: 42%;
+    }
+
+    .mb {
+        margin-bottom: 50px;
+    }
+
+    .footer-bottom {
+        display: block;
+        text-align: center;
+    }
+
+    .categories .categories4 {
+        left: 30px;
+    }
+
+    .heading h2 {
+        margin-bottom: 10px;
+        font-size: 27px;
+    }
+
+    .heading h5 {
+        font-size: 16px;
+    }
+
+    .heading p {
+        font-size: 15px;
+        line-height: 25px;
+    }
+
+    .categories-box {
+        padding: 40px;
+    }
+
+    .categories .categories5 {
+        position: absolute;
+        bottom: 0px;
+        right: 0;
+        z-index: 9;
+        width: 25%;
+    }
+
+    .categories-box h3 {
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+
+    .btn-main {
+        margin-top: 15px;
+    }
+
+    .btn-main button {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+
+    .btn-main button svg {
+        width: 15px;
+    }
+
+    .courses .tab button {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+
+    .courses .tab {
+        margin-bottom: 30px;
+    }
+
+    .heading {
+        margin-bottom: 30px;
+    }
+
+    .admissions .admissions-sub1 .admissions-sub-btn a {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+
+    .admissions .admissions-sub1 .admissions-sub-btn a svg {
+        margin-left: 10px;
+        width: 15px;
+    }
+
+    .admissions .admissions-sub2 {
+        padding: 40px 20px;
+    }
+
+    .admissions .admissions-sub2 .admissions-form form input,
+    .admissions .admissions-sub2 .admissions-form form textarea {
+        font-size: 14px;
+    }
+
+    .Admissions1 {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        z-index: 9;
+        width: 15%;
+    }
+
+    .admissions .admissions-sub2 .admissions-form h3 {
+        font-size: 27px;
+        margin-bottom: 20px;
+    }
+
+    .reviewicon1 {
+        right: 5px;
+        top: -75px;
+        width: 35%;
+    }
+
+    .reviews .reviews-sec {
+        margin: 0 30px;
+    }
+
+    .reviewicon {
+        position: absolute;
+        left: 30px;
+        bottom: -15px;
+        z-index: 9;
+        width: 8%;
+    }
+
+    .reviews .btn-main {
+        margin-top: 15px;
+    }
+
+    .experience-video {
+        padding: 15px;
+    }
+
+    .exp-icon {
+        width: 15%;
+    }
+
+    .experience-text h3 {
+        font-size: 25px;
+    }
+
+    .experience-text p {
+        font-size: 16px;
+        line-height: 25px;
+    }
+
+    .agency .container {
+        padding: 60px 10px;
+    }
+
+    .agency .heading h2 {
+        font-size: 30px;
+    }
+
+    .agency .heading h3 {
+        font-size: 22px;
+    }
+
+    .agency::after {
+        width: 500px;
+        height: 500px;
+    }
+
+    .parents-testimonial-img {
+        width: 85px;
+        height: 85px;
+        border-radius: 100%;
+    }
+
+    .agency .agency-sub-btn a {
+        padding: 12px 30px;
+        font-size: 14px;
+    }
+
+    .agency .agency-sub-btn a svg {
+        margin-left: 10px;
+        width: 15px;
+    }
+
+    .subscribe .container {
+        padding: 25px;
+    }
+
+    .subscribe-text h3 {
+        font-size: 25px;
+    }
+
+    .mail-icon svg {
+        width: 30px;
+        height: 22px;
+    }
+
+    .subscribe-text .subscribe-form .btn-main button {
+        padding: 12px 15px;
+    }
+
+    .subscribe-text .subscribe-form input {
+        text-indent: 55px;
+        font-size: 14px;
+        line-height: 62px;
+    }
+
+    .subscribe-text .subscribe-form .mail-icon {
+        top: 20px;
+    }
+
+    .subscribe-img-sub {
+        position: absolute;
+        top: 0;
+        left: -100px;
+        z-index: 9;
+        width: 65%;
+    }
+
+    .news .news-icon {
+        top: -35px;
+        left: 30px;
+    }
+
+    .news-slider .slick-dots {
+        bottom: -25px;
+    }
+
+    .parents-testimonial {
+        padding: 50px 0 85px;
+    }
+
+    .categories-icon .categories-icon-normal {
+        width: 35%;
+    }
+
+    .categories-icon .categories-icon-hover {
+        width: 35%;
+    }
+
+    .scrollToTop {
+        width: 52px;
+        height: 52px;
+        right: 30px;
+        bottom: 30px;
+    }
+
+    .scrollToTop #progress-bar svg {
+        width: 50px;
+        height: 50px;
+    }
+
+    .banner .container-fluid {
+        padding: 110px 25px 85px;
+        height: auto;
+    }
+
+    .banner-text h1 {
+        font-size: 110px;
+        line-height: 85px;
+    }
+
+    .banner-text h2 {
+        font-size: 30px;
+    }
+
+    .banner-slider-sub .banner-img1 {
+        width: 95%;
+    }
+
+    .banner-download {
+        bottom: -45px;
+        left: 80%;
+    }
+}
+
+
+@media only screen and (max-width: 400px) {
+
+    .courses-slider-text a {
+        color: #3D3D3D;
+        font-family: Quarto;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 30px;
+        margin-bottom: 10px;
+        display: inline-block;
+        transition: all .3s ease-in-out;
+    }
+
+    .footer-content .footer-content-sub ul li a {
+        font-size: 13px;
+    }
+
+    .footer-content .footer-content-sub ul li {
+        line-height: 27px;
+    }
+
+    .footer-content .footer-content-sub h3 {
+        margin-bottom: 10px;
+    }
+
+    .footer-bottom-left p {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .hamburger .line {
+        width: 30px;
+        height: 2px;
+        margin: 6px auto;
+    }
+
+    #hamburger-1.is-active .line:nth-child(1) {
+        -webkit-transform: translateY(3px) rotate(45deg);
+        -ms-transform: translateY(3px) rotate(45deg);
+        -o-transform: translateY(3px) rotate(45deg);
+        transform: translateY(3px) rotate(45deg);
+    }
+
+    .admissions .admissions-sub1 ul li {
+        margin-bottom: 15px;
+        font-size: 14px;
+    }
+
+    .admissions .admissions-sub1 ul li svg {
+        margin-right: 5px;
+    }
+
+    .admissions .admissions-sub2 {
+        padding: 30px 15px;
+        width: 95%;
+    }
+
+    .subscribe-text .subscribe-form .btn-main button {
+        font-size: 12px;
+    }
+
+    .subscribe-text .subscribe-form .btn-main button svg {
+        margin-left: 5px;
+    }
+}

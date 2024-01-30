@@ -95,7 +95,7 @@ if($segment == 'college')
     <?php }?>
 
     <?php if($controller == 'ProfileController'){?>
-        @include('college.profile.includes.header');
+        @include('college.admin.profile.includes.header');
     <?php }?>
 
     <?php if($controller == 'AssignTeacherController'){?>
@@ -817,9 +817,9 @@ if($segment == 'college')
 
                 <?php
 
-                if(!empty(Auth::guard('admin')->user()->image))
+                if(!empty(Auth::guard('collegeadmin')->user()->image))
                 {
-                    $profileImage = 'images/users/admins/'.Auth::guard('collegeadmin')->user()->image;
+                    $profileImage = 'images/college/users/admins/'.Auth::guard('collegeadmin')->user()->image;
                 }
                 else
                 {
@@ -856,7 +856,7 @@ if($segment == 'college')
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="{{ route('profile') }}">
+                      <a class="dropdown-item" href="{{ route('college.admin.profile') }}">
                         <i class="ti ti-user-check me-2 ti-sm"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
@@ -1015,7 +1015,7 @@ if($segment == 'college')
     <?php }?>
 
     <?php if($controller == 'ProfileController'){?>
-        @include('college.profile.includes.footer');
+        @include('college.admin.profile.includes.footer');
     <?php }?>
 
     <?php if($controller == 'AssignTeacherController'){?>

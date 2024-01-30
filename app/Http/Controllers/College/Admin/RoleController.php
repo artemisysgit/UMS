@@ -12,13 +12,23 @@ use App\Models\College\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Role();
 
         $title = "Role";
         $grid_title = "Role List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('college.admin.role.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -48,7 +58,8 @@ class RoleController extends Controller
         $model->roleCode = Str::slug($request->input('title'));
         $model->descr = $request->input('descr');
         $model->status = $request->input('status');
-        $model->createdBy = Auth::guard('admin')->user()->id;
+        $model->collegeID = (int)$this->collegeID;
+        $model->createdBy = Auth::guard('collegeadmin')->user()->id;
 
         $res = $model->saveData($model);
         return redirect()->route('college.admin.roles')->with('message',"Data has been saved...!");
@@ -63,7 +74,7 @@ class RoleController extends Controller
 
         $title = "Edit Role";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('college.admin.role.edit',array('title'=>$title,'data'=>$data));

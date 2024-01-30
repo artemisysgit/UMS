@@ -12,6 +12,17 @@ use App\Models\College\Semester;
 
 class SemesterController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Semester();
@@ -22,7 +33,7 @@ class SemesterController extends Controller
 
         $title = "Semester";
         $grid_title = "Semester List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('college.admin.semester.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -49,10 +60,11 @@ class SemesterController extends Controller
 
         $model->title = $request->input('title');
         $model->status = $request->input('status');
-        $model->createdBy = Auth::guard('admin')->user()->id;
+        $model->collegeID = (int)$this->collegeID;
+        $model->createdBy = Auth::guard('collegeadmin')->user()->id;
 
         $res = $model->saveData($model);
-        return redirect()->route('semesters')->with('message',"Data has been saved...!");
+        return redirect()->route('college.admin.semesters')->with('message',"Data has been saved...!");
     }
 
     /**
@@ -64,7 +76,7 @@ class SemesterController extends Controller
 
         $title = "Edit Semester";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('college.admin.semester.edit',array('title'=>$title,'data'=>$data));

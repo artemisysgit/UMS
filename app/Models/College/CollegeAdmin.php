@@ -30,18 +30,22 @@ class CollegeAdmin extends Authenticatable
         return $lastID;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         $res = DB::table('college_admins')
+        ->where('collegeID', $collegeID)
         ->where('collegeID', $collegeID)
         ->where('status', 1)
         ->get();
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('college_admins')->where('id', $id)->first();
+        $res = DB::table('college_admins')
+        ->where('id', $id)
+        ->where('collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

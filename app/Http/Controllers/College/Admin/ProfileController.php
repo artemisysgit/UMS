@@ -9,26 +9,36 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-use App\Models\College\Admin;
+use App\Models\College\CollegeAdmin;
 use App\Models\College\Country;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
-        $model = new Admin();
+        $model = new CollegeAdmin();
 
         $title = "Account";
         $page_title = "Profile Details";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         $countryData = Country::all();
 
-        $id = Auth::guard('admin')->user()->id;
-        $profileImageData = Admin::find($id);
+        $id = Auth::guard('collegeadmin')->user()->id;
+        $profileImageData = CollegeAdmin::find($id);
 
         if(!empty($profileImageData->image))
         {
-            $profileImage = 'images/users/admins/'.$profileImageData->image;
+            $profileImage = 'images/college/users/admins/'.$profileImageData->image;
         }
         else
         {
@@ -52,9 +62,9 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $id = Auth::guard('admin')->user()->id;
+        $id = Auth::guard('collegeadmin')->user()->id;
 
-        $model = Admin::find($id);
+        $model = CollegeAdmin::find($id);
 
         $request->validate([
             'email'=> 'required|email|unique:admins,email,'.$id,
@@ -62,6 +72,7 @@ class ProfileController extends Controller
         ]);
 
         $model->name = $request->input('name');
+        $model->collegeID = (int)$this->collegeID;
         $model->userName = Str::slug($request->input('name'));
         $model->email = $request->input('email');
         $model->mobile = $request->input('phone');
@@ -121,10 +132,10 @@ class ProfileController extends Controller
 
 
         //$model = new Admin();
-        $id = Auth::guard('admin')->user()->id;
-        $model = Admin::find($id);
+        $id = Auth::guard('collegeadmin')->user()->id;
+        $model = CollegeAdmin::find($id);
         $old_img = $model->image;
-        $upload_path = public_path().'/images/users/admins/';
+        $upload_path = public_path().'/images/college/users/admins/';
 
         if($request->hasFile('file'))
         {
@@ -141,10 +152,6 @@ class ProfileController extends Controller
             $model->save();
             echo true;
         }
-        // else
-        // {
-        //     $imageName = $request->txt_file;
-        //     echo true;
-        // }
+
     }
 }

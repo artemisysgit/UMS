@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\College;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,19 +16,23 @@ class Semester extends Model
         return true;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         $res = DB::table('semesters')
             ->select('admins.name','semesters.*')
             ->join('admins','semesters.createdBy','=','admins.id')
+            ->where('semesters.collegeID', $collegeID)
             ->get();
 
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('semesters')->where('id', $id)->first();
+        $res = DB::table('semesters')
+        ->where('id', $id)
+        ->where('collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

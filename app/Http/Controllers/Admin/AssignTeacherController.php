@@ -18,13 +18,23 @@ use App\Models\superadmin\Assign_teacher_subject_wise;
 
 class AssignTeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Assign_teacher();
 
         $title = "Assign Teacher";
         $grid_title = "Assign List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('admin.assignment.teachers.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -35,19 +45,19 @@ class AssignTeacherController extends Controller
     {
         $title = "Create Assignment";
         $teacher_model = new Teacher();
-        $teacherData = $teacher_model->getList();
+        $teacherData = $teacher_model->getList($this->collegeID);
 
         $course_model = new Course();
-        $courseData = $course_model->getList();
+        $courseData = $course_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $subject_model = new Subject();
-        $subjectData = $subject_model->getList();
+        $subjectData = $subject_model->getList($this->collegeID);
 
         $sem_model = new Semester();
-        $semData = $sem_model->getList();
+        $semData = $sem_model->getList($this->collegeID);
 
         $data = array(
             'title' =>$title,
@@ -105,29 +115,29 @@ class AssignTeacherController extends Controller
     {
         $title = "Update Assignment";
         $teacher_model = new Teacher();
-        $teacherData = $teacher_model->getList();
+        $teacherData = $teacher_model->getList($this->collegeID);
 
         $course_model = new Course();
-        $courseData = $course_model->getList();
+        $courseData = $course_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $subject_model = new Subject();
-        $subjectData = $subject_model->getList();
+        $subjectData = $subject_model->getList($this->collegeID);
 
         $sem_model = new Semester();
-        $semData = $sem_model->getList();
+        $semData = $sem_model->getList($this->collegeID);
 
         $model = new Assign_teacher();
 
         $title = "Edit Assignments";
-        $assign_data = $model->getDataByID($id);
+        $assign_data = $model->getDataByID($id,$this->collegeID);
 
         if(!empty($assign_data))
         {
             $model2 = new Assign_teacher_subject_wise();
-            $line_item_data = $model2->getDataByTeacherID($id);
+            $line_item_data = $model2->getDataByTeacherID($id,$this->collegeID);
 
             $data = array(
                 'title' =>$title,
@@ -176,7 +186,7 @@ class AssignTeacherController extends Controller
                 'subjectID'=>$request->input('subject')[$i],
                 'semID'=>$request->input('sem')[$i],
             );
-            $model2->updateData($data,$item_id);
+            $model2->updateData($data,$item_id,$this->collegeID);
         }
 
         return redirect()->route('assignList')->with('message',"Data has been updated...!");
@@ -193,16 +203,16 @@ class AssignTeacherController extends Controller
     public function add_line_items(Request $request)
     {
         $course_model = new Course();
-        $courseData = $course_model->getList();
+        $courseData = $course_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $subject_model = new Subject();
-        $subjectData = $subject_model->getList();
+        $subjectData = $subject_model->getList($this->collegeID);
 
         $sem_model = new Semester();
-        $semData = $sem_model->getList();
+        $semData = $sem_model->getList($this->collegeID);
 
         $cnt = $request->post('cnt');
 

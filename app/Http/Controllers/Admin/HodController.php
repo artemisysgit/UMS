@@ -13,13 +13,23 @@ use App\Models\superadmin\Department;
 
 class HodController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Hod();
 
         $title = "HOD";
         $grid_title = "HOD List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
 
         //echo "<pre>";print_r($data);die;
 
@@ -39,10 +49,10 @@ class HodController extends Controller
     {
         $title = "Create HOD";
         $teacher_model = new Teacher();
-        $teacherData = $teacher_model->getList();
+        $teacherData = $teacher_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $data = array(
             'title' =>$title,
@@ -83,14 +93,14 @@ class HodController extends Controller
         $model = new Hod();
 
         $title = "Edit Hod";
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             $teacher_model = new Teacher();
-            $teacherData = $teacher_model->getList();
+            $teacherData = $teacher_model->getList($this->collegeID);
 
             $dept_model = new Department();
-            $deptData = $dept_model->getList();
+            $deptData = $dept_model->getList($this->collegeID);
 
             $data = array(
                 'title' =>$title,

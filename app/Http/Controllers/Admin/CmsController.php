@@ -12,13 +12,23 @@ use App\Models\superadmin\Cms;
 
 class CmsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Cms();
 
         $title = "CMS Pages";
         $grid_title = "Page List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('admin.cms.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -46,7 +56,7 @@ class CmsController extends Controller
 
         $model = new Cms();
 
-        $upload_path = public_path().'/images/cms/';
+        $upload_path = public_path().'/images/admin/cms/';
         $imageName = '';
 
         if($request->hasFile('file'))
@@ -77,7 +87,7 @@ class CmsController extends Controller
 
         $title = "Edit Subject";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('admin.cms.edit',array('title'=>$title,'data'=>$data));
@@ -102,7 +112,7 @@ class CmsController extends Controller
 
         $model = Cms::find($id);
         $old_img = $model->image;
-        $upload_path = public_path().'/images/cms/';
+        $upload_path = public_path().'/images/admin/cms/';
 
         if($request->hasFile('file'))
         {

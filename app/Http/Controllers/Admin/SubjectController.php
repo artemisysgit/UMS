@@ -12,13 +12,23 @@ use App\Models\superadmin\Subject;
 
 class SubjectController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Subject();
 
         $title = "Subject";
         $grid_title = "Subject List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('admin.subject.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -63,7 +73,7 @@ class SubjectController extends Controller
 
         $title = "Edit Subject";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('admin.subject.edit',array('title'=>$title,'data'=>$data));

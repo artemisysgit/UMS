@@ -16,19 +16,23 @@ class Benefit extends Model
         return true;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         $res = DB::table('benefits')
             ->select('admins.name','benefits.*')
             ->join('admins','benefits.createdBy','=','admins.id')
+            ->where('benefits.collegeID', $collegeID)
             ->get();
 
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('benefits')->where('id', $id)->first();
+        $res = DB::table('benefits')
+        ->where('id', $id)
+        ->where('benefits.collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

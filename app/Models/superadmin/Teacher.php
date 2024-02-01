@@ -30,15 +30,20 @@ class Teacher extends Authenticatable
         return $lastID;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
-        $res = DB::table('teachers')->get();
+        $res = DB::table('teachers')
+        ->where('teachers.collegeID', $collegeID)
+        ->get();
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('teachers')->where('id', $id)->first();
+        $res = DB::table('teachers')
+        ->where('id', $id)
+        ->where('teachers.collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

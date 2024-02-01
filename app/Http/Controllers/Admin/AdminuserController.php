@@ -15,6 +15,16 @@ use App\Models\superadmin\UserRoles;
 
 class AdminuserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Admin();
@@ -32,7 +42,7 @@ class AdminuserController extends Controller
     {
         $title = "Create User";
         $model = new Role();
-        $roleData = $model->getList();
+        $roleData = $model->getList($this->collegeID);
         return view('admin.users.admin.create',array('title'=>$title,'roleData'=>$roleData));
     }
 
@@ -51,7 +61,7 @@ class AdminuserController extends Controller
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $upload_path = public_path().'/images/users/admins/';
+        $upload_path = public_path().'/images/admin/users/admins/';
         $imageName = '';
 
         if($request->hasFile('file'))
@@ -107,7 +117,7 @@ class AdminuserController extends Controller
         $data = $model->getDataByID($id);
         if(!empty($data))
         {
-            $roleData = $role_model->getList();
+            $roleData = $role_model->getList($this->collegeID);
             $user_role_data = $user_roles_model->getDataByID($id,'admin');
             if(!empty($user_role_data))
             {
@@ -145,7 +155,7 @@ class AdminuserController extends Controller
 
         $imageName = '';
         $old_img = $model->image;
-        $upload_path = public_path().'/images/users/admins/';
+        $upload_path = public_path().'/images/admin/users/admins/';
 
         if($request->hasFile('file'))
         {

@@ -17,7 +17,7 @@ class Assign_teacher_subject_wise extends Model
         return true;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         // $res = DB::table('courses')->get();
         // return $res;
@@ -25,24 +25,31 @@ class Assign_teacher_subject_wise extends Model
         $res = DB::table('assign_teacher_subject_wises')
             ->select('teachers.name','assign_teacher_subject_wises.*')
             ->join('teachers','assign_teacher_subject_wises.createdBy','=','teachers.id')
+            ->where('assign_teacher_subject_wises.collegeID', $collegeID)
             ->get();
 
         return $res;
     }
 
-    public function getDataID($id)
+    public function getDataID($id,$collegeID=0)
     {
-        $res = DB::table('assign_teacher_subject_wises')->where('id', $id)->first();
+        $res = DB::table('assign_teacher_subject_wises')
+        ->where('id', $id)
+        ->where('assign_teacher_subject_wises.collegeID', $collegeID)
+        ->first();
         return $res;
     }
 
-    public function getDataByTeacherID($id)
+    public function getDataByTeacherID($id,$collegeID=0)
     {
-        $res = DB::table('assign_teacher_subject_wises')->where('teacherID', $id)->get();
+        $res = DB::table('assign_teacher_subject_wises')
+        ->where('teacherID', $id)
+        ->where('assign_teacher_subject_wises.collegeID', $collegeID)
+        ->get();
         return $res;
     }
 
-    public function updateData($data,$id)
+    public function updateData($data,$id,$collegeID=0)
     {
         if($id == 0)
         {
@@ -51,7 +58,10 @@ class Assign_teacher_subject_wise extends Model
         }
         else
         {
-            $res = DB::table('assign_teacher_subject_wises')->where('id',$id)->update($data);
+            $res = DB::table('assign_teacher_subject_wises')
+            ->where('id',$id)
+            ->where('assign_teacher_subject_wises.collegeID', $collegeID)
+            ->update($data);
             return true;
         }
     }

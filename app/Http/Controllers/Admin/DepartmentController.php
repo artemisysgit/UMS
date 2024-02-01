@@ -12,13 +12,23 @@ use App\Models\superadmin\Department;
 
 class DepartmentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Department();
 
         $title = "Department";
         $grid_title = "Department List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('admin.department.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -63,7 +73,7 @@ class DepartmentController extends Controller
 
         $title = "Edit Department";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('admin.department.edit',array('title'=>$title,'data'=>$data));

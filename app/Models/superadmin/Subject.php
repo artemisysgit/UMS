@@ -17,19 +17,23 @@ class Subject extends Model
         return true;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         $res = DB::table('subjects')
             ->select('admins.name','subjects.*')
             ->join('admins','subjects.createdBy','=','admins.id')
+            ->where('subjects.collegeID', $collegeID)
             ->get();
 
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('subjects')->where('id', $id)->first();
+        $res = DB::table('subjects')
+        ->where('id', $id)
+        ->where('subjects.collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

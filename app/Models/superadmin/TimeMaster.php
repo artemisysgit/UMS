@@ -17,15 +17,20 @@ class TimeMaster extends Model
         return true;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
-        $res = DB::table('time_masters')->get();
+        $res = DB::table('time_masters')
+        ->where('time_masters.collegeID', $collegeID)
+        ->get();
         return $res;
     }
 
     public function getDataByID($id)
     {
-        $res = DB::table('time_masters')->where('id', $id)->first();
+        $res = DB::table('time_masters')
+        ->where('id', $id)
+        ->where('time_masters.collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

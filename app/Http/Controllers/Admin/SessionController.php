@@ -12,13 +12,24 @@ use App\Models\superadmin\SessionModel;
 
 class SessionController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new SessionModel();
 
         $title = "Sessions";
         $grid_title = "Session List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('admin.session.sessionList',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -60,7 +71,7 @@ class SessionController extends Controller
 
         $title = "Edit Session";
         //$data = Course::find($id);
-        $data = $model->getSessionByID($id);
+        $data = $model->getSessionByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('admin.session.editSession',array('title'=>$title,'data'=>$data));

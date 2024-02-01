@@ -27,7 +27,7 @@ class Routine extends Model
         return true;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         $res = DB::table('routines')
                ->select('routines.*','teachers.name','departments.title as dept','semesters.title as sem',DB::raw("CONCAT(time_masters.start_time,'-',time_masters.end_time) as time"))
@@ -35,18 +35,22 @@ class Routine extends Model
                ->join('departments','departments.id','=','routines.deptID')
                ->join('semesters','semesters.id','=','routines.semID')
                ->join('time_masters','time_masters.id','=','routines.timeID')
+               ->where('routines.collegeID', $collegeID)
                ->get();
 
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('routines')->where('id', $id)->first();
+        $res = DB::table('routines')
+        ->where('id', $id)
+        ->where('routines.collegeID', $collegeID)
+        ->first();
         return $res;
     }
 
-    public function get_routine_by_teacher_dept($teacherID,$deptID)
+    public function get_routine_by_teacher_dept($teacherID,$deptID,$collegeID=0)
     {
         $res = DB::table('routines')
                ->select('routines.id','routines.status','routines.weekID','teachers.name','departments.title as dept','semesters.title as sem',DB::raw("CONCAT(time_masters.start_time,'-',time_masters.end_time) as time"))
@@ -56,6 +60,7 @@ class Routine extends Model
                ->join('time_masters','time_masters.id','=','routines.timeID')
                ->where('routines.teacherID','=',$teacherID)
                ->where('routines.deptID','=',$deptID)
+               ->where('routines.collegeID', $collegeID)
                //->toSql();
                ->get()->toArray();
 
@@ -63,13 +68,14 @@ class Routine extends Model
 
     }
 
-    public function chk_teacher_availability($time,$week,$teacher)
+    public function chk_teacher_availability($time,$week,$teacher,$collegeID=0)
     {
         $res = DB::table('routines')
         ->select(DB::raw('count(*) as cnt'))
         ->where('routines.timeID','=',$time)
         ->where('routines.weekID','=',$week)
         ->where('routines.teacherID','=',$teacher)
+        ->where('routines.collegeID', $collegeID)
         ->pluck('cnt');
 
         return $res;

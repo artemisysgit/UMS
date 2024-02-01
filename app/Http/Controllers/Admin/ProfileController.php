@@ -28,7 +28,7 @@ class ProfileController extends Controller
 
         if(!empty($profileImageData->image))
         {
-            $profileImage = 'images/users/admins/'.$profileImageData->image;
+            $profileImage = 'images/admin/users/admins/'.$profileImageData->image;
         }
         else
         {
@@ -124,7 +124,7 @@ class ProfileController extends Controller
         $id = Auth::guard('admin')->user()->id;
         $model = Admin::find($id);
         $old_img = $model->image;
-        $upload_path = public_path().'/images/users/admins/';
+        $upload_path = public_path().'/images/admin/users/admins/';
 
         if($request->hasFile('file'))
         {

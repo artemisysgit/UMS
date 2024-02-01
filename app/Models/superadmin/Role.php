@@ -16,19 +16,23 @@ class Role extends Model
         return true;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         $res = DB::table('roles')
             ->select('admins.name','roles.*')
             ->join('admins','roles.createdBy','=','admins.id')
+            ->where('roles.collegeID', $collegeID)
             ->get();
 
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('roles')->where('id', $id)->first();
+        $res = DB::table('roles')
+        ->where('id', $id)
+        ->where('roles.collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

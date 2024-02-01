@@ -12,13 +12,23 @@ use App\Models\superadmin\Role;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Role();
 
         $title = "Role";
         $grid_title = "Role List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('admin.role.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -63,7 +73,7 @@ class RoleController extends Controller
 
         $title = "Edit Role";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('admin.role.edit',array('title'=>$title,'data'=>$data));

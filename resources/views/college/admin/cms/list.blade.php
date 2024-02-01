@@ -1,4 +1,4 @@
-@extends('layouts.admin.app')
+@extends('layouts.collegeadmin.main')
 
 @section('content')
 
@@ -20,7 +20,7 @@
 @endif
 
 <div class="breadcrumb d-flex justify-content-end me-3 mt-3">
-    <a href="{{ route('addPage') }}" class="btn btn-primary">Add New</a>
+    <a href="{{ route('college.admin.addPage') }}" class="btn btn-primary">Add New</a>
 </div>
 
 <hr class="my-2">
@@ -50,7 +50,7 @@
                     <td>{{ $r->short_description }}</td>
                     <td>{{ $r->status == 1 ?'Active':'Inactive' }}</td>
                     <td>{{ $r->name }}</td>
-                    <td><a href="{{  url('admin/cms/edit/'.$r->id) }}" class="btn btn-primary btn-sm">edit</a></td>
+                    <td><a href="{{  url('college/admin/cms/edit/'.$r->id) }}" class="btn btn-primary btn-sm">edit</a></td>
                 </tr>
 
                 @endforeach

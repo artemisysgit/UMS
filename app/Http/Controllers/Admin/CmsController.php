@@ -37,8 +37,9 @@ class CmsController extends Controller
      */
     public function store(Request $request)
     {
+        $collegeID = Auth::guard('admin')->user()->collegeID;
         $request->validate([
-            'title' => 'required|unique:cms,title',
+            'title' => 'required|unique:cms,title,collegeID',
             'descr' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);

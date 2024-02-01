@@ -38,4 +38,4 @@
 <!----------------------End------------------------------>
 
 <!-- Custom JS -->
-<script src="{{ url('assets/admin_assets/js/assignment/teacher/custom.js') }}"></script>
+<script src="{{ url('assets/admin_assets/js/college/assignment/teacher/custom.js') }}"></script>

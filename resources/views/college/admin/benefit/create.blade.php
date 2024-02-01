@@ -1,10 +1,10 @@
-@extends('layouts.admin.app')
+@extends('layouts.collegeadmin.main')
 
 @section('content')
 
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="py-3 mb-4"><span class="text-muted fw-light"><a href="{{ route('benefits') }}">Benefits</a> /</span> {{ $title }}</h4>
+    <h4 class="py-3 mb-4"><span class="text-muted fw-light"><a href="{{ route('college.admin.benefits') }}">Benefits</a> /</span> {{ $title }}</h4>
     <div class="row mb-4">
 
         <!-- Bootstrap Validation -->
@@ -22,7 +22,7 @@
                 @endif
                 </h5>
                 <div class="card-body">
-                    <form action="{{ route('saveBenefit') }}" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
+                    <form action="{{ route('college.admin.saveBenefit') }}" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
 
                         @csrf
                         <div class="mb-3">

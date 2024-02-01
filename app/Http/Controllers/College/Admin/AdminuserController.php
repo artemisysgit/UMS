@@ -15,6 +15,16 @@ use App\Models\College\UserRoles;
 
 class AdminuserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Admin();
@@ -22,7 +32,7 @@ class AdminuserController extends Controller
         $title = "Admin Users";
         $grid_title = "Admin List";
         $collegeID = Auth::guard('collegeadmin')->user()->collegeID;
-        $data = $model->getList($collegeID);
+        $data = $model->getList($this->collegeID);
         return view('college.admin.users.admin.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -33,8 +43,8 @@ class AdminuserController extends Controller
     {
         $title = "Create User";
         $model = new Role();
-        $roleData = $model->getList();
-        return view('admin.users.admin.create',array('title'=>$title,'roleData'=>$roleData));
+        $roleData = $model->getList($this->collegeID);
+        return view('college.admin.users.admin.create',array('title'=>$title,'roleData'=>$roleData));
     }
 
 
@@ -52,7 +62,7 @@ class AdminuserController extends Controller
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $upload_path = public_path().'/images/users/admins/';
+        $upload_path = public_path().'/images/college/users/admins/';
         $imageName = '';
 
         if($request->hasFile('file'))
@@ -75,6 +85,7 @@ class AdminuserController extends Controller
         $model->mobile = $request->input('mobile');
         $model->dob = date('Y-m-d',strtotime($request->input('dob')));
         $model->image = $imageName;
+        $model->collegeID = $this->collegeID;
         $model->status = $request->input('status');
         //$model->createdBy = Auth::guard('admin')->user()->id;
 
@@ -91,7 +102,7 @@ class AdminuserController extends Controller
             $roles_model->saveData($roles_model);
         }
 
-        return redirect()->route('admins')->with('message',"Data has been saved...!");
+        return redirect()->route('college.admin.admins')->with('message',"Data has been saved...!");
     }
 
     /**
@@ -109,8 +120,8 @@ class AdminuserController extends Controller
         $data = $model->getDataByID($id,$collegeID);
         if(!empty($data))
         {
-            $roleData = $role_model->getList();
-            $user_role_data = $user_roles_model->getDataByID($id,'admin');
+            $roleData = $role_model->getList($this->collegeID);
+            $user_role_data = $user_roles_model->getDataByID($id,'admin',$this->collegeID);
             if(!empty($user_role_data))
             {
                 $user_role_arr = [];
@@ -120,7 +131,7 @@ class AdminuserController extends Controller
                 }
 
             }
-            return view('admin.users.admin.edit',array('title'=>$title,'data'=>$data,'roleData'=>$roleData,'user_role_data'=>$user_role_arr));
+            return view('college.admin.users.admin.edit',array('title'=>$title,'data'=>$data,'roleData'=>$roleData,'user_role_data'=>$user_role_arr));
         }
         else
         {
@@ -147,7 +158,7 @@ class AdminuserController extends Controller
 
         $imageName = '';
         $old_img = $model->image;
-        $upload_path = public_path().'/images/users/admins/';
+        $upload_path = public_path().'/images/college/users/admins/';
 
         if($request->hasFile('file'))
         {
@@ -194,7 +205,7 @@ class AdminuserController extends Controller
             $roles_model->saveData($roles_model);
         }
 
-        return redirect()->route('admins')->with('message',"Data has been updated...!");
+        return redirect()->route('college.admin.admins')->with('message',"Data has been updated...!");
 
     }
 

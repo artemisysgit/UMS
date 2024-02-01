@@ -12,13 +12,23 @@ use App\Models\College\Benefit;
 
 class BenefitController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Benefit();
 
         $title = "Benefits";
         $grid_title = "Benefits List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('college.admin.benefit.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -45,7 +55,7 @@ class BenefitController extends Controller
 
         $model = new Benefit();
 
-        $upload_path = public_path().'/images/benefit/';
+        $upload_path = public_path().'/images/college/benefit/';
         $imageName = '';
 
         if($request->hasFile('file'))
@@ -61,7 +71,8 @@ class BenefitController extends Controller
         $model->descr = htmlentities($request->input('descr'));
         $model->image = $imageName;
         $model->status = $request->input('status');
-        $model->createdBy = Auth::guard('admin')->user()->id;
+        $model->collegeID = (int)$this->collegeID;
+        $model->createdBy = Auth::guard('collegeadmin')->user()->id;
 
         $res = $model->saveData($model);
         return redirect()->route('college.admin.benefits')->with('message',"Data has been saved...!");
@@ -76,7 +87,7 @@ class BenefitController extends Controller
 
         $title = "Edit Subject";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('college.admin.benefit.edit',array('title'=>$title,'data'=>$data));
@@ -101,7 +112,7 @@ class BenefitController extends Controller
 
         $model = Benefit::find($id);
         $old_img = $model->image;
-        $upload_path = public_path().'/images/benefit/';
+        $upload_path = public_path().'/images/college/benefit/';
 
         if($request->hasFile('file'))
         {

@@ -13,13 +13,23 @@ use App\Models\College\Department;
 
 class HodController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Hod();
 
         $title = "HOD";
         $grid_title = "HOD List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
 
         //echo "<pre>";print_r($data);die;
 
@@ -39,10 +49,10 @@ class HodController extends Controller
     {
         $title = "Create HOD";
         $teacher_model = new Teacher();
-        $teacherData = $teacher_model->getList();
+        $teacherData = $teacher_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $data = array(
             'title' =>$title,
@@ -66,10 +76,11 @@ class HodController extends Controller
 
         $model = new Hod();
 
+        $model->collegeID = (int)$this->collegeID;
         $model->teacherID = $request->input('teacher');
         $model->deptID = $request->input('dept');
         $model->status = $request->input('status');
-        $model->createdBy = Auth::guard('admin')->user()->id;
+        $model->createdBy = Auth::guard('collegeadmin')->user()->id;
 
         $res = $model->saveData($model);
         return redirect()->route('college.admin.hodList')->with('message',"Data has been saved...!");
@@ -83,14 +94,14 @@ class HodController extends Controller
         $model = new Hod();
 
         $title = "Edit Hod";
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             $teacher_model = new Teacher();
-            $teacherData = $teacher_model->getList();
+            $teacherData = $teacher_model->getList($this->collegeID);
 
             $dept_model = new Department();
-            $deptData = $dept_model->getList();
+            $deptData = $dept_model->getList($this->collegeID);
 
             $data = array(
                 'title' =>$title,

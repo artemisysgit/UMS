@@ -12,13 +12,23 @@ use App\Models\College\TimeMaster;
 
 class TimeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new TimeMaster();
 
         $title = "Time";
         $grid_title = "Lession List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
 
         //echo "<pre>";print_r($data);die;
 
@@ -57,6 +67,7 @@ class TimeController extends Controller
 
         $model = new TimeMaster();
 
+        $model->collegeID = (int)$this->collegeID;
         $model->start_time = $request->input('start_time');
         $model->end_time = $request->input('end_time');
         $model->status = $request->input('status');
@@ -73,7 +84,7 @@ class TimeController extends Controller
         $model = new TimeMaster();
 
         $title = "Edit Time";
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             $data = array(

@@ -55,4 +55,4 @@
 <!----------------------End------------------------------>
 
 <!-- Custom JS -->
-<script src="{{ url('assets/admin_assets/js/routine/custom.js') }}"></script>
+<script src="{{ url('assets/admin_assets/js/college/routine/custom.js') }}"></script>

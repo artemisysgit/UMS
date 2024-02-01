@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\College;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -30,15 +30,20 @@ class Teacher extends Authenticatable
         return $lastID;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
-        $res = DB::table('teachers')->get();
+        $res = DB::table('teachers')
+        ->where('collegeID', $collegeID)
+        ->get();
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('teachers')->where('id', $id)->first();
+        $res = DB::table('teachers')
+        ->where('id', $id)
+        ->where('collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

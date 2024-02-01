@@ -15,13 +15,23 @@ use App\Models\College\UserRoles;
 
 class FacultyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Teacher();
 
         $title = "Faculty Users";
         $grid_title = "Faculty List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('college.admin.users.normal.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -32,7 +42,7 @@ class FacultyController extends Controller
     {
         $model = new Role();
         $title = "Create User";
-        $roleData = $model->getList();
+        $roleData = $model->getList($this->collegeID);
         return view('college.admin.users.normal.create',array('title'=>$title,'roleData'=>$roleData));
     }
 
@@ -51,7 +61,7 @@ class FacultyController extends Controller
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $upload_path = public_path().'/images/users/faculty/';
+        $upload_path = public_path().'/images/college/users/faculty/';
         $imageName = '';
 
         if($request->hasFile('file'))
@@ -74,6 +84,7 @@ class FacultyController extends Controller
         $model->mobile = $request->input('mobile');
         $model->dob = date('Y-m-d',strtotime($request->input('dob')));
         $model->image = $imageName;
+        $model->collegeID = $this->collegeID;
         $model->status = $request->input('status');
         //$model->createdBy = Auth::guard('admin')->user()->id;
 
@@ -104,12 +115,12 @@ class FacultyController extends Controller
 
         $title = "Edit Faculty";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
 
         if(!empty($data))
         {
-            $roleData = $role_model->getList();
-            $user_role_data = $user_roles_model->getDataByID($id,'faculty');
+            $roleData = $role_model->getList($this->collegeID);
+            $user_role_data = $user_roles_model->getDataByID($id,'teacher',$this->collegeID);
             //echo "<pre>";print_r($user_role_data);die;
             if(!empty($user_role_data))
             {
@@ -148,7 +159,7 @@ class FacultyController extends Controller
 
         $imageName = '';
         $old_img = $model->image;
-        $upload_path = public_path().'/images/users/faculty/';
+        $upload_path = public_path().'/images/college/users/faculty/';
 
         if($request->hasFile('file'))
         {

@@ -18,14 +18,24 @@ use App\Models\College\Assign_teacher_subject_wise;
 
 class AssignTeacherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Assign_teacher();
 
         $title = "Assign Teacher";
         $grid_title = "Assign List";
-        $data = $model->getList();
-        return view('admin.assignment.teachers.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
+        $data = $model->getList($this->collegeID);
+        return view('college.admin.assignment.teachers.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
     /**
@@ -35,19 +45,19 @@ class AssignTeacherController extends Controller
     {
         $title = "Create Assignment";
         $teacher_model = new Teacher();
-        $teacherData = $teacher_model->getList();
+        $teacherData = $teacher_model->getList($this->collegeID);
 
         $course_model = new Course();
-        $courseData = $course_model->getList();
+        $courseData = $course_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $subject_model = new Subject();
-        $subjectData = $subject_model->getList();
+        $subjectData = $subject_model->getList($this->collegeID);
 
         $sem_model = new Semester();
-        $semData = $sem_model->getList();
+        $semData = $sem_model->getList($this->collegeID);
 
         $data = array(
             'title' =>$title,
@@ -58,7 +68,7 @@ class AssignTeacherController extends Controller
             'semData' =>$semData,
         );
 
-        return view('admin.assignment.teachers.create',$data);
+        return view('college.admin.assignment.teachers.create',$data);
     }
 
     /**
@@ -78,7 +88,8 @@ class AssignTeacherController extends Controller
         $model = new Assign_teacher();
 
         $model->teacherID = $request->input('teacher');
-        $model->createdBy = Auth::guard('admin')->user()->id;
+        $model->collegeID = $this->collegeID;
+        $model->createdBy = Auth::guard('collegeadmin')->user()->id;
         $res = $model->saveData($model);
 
         $cnt = count($request->input('course'));
@@ -88,6 +99,7 @@ class AssignTeacherController extends Controller
         {
             $model2 = new Assign_teacher_subject_wise();
             $model2->teacherID = $res;
+            $model2->collegeID = $this->collegeID;
             $model2->courseID = $request->input('course')[$i];
             $model2->deptID = $request->input('dept')[$i];
             $model2->subjectID = $request->input('subject')[$i];
@@ -95,7 +107,7 @@ class AssignTeacherController extends Controller
             $model2->saveData($model2);
         }
 
-        return redirect()->route('assignList')->with('message',"Data has been saved...!");
+        return redirect()->route('college.admin.assignList')->with('message',"Data has been saved...!");
     }
 
     /**
@@ -105,29 +117,29 @@ class AssignTeacherController extends Controller
     {
         $title = "Update Assignment";
         $teacher_model = new Teacher();
-        $teacherData = $teacher_model->getList();
+        $teacherData = $teacher_model->getList($this->collegeID);
 
         $course_model = new Course();
-        $courseData = $course_model->getList();
+        $courseData = $course_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $subject_model = new Subject();
-        $subjectData = $subject_model->getList();
+        $subjectData = $subject_model->getList($this->collegeID);
 
         $sem_model = new Semester();
-        $semData = $sem_model->getList();
+        $semData = $sem_model->getList($this->collegeID);
 
         $model = new Assign_teacher();
 
         $title = "Edit Assignments";
-        $assign_data = $model->getDataByID($id);
+        $assign_data = $model->getDataByID($id,$this->collegeID);
 
         if(!empty($assign_data))
         {
             $model2 = new Assign_teacher_subject_wise();
-            $line_item_data = $model2->getDataByTeacherID($id);
+            $line_item_data = $model2->getDataByTeacherID($id,$this->collegeID);
 
             $data = array(
                 'title' =>$title,
@@ -139,7 +151,7 @@ class AssignTeacherController extends Controller
                 'assign_data'=>$assign_data,
                 'line_item_data'=>$line_item_data
             );
-            return view('admin.assignment.teachers.edit',$data);
+            return view('college.admin.assignment.teachers.edit',$data);
         }
         else
         {
@@ -171,6 +183,7 @@ class AssignTeacherController extends Controller
             $item_id = (int)$request->input('item_id')[$i];
             $data = array(
                 'teacherID'=>$id,
+                'collegeID'=>$this->collegeID,
                 'courseID'=>$request->input('course')[$i],
                 'deptID'=>$request->input('dept')[$i],
                 'subjectID'=>$request->input('subject')[$i],
@@ -179,7 +192,7 @@ class AssignTeacherController extends Controller
             $model2->updateData($data,$item_id);
         }
 
-        return redirect()->route('assignList')->with('message',"Data has been updated...!");
+        return redirect()->route('college.admin.assignList')->with('message',"Data has been updated...!");
     }
 
     /**
@@ -193,16 +206,16 @@ class AssignTeacherController extends Controller
     public function add_line_items(Request $request)
     {
         $course_model = new Course();
-        $courseData = $course_model->getList();
+        $courseData = $course_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $subject_model = new Subject();
-        $subjectData = $subject_model->getList();
+        $subjectData = $subject_model->getList($this->collegeID);
 
         $sem_model = new Semester();
-        $semData = $sem_model->getList();
+        $semData = $sem_model->getList($this->collegeID);
 
         $cnt = $request->post('cnt');
 
@@ -214,7 +227,7 @@ class AssignTeacherController extends Controller
             'cnt' =>(int)$cnt
         );
 
-        $html = view('admin.assignment.teachers.add_line_item',$data)->render();
+        $html = view('college.admin.assignment.teachers.add_line_item',$data)->render();
         echo $html;
     }
 

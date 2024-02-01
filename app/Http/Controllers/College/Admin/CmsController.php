@@ -12,13 +12,23 @@ use App\Models\College\Cms;
 
 class CmsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Cms();
 
         $title = "CMS Pages";
         $grid_title = "Page List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
         return view('college.admin.cms.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
@@ -38,14 +48,14 @@ class CmsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:cms,title',
+            'title' => 'required|unique:cms,title,collegeID',
             'descr' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $model = new Cms();
 
-        $upload_path = public_path().'/images/cms/';
+        $upload_path = public_path().'/images/college/cms/';
         $imageName = '';
 
         if($request->hasFile('file'))
@@ -60,8 +70,9 @@ class CmsController extends Controller
         $model->short_description = $request->input('short_descr');
         $model->description = $request->input('descr');
         $model->image = $imageName;
+        $model->collegeID = $this->collegeID;
         $model->status = $request->input('status');
-        $model->createdBy = Auth::guard('admin')->user()->id;
+        $model->createdBy = Auth::guard('collegeadmin')->user()->id;
 
         $res = $model->saveData($model);
         return redirect()->route('college.admin.pages')->with('message',"Data has been saved...!");
@@ -76,7 +87,7 @@ class CmsController extends Controller
 
         $title = "Edit Subject";
         //$data = Course::find($id);
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
             return view('college.admin.cms.edit',array('title'=>$title,'data'=>$data));
@@ -101,7 +112,7 @@ class CmsController extends Controller
 
         $model = Cms::find($id);
         $old_img = $model->image;
-        $upload_path = public_path().'/images/cms/';
+        $upload_path = public_path().'/images/college/cms/';
 
         if($request->hasFile('file'))
         {

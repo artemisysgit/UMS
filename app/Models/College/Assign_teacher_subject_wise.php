@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\College;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +17,7 @@ class Assign_teacher_subject_wise extends Model
         return true;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         // $res = DB::table('courses')->get();
         // return $res;
@@ -25,20 +25,27 @@ class Assign_teacher_subject_wise extends Model
         $res = DB::table('assign_teacher_subject_wises')
             ->select('teachers.name','assign_teacher_subject_wises.*')
             ->join('teachers','assign_teacher_subject_wises.createdBy','=','teachers.id')
+            ->where('assign_teacher_subject_wises.collegeID', $collegeID)
             ->get();
 
         return $res;
     }
 
-    public function getDataID($id)
+    public function getDataID($id,$collegeID=0)
     {
-        $res = DB::table('assign_teacher_subject_wises')->where('id', $id)->first();
+        $res = DB::table('assign_teacher_subject_wises')
+        ->where('id', $id)
+        ->where('collegeID', $collegeID)
+        ->first();
         return $res;
     }
 
-    public function getDataByTeacherID($id)
+    public function getDataByTeacherID($id,$collegeID=0)
     {
-        $res = DB::table('assign_teacher_subject_wises')->where('teacherID', $id)->get();
+        $res = DB::table('assign_teacher_subject_wises')
+        ->where('teacherID', $id)
+        ->where('collegeID', $collegeID)
+        ->get();
         return $res;
     }
 

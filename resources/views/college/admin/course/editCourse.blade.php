@@ -53,7 +53,7 @@
                             <input type="hidden" name="txt_file" id="txt_file" value="{{ $data->image }}">
                             <input type="file" name="file" class="form-control" id="bs-validation-upload-file"/>
                             @if($data->image)
-                                <img src="/images/college/course/{{ $data->image }}" style="height: 50px;width:100px;">
+                                <img src="/images/college/course/{{ $data->id }}/{{ $data->image }}" style="height: 50px;width:100px;">
                             @else
                                 <span>No image found!</span>
                             @endif

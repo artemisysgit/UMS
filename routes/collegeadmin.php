@@ -117,8 +117,8 @@ Route::group(['middleware'=>'collegeadmin'],function(){
     Route::post('college/admin/assign-teachers/save', [AssignTeacherController::class,'store'])->name('college.admin.save');
     Route::get('college/admin/assign-teachers/edit/{id}', [AssignTeacherController::class,'edit'])->name('college.admin.edit');
     Route::put('college/admin/assign-teachers/update/{id}', [AssignTeacherController::class,'update'])->name('college.admin.update');
-    Route::post('college/admin/assign-teachers/ajax-add-item', [AssignTeacherController::class,'add_line_items'])->name('college.admin.addRow');
-    Route::post('college/admin/assign-teachers/ajax-delete-item', [AssignTeacherController::class,'del_line_item'])->name('college.admin.delRow');
+    Route::post('college/admin/assign-teachers/ajax-add-item', [AssignTeacherController::class,'add_line_items']);
+    Route::post('college/admin/assign-teachers/ajax-delete-item', [AssignTeacherController::class,'del_line_item']);
     //--------------------------------------End------------------------------------------//
 
     //-------------------------------HOD Master---------------------------------//
@@ -143,7 +143,7 @@ Route::group(['middleware'=>'collegeadmin'],function(){
     Route::post('college/admin/routine/save', [RoutineController::class,'store'])->name('college.admin.saveRoutine');
     Route::get('college/admin/routine/edit/{id}', [RoutineController::class,'edit'])->name('college.admin.editRoutine');
     Route::put('college/admin/routine/update/{id}', [RoutineController::class,'update'])->name('college.admin.updateRoutine');
-    Route::post('college/admin/routine/ajax-search-routine', [RoutineController::class,'college.admin.search_routine']);
+    Route::post('college/admin/routine/ajax-search-routine', [RoutineController::class,'search_routine']);
     //-------------------------------------End--------------------------------------------//
 
     //-------------------------------------CMS Pages---------------------------------------//

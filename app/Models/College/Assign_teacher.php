@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\College;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,20 +18,24 @@ class Assign_teacher extends Model
         return $data->id;
     }
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         $res = DB::table('assign_teachers')
             ->select('teachers.name','assign_teachers.*','admins.name as createdBy')
             ->join('teachers','assign_teachers.teacherID','=','teachers.id')
             ->join('admins','assign_teachers.createdBy','=','admins.id')
+            ->where('assign_teachers.collegeID', $collegeID)
             ->get();
 
         return $res;
     }
 
-    public function getDataByID($id)
+    public function getDataByID($id,$collegeID=0)
     {
-        $res = DB::table('assign_teachers')->where('id', $id)->first();
+        $res = DB::table('assign_teachers')
+        ->where('id', $id)
+        ->where('collegeID', $collegeID)
+        ->first();
         return $res;
     }
 }

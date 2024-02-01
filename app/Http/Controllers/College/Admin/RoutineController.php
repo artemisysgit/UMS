@@ -17,19 +17,29 @@ use App\Models\College\TimeMaster;
 
 class RoutineController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('collegeadmin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('collegeadmin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Routine();
 
         $title = "Lession";
         $grid_title = "Lession List";
-        $data = $model->getList();
+        $data = $model->getList($this->collegeID);
 
         $teacher_model = new Teacher();
-        $teacherData = $teacher_model->getList();
+        $teacherData = $teacher_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $data = array(
             'title' =>$title,
@@ -49,16 +59,16 @@ class RoutineController extends Controller
     {
         $title = "Create Routine";
         $teacher_model = new Teacher();
-        $teacherData = $teacher_model->getList();
+        $teacherData = $teacher_model->getList($this->collegeID);
 
         $dept_model = new Department();
-        $deptData = $dept_model->getList();
+        $deptData = $dept_model->getList($this->collegeID);
 
         $sem_model = new Semester();
-        $semData = $sem_model->getList();
+        $semData = $sem_model->getList($this->collegeID);
 
         $time_model = new TimeMaster();
-        $timeData = $time_model->getList();
+        $timeData = $time_model->getList($this->collegeID);
 
         $weekdays = Routine::WEEK_DAYS;
 
@@ -100,9 +110,10 @@ class RoutineController extends Controller
         $model->timeID = $request->input('times');
         $model->weekID = $request->input('weekdays');
         $model->startTime = $request->input('start_time');
-        $model->createdBy = Auth::guard('admin')->user()->id;
+        $model->collegeID = (int)$this->collegeID;
+        $model->createdBy = Auth::guard('collegeadmin')->user()->id;
 
-        $validate_schedule = $model->chk_teacher_availability($timeID,$weekID,$teacherID);
+        $validate_schedule = $model->chk_teacher_availability($timeID,$weekID,$teacherID,$this->collegeID);
 
         //echo $validate_schedule;die;
 
@@ -123,21 +134,21 @@ class RoutineController extends Controller
         $model = new Routine();
 
         $title = "Edit Routine";
-        $data = $model->getDataByID($id);
+        $data = $model->getDataByID($id,$this->collegeID);
 
         if(!empty($data))
         {
             $teacher_model = new Teacher();
-            $teacherData = $teacher_model->getList();
+            $teacherData = $teacher_model->getList($this->collegeID);
 
             $dept_model = new Department();
-            $deptData = $dept_model->getList();
+            $deptData = $dept_model->getList($this->collegeID);
 
             $sem_model = new Semester();
-            $semData = $sem_model->getList();
+            $semData = $sem_model->getList($this->collegeID);
 
             $time_model = new TimeMaster();
-            $timeData = $time_model->getList();
+            $timeData = $time_model->getList($this->collegeID);
 
             $weekdays = Routine::WEEK_DAYS;
 
@@ -186,7 +197,7 @@ class RoutineController extends Controller
         $timeID = (int)$request->input('times');
         $weekID = (int)$request->input('weekdays');
 
-        $res = $model->getDataByID($id);
+        $res = $model->getDataByID($id,$this->collegeID);
         $current_weekID = (int)$res->weekID;
 
         $validate_schedule = $model->chk_teacher_availability($timeID,$weekID,$teacherID);
@@ -214,14 +225,14 @@ class RoutineController extends Controller
         $model = new Routine();
         $teacherID = (int)$request->post('teacher');
         $deptID = (int)$request->post('dept');
-        $res = $model->get_routine_by_teacher_dept($teacherID,$deptID);
+        $res = $model->get_routine_by_teacher_dept($teacherID,$deptID,$this->collegeID);
 
         //echo "<pre>";print_r($res);die;
 
         $weekdays = Routine::WEEK_DAYS;
 
         $model2 = new TimeMaster();
-        $time_slot = $model2->getList();
+        $time_slot = $model2->getList($this->collegeID);
 
         $arr = [];
 

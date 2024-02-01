@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\TimeMaster;
+use App\Models\superadmin\TimeMaster;
 
 class TimeController extends Controller
 {

@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-use App\Models\Admin;
-use App\Models\Country;
+use App\Models\superadmin\Admin;
+use App\Models\superadmin\Country;
 
 class ProfileController extends Controller
 {

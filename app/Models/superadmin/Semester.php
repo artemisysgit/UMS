@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\superadmin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class Department extends Model
+class Semester extends Model
 {
     use HasFactory;
 
@@ -18,9 +18,9 @@ class Department extends Model
 
     public function getList()
     {
-        $res = DB::table('departments')
-            ->select('admins.name','departments.*')
-            ->join('admins','departments.createdBy','=','admins.id')
+        $res = DB::table('semesters')
+            ->select('admins.name','semesters.*')
+            ->join('admins','semesters.createdBy','=','admins.id')
             ->get();
 
         return $res;
@@ -28,7 +28,7 @@ class Department extends Model
 
     public function getDataByID($id)
     {
-        $res = DB::table('departments')->where('id', $id)->first();
+        $res = DB::table('semesters')->where('id', $id)->first();
         return $res;
     }
 }

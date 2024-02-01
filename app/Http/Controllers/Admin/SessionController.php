@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\SessionModel;
+use App\Models\superadmin\SessionModel;
 //use App\Helpers\OrderHelper;
 
 class SessionController extends Controller

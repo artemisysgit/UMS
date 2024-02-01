@@ -8,13 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\Teacher;
-use App\Models\Course;
-use App\Models\Department;
-use App\Models\Semester;
-use App\Models\Subject;
-use App\Models\Assign_teacher;
-use App\Models\Assign_teacher_subject_wise;
+use App\Models\superadmin\Teacher;
+use App\Models\superadmin\Course;
+use App\Models\superadmin\Department;
+use App\Models\superadmin\Semester;
+use App\Models\superadmin\Subject;
+use App\Models\superadmin\Assign_teacher;
+use App\Models\superadmin\Assign_teacher_subject_wise;
 
 class AssignTeacherController extends Controller
 {

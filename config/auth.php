@@ -78,18 +78,18 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\superadmin\User::class,
         ],
 
         'admins' => [
             'driver' => 'eloquent',
             //'model' => App\Models\Admin\Admin::class,
-            'model' => App\Models\Admin::class,
+            'model' => App\Models\superadmin\Admin::class,
         ],
 
         'teachers' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Teacher::class,
+            'model' => App\Models\superadmin\Teacher::class,
         ],
 
         'collegeadmins' => [

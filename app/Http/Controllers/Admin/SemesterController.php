@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\Semester;
+use App\Models\superadmin\Semester;
 //use App\Helpers\helpers;
 
 class SemesterController extends Controller

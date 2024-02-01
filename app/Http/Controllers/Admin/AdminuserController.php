@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-use App\Models\Admin;
-use App\Models\Role;
-use App\Models\UserRoles;
+use App\Models\superadmin\Admin;
+use App\Models\superadmin\Role;
+use App\Models\superadmin\UserRoles;
 
 class AdminuserController extends Controller
 {

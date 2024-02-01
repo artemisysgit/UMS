@@ -119,13 +119,17 @@
         @include('admin.benefit.includes.header');
     <?php }?>
 
+    <?php if($controller == 'CollegeController'){?>
+        @include('admin.college.includes.header');
+    <?php }?>
+
     <?php
 
     $admin_menu_active = '';
     if(activeMenu('admin/dashboard') || activeMenu('admin/courses') || activeMenu('admin/sessions') || activeMenu('admin/semesters')
     || activeMenu('admin/departments') || activeMenu('admin/roles') || activeMenu('admin/subjects')
     || activeMenu('admin/admins') || activeMenu('admin/faculties') || activeMenu('admin/assign-teachers') || activeMenu('admin/hod')
-    || activeMenu('admin/time')|| activeMenu('admin/routine') || activeMenu('admin/cms') || activeMenu('admin/benefits'))
+    || activeMenu('admin/time')|| activeMenu('admin/routine') || activeMenu('admin/cms') || activeMenu('admin/benefits') || activeMenu('admin/colleges'))
 
     {
         $admin_menu_active = 'active open';
@@ -134,7 +138,7 @@
     $admin_master_menu_active = '';
     if(activeMenu('admin/dashboard') || activeMenu('admin/courses') || activeMenu('admin/sessions') || activeMenu('admin/semesters')
     || activeMenu('admin/departments') || activeMenu('admin/roles') || activeMenu('admin/subjects')
-    || activeMenu('admin/admins') || activeMenu('admin/faculties'))
+    || activeMenu('admin/admins') || activeMenu('admin/faculties') || activeMenu('admin/colleges'))
 
     {
         $admin_master_menu_active = 'active open';
@@ -149,7 +153,7 @@
 
     $admin_academy_menu_active = '';
 
-    if(activeMenu('admin/assign-teachers') || activeMenu('admin/hod') || activeMenu('admin/time') || activeMenu('admin/routine'))
+    if(activeMenu('admin/assign-teachers') || activeMenu('admin/hod') || activeMenu('admin/time') || activeMenu('admin/routine') || activeMenu('admin/college'))
     {
         $admin_academy_menu_active = 'active open';
     }
@@ -320,16 +324,23 @@
                                 </a>
                                 <ul class="menu-sub">
                                     <li class="menu-item {{ activeMenu('admin/admins') }}">
-                                    <a href="{{ route('admins') }}" class="menu-link">
-                                        <div data-i18n="Admin List">Admin List</div>
-                                    </a>
+                                        <a href="{{ route('admins') }}" class="menu-link">
+                                            <div data-i18n="Admin List">Admin List</div>
+                                        </a>
                                     </li>
                                     <li class="menu-item {{ activeMenu('admin/faculties') }}">
-                                    <a href="{{ route('faculties') }}" class="menu-link">
-                                        <div data-i18n="Faculty List">Faculty List</div>
-                                    </a>
+                                        <a href="{{ route('faculties') }}" class="menu-link">
+                                            <div data-i18n="Faculty List">Faculty List</div>
+                                        </a>
                                     </li>
+
                                 </ul>
+                            </li>
+
+                            <li class="menu-item {{ activeMenu('admin/colleges') }}">
+                                <a href="{{ route('colleges') }}" class="menu-link">
+                                    <div data-i18n="Colleges">Colleges</div>
+                                </a>
                             </li>
 
                         </ul>
@@ -2211,6 +2222,10 @@
 
     <?php if($controller == 'BenefitController'){?>
         @include('admin.benefit.includes.footer');
+    <?php }?>
+
+    <?php if($controller == 'CollegeController'){?>
+        @include('admin.college.includes.footer');
     <?php }?>
 
 

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-use App\Models\Role;
+use App\Models\superadmin\Role;
 
 class RoleController extends Controller
 {

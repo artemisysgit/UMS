@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-use App\Models\Teacher;
-use App\Models\Role;
-use App\Models\UserRoles;
+use App\Models\superadmin\Teacher;
+use App\Models\superadmin\Role;
+use App\Models\superadmin\UserRoles;
 
 class FacultyController extends Controller
 {

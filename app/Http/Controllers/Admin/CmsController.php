@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-use App\Models\Cms;
+use App\Models\superadmin\Cms;
 
 class CmsController extends Controller
 {

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-use App\Models\Benefit;
+use App\Models\superadmin\Benefit;
 
 class BenefitController extends Controller
 {

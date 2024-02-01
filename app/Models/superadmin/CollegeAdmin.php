@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\superadmin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use DB;
 
-class Admin extends Authenticatable
+class CollegeAdmin extends Authenticatable
 {
     use HasFactory;
 
@@ -32,13 +32,16 @@ class Admin extends Authenticatable
 
     public function getList()
     {
-        $res = DB::table('admins')->get();
+        $res = DB::table('college_admins')
+        ->where('collegeID', $collegeID)
+        ->where('status', 1)
+        ->get();
         return $res;
     }
 
     public function getDataByID($id)
     {
-        $res = DB::table('admins')->where('id', $id)->first();
+        $res = DB::table('college_admins')->where('id', $id)->first();
         return $res;
     }
 }

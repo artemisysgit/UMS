@@ -131,8 +131,11 @@
                   <label for="collegeID" class="form-label">College</label>
                   <select name="collegeID" id="collegeID" class="form-control" required>
                     <option value="">--Select--</option>
-                    <option value="1">College 1</option>
-                    <option value="2">College 2</option>
+                    @if(!empty($college_data))
+                    @foreach($college_data as $r)
+                    <option value="{{ $r->id }}">{{ $r->title }}</option>
+                    @endforeach
+                    @endif
                   </select>
                 </div>
                 <div class="mb-3 form-password-toggle">

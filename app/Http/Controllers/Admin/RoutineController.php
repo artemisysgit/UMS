@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 //use Illuminate\Support\Facades\Validator;
 
-use App\Models\Routine;
-use App\Models\Teacher;
-use App\Models\Department;
-use App\Models\Semester;
-use App\Models\TimeMaster;
+use App\Models\superadmin\Routine;
+use App\Models\superadmin\Teacher;
+use App\Models\superadmin\Department;
+use App\Models\superadmin\Semester;
+use App\Models\superadmin\TimeMaster;
 
 class RoutineController extends Controller
 {

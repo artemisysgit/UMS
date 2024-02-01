@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-use App\Models\Subject;
+use App\Models\superadmin\Subject;
 
 class SubjectController extends Controller
 {

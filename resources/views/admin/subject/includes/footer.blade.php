@@ -45,4 +45,4 @@
 <!----------------------End------------------------------>
 
 <!-- Custom JS -->
-<script src="{{ url('assets/admin_assets/js/subject/custom.js') }}"></script>
+<script src="{{ url('assets/admin_assets/js/superadmin/subject/custom.js') }}"></script>

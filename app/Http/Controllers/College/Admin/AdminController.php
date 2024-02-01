@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
+use App\Models\superadmin\College;
 use App\Helpers\OrderHelper;
 
 
@@ -22,7 +23,11 @@ class AdminController extends Controller
     public function login_form()
     {
         $title = "Admin | Login";
-        return view('college.admin.login',compact('title'));
+        //return view('college.admin.login',compact('title'));
+        $model = new College();
+        $college_data = $model->getList();
+        //echo "<pre>";print_r($college_data);die;
+        return view('college.admin.login',array('title'=>$title,'college_data'=>$college_data));
     }
 
     //todo: admin login functionality

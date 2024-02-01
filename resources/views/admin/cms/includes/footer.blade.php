@@ -49,6 +49,6 @@
 <!----------------------End------------------------------>
 
 <!-- Custom JS -->
-<script src="{{ url('assets/admin_assets/js/cms/custom.js') }}"></script>
+<script src="{{ url('assets/admin_assets/js/superadmin/cms/custom.js') }}"></script>
 
 <script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>

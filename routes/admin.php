@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\RoutineController;
 use App\Http\Controllers\Admin\TimeController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\BenefitController;
+use App\Http\Controllers\Admin\CollegeController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -144,6 +145,14 @@ Route::group(['middleware'=>'admin'],function(){
     Route::put('admin/routine/update/{id}', [RoutineController::class,'update'])->name('updateRoutine');
     Route::post('admin/routine/ajax-search-routine', [RoutineController::class,'search_routine']);
     //-------------------------------------End--------------------------------------------//
+
+    //-------------------------------------Colleges---------------------------------------//
+    Route::get('admin/colleges', [CollegeController::class,'index'])->name('colleges');
+    Route::get('admin/colleges/add-department', [CollegeController::class,'create'])->name('addCollege');
+    Route::post('admin/colleges/save-department', [CollegeController::class,'store'])->name('saveCollege');
+    Route::get('admin/colleges/edit/{id}', [CollegeController::class,'edit'])->name('editCollege');
+    Route::put('admin/colleges/update/{id}', [CollegeController::class,'update'])->name('updateCollege');
+    //--------------------------------------End------------------------------------------//
 
     //-------------------------------------CMS Pages---------------------------------------//
     Route::get('admin/cms', [CmsController::class,'index'])->name('pages');

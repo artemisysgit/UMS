@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use App\Models\Hod;
-use App\Models\Teacher;
-use App\Models\Department;
+use App\Models\superadmin\Hod;
+use App\Models\superadmin\Teacher;
+use App\Models\superadmin\Department;
 
 class HodController extends Controller
 {

@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\superadmin;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 use DB;
 
-class Cms extends Model
+class Role extends Model
 {
     use HasFactory;
 
@@ -19,9 +18,9 @@ class Cms extends Model
 
     public function getList()
     {
-        $res = DB::table('cms')
-            ->select('admins.name','cms.*')
-            ->join('admins','cms.createdBy','=','admins.id')
+        $res = DB::table('roles')
+            ->select('admins.name','roles.*')
+            ->join('admins','roles.createdBy','=','admins.id')
             ->get();
 
         return $res;
@@ -29,7 +28,7 @@ class Cms extends Model
 
     public function getDataByID($id)
     {
-        $res = DB::table('cms')->where('id', $id)->first();
+        $res = DB::table('roles')->where('id', $id)->first();
         return $res;
     }
 }

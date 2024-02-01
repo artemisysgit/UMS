@@ -8,18 +8,28 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-use App\Models\superadmin\Department;
+use App\Models\superadmin\College;
 
-class DepartmentController extends Controller
+class CollegeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
-        $model = new Department();
+        $model = new College();
 
-        $title = "Department";
-        $grid_title = "Department List";
+        $title = "College";
+        $grid_title = "College List";
         $data = $model->getList();
-        return view('admin.department.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
+        return view('admin.college.list',array('title'=>$title,'grid_title'=>$grid_title,'data'=>$data));
     }
 
     /**
@@ -27,8 +37,8 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        $title = "Create Department";
-        return view('admin.department.create',array('title'=>$title));
+        $title = "Create College";
+        return view('admin.college.create',array('title'=>$title));
     }
 
 
@@ -38,20 +48,20 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:departments,title',
+            'title' => 'required|unique:colleges,title',
             'descr' => 'required'
         ]);
 
-        $model = new Department();
+        $model = new College();
 
         $model->title = $request->input('title');
-        $model->deptCode = Str::slug($request->input('title')).time();
+        $model->collegeCode = Str::slug($request->input('title')).time();
         $model->descr = $request->input('descr');
         $model->status = $request->input('status');
         $model->createdBy = Auth::guard('admin')->user()->id;
 
         $res = $model->saveData($model);
-        return redirect()->route('departments')->with('message',"Data has been saved...!");
+        return redirect()->route('colleges')->with('message',"Data has been saved...!");
     }
 
     /**
@@ -59,14 +69,13 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        $model = new Department();
+        $model = new College();
 
-        $title = "Edit Department";
-        //$data = Course::find($id);
+        $title = "Edit College";
         $data = $model->getDataByID($id);
         if(!empty($data))
         {
-            return view('admin.department.edit',array('title'=>$title,'data'=>$data));
+            return view('admin.college.edit',array('title'=>$title,'data'=>$data));
         }
         else
         {
@@ -81,21 +90,21 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            //'title' => 'required|unique:departments,title,{$id}',
-            'title' => 'required|unique:departments,title,' . $id,
+            'title' => 'required|unique:colleges,title,' . $id,
             'descr' => 'required'
         ]);
 
 
         $imageName = '';
 
-        $model = Department::find($id);
+        $model = College::find($id);
         $model->title = $request->input('title');
+        $model->collegeCode = Str::slug($request->input('title')).time();
         $model->descr = $request->input('descr');
         $model->status = $request->input('status');
         $model->save();
 
-        return redirect()->route('departments')->with('message',"Data has been updated...!");
+        return redirect()->route('colleges')->with('message',"Data has been updated...!");
 
     }
 

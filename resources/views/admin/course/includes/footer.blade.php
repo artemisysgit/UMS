@@ -36,7 +36,7 @@
 <script src="{{ url('assets/js/main.js') }}"></script>
 
 <!-- Page JS -->
-<script src="{{ url('assets/js/form-validation.js') }}"></script>
+<!-- <script src="{{ url('assets/js/form-validation.js') }}"></script> -->
 <!----------------End------------------>
 
 <!--------------------Sweet Alert 2----------------------->

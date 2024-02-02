@@ -81,7 +81,6 @@ class CollegeController extends Controller
         {
             abort('404');
         }
-
     }
 
     /**
@@ -93,7 +92,6 @@ class CollegeController extends Controller
             'title' => 'required|unique:colleges,title,' . $id,
             'descr' => 'required'
         ]);
-
 
         $imageName = '';
 

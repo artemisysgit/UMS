@@ -98,6 +98,7 @@ class FacultyController extends Controller
             $roles_model->roleID = $request->input('roles')[$i];
             $roles_model->userID = $res;
             $roles_model->type = 'faculty';
+            $model->collegeID = $this->collegeID;
             $roles_model->saveData($roles_model);
         }
 

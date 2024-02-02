@@ -55,6 +55,8 @@
     <link rel="stylesheet" href="{{ url('assets/vendor/css/rtl/theme-default.css') }}" />
     <link rel="stylesheet" href="{{ url('assets/css/demo.css') }}" />
 
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
     <?php if($controller == 'AdminController'){?>
         @include('admin.header');
     <?php }?>
@@ -2157,6 +2159,10 @@
     <script src="{{ url('assets/vendor/libs/i18n/i18n.js') }}"></script>
     <script src="{{ url('assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
     <script src="{{ url('assets/vendor/js/menu.js') }}"></script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 
     <!-- endbuild -->
 

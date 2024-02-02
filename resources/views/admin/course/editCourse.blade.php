@@ -43,8 +43,8 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="bs-validation-dob">Start Date</label>
-                            <input type="text" class="form-control flatpickr-validation" name="startDate" value="{{ $data->startDate }}" id="bs-validation-dob" autocomplete="off"
-                                required />
+                            <input type="text" class="form-control" name="startDate" value="{{ $data->startDate }}" id="startDate" autocomplete="off"
+                                required readonly />
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please Enter Start Date</div>
                         </div>

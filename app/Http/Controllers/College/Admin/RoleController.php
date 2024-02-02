@@ -48,7 +48,8 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:roles,title',
+            //'title' => 'required|unique:roles,title',
+            'title' => 'required',
             'descr' => 'required'
         ]);
 
@@ -60,6 +61,15 @@ class RoleController extends Controller
         $model->status = $request->input('status');
         $model->collegeID = (int)$this->collegeID;
         $model->createdBy = Auth::guard('collegeadmin')->user()->id;
+
+        $validate_title = $model->chk_role_availability($request->input('title'),$this->collegeID);
+
+        //echo $validate_title[0];die;
+
+        if($validate_title[0] == 1)
+        {
+            return redirect()->route('college.admin.addRole')->with("error_message","That Role already exists !!");
+        }
 
         $res = $model->saveData($model);
         return redirect()->route('college.admin.roles')->with('message',"Data has been saved...!");

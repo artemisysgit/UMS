@@ -55,7 +55,7 @@ class AdminuserController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email'=> 'required|email|unique:admins,email',
+            'email'=> 'required|email|unique:college_admins,email,collegeID',
             'pwd'=> 'required',
             'mobile'=> 'required|numeric|digits:10',
             'dob' => 'required',
@@ -99,6 +99,7 @@ class AdminuserController extends Controller
             $roles_model->roleID = $request->input('roles')[$i];
             $roles_model->userID = $res;
             $roles_model->type = 'admin';
+            $model->collegeID = $this->collegeID;
             $roles_model->saveData($roles_model);
         }
 

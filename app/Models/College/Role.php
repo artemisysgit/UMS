@@ -35,4 +35,15 @@ class Role extends Model
         ->first();
         return $res;
     }
+
+    public function chk_role_availability($title,$collegeID)
+    {
+        $res = DB::table('roles')
+        ->select(DB::raw('count(*) as cnt'))
+        ->where('roles.title','=',$title)
+        ->where('roles.collegeID', $collegeID)
+        ->pluck('cnt');
+
+        return $res;
+    }
 }

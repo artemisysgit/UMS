@@ -45,4 +45,4 @@
 <!----------------------End------------------------------>
 
 <!-- Custom JS -->
-<script src="{{ url('assets/admin_assets/js/admin/custom.js') }}"></script>
+<script src="{{ url('assets/admin_assets/js/college/admin/custom.js') }}"></script>

@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 //--------------------------------------Teacher Routes--------------------------------//
-Route::get('teacher',[TeacherController::class,'login_form'])->name('teacher.login');
+Route::get('admin/teacher',[TeacherController::class,'login_form'])->name('teacher.login');
 Route::post('teacher-functionality',[TeacherController::class,'login_functionality'])->name('teacher.functionality');
 
 Route::group(['middleware'=>'teacher'],function(){

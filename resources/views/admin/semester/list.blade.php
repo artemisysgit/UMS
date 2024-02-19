@@ -46,7 +46,7 @@
                     <td></td>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $r->title }}</td>
-                    <td>{{ $r->status == 1 ?'Active':'' }}</td>
+                    <td>{{ $r->status == 1 ?'Active':'Inactive' }}</td>
                     <td>{{ $r->name }}</td>
                     <td><a href="{{  url('admin/semesters/edit/'.$r->id) }}" class="btn btn-primary btn-sm">edit</a></td>
                 </tr>

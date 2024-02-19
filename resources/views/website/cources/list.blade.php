@@ -31,7 +31,7 @@
 
                     <div class="courses-slide">
                         <div class="courses-slide-main">
-                            <div class="courses-slider-img"><img src="/images/course/{{ $course->image }}" alt=""></div>
+                            <div class="courses-slider-img"><img src="/images/admin/course/{{ $course->image }}" alt=""></div>
                             <div class="courses-slider-text">
                                 <ul class="course-detail d-flex align-items-center justify-content-between ">
                                     <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"

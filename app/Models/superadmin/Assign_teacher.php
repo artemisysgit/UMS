@@ -38,4 +38,5 @@ class Assign_teacher extends Model
         ->first();
         return $res;
     }
+
 }

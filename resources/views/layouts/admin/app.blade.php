@@ -89,6 +89,10 @@
         @include('admin.subject.includes.header');
     <?php }?>
 
+    <?php if($controller == 'SubjectCombinationController'){?>
+        @include('admin.subject_combination.includes.header');
+    <?php }?>
+
     <?php if($controller == 'FacultyController'){?>
         @include('admin.users.normal.includes.header');
     <?php }?>
@@ -129,7 +133,7 @@
 
     $admin_menu_active = '';
     if(activeMenu('admin/dashboard') || activeMenu('admin/courses') || activeMenu('admin/sessions') || activeMenu('admin/semesters')
-    || activeMenu('admin/departments') || activeMenu('admin/roles') || activeMenu('admin/subjects')
+    || activeMenu('admin/departments') || activeMenu('admin/roles') || activeMenu('admin/subjects') || activeMenu('admin/subject_combination_list')
     || activeMenu('admin/admins') || activeMenu('admin/faculties') || activeMenu('admin/assign-teachers') || activeMenu('admin/hod')
     || activeMenu('admin/time')|| activeMenu('admin/routine') || activeMenu('admin/cms') || activeMenu('admin/benefits') || activeMenu('admin/colleges'))
 
@@ -139,7 +143,7 @@
 
     $admin_master_menu_active = '';
     if(activeMenu('admin/dashboard') || activeMenu('admin/courses') || activeMenu('admin/sessions') || activeMenu('admin/semesters')
-    || activeMenu('admin/departments') || activeMenu('admin/roles') || activeMenu('admin/subjects')
+    || activeMenu('admin/departments') || activeMenu('admin/roles') || activeMenu('admin/subjects') || activeMenu('admin/subject_combination_list')
     || activeMenu('admin/admins') || activeMenu('admin/faculties') || activeMenu('admin/colleges'))
 
     {
@@ -1985,7 +1989,7 @@
 
                 if(!empty(Auth::guard('admin')->user()->image))
                 {
-                    $profileImage = 'images/users/admins/'.Auth::guard('admin')->user()->image;
+                    $profileImage = 'images/admin/users/admins/'.Auth::guard('admin')->user()->image;
                 }
                 else
                 {
@@ -2196,6 +2200,10 @@
 
     <?php if($controller == 'SubjectController'){?>
         @include('admin.subject.includes.footer');
+    <?php }?>
+
+    <?php if($controller == 'SubjectCombinationController'){?>
+        @include('admin.subject_combination.includes.footer');
     <?php }?>
 
     <?php if($controller == 'FacultyController'){?>

@@ -171,6 +171,7 @@ class AssignTeacherController extends Controller
         $model = Assign_teacher::find($id);
         $model->teacherID = $request->input('teacher');
         //$model->createdBy = Auth::guard('admin')->user()->id;
+
         $res = $model->save();
 
         $cnt = count($request->input('course'));

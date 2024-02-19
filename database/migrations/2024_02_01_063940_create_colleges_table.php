@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();;
             $table->string('collegeCode')->default('null');
-            $table->string('descr')->nullable();
+            $table->text('descr')->nullable();
             $table->string('image')->default('null');
             $table->tinyInteger('status')->default(1);
             $table->integer('createdBy');

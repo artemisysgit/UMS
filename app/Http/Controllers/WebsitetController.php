@@ -24,7 +24,7 @@ class WebsitetController extends Controller
 
         $course_model = new Course();
         $course_type = Course::COURSE_TYPE;
-        $course_data = $course_model->getList();
+        $course_data = $course_model->getList(null,0);
 
         $data = array(
             'title' =>$title,
@@ -91,7 +91,7 @@ class WebsitetController extends Controller
         $course_model = new Course();
 
         $course_type = (int)$request->input('type');
-        $course_data = $course_model->getList($course_type);
+        $course_data = $course_model->getList($course_type,0);
 
         //dd($course_data);die;
 
@@ -101,7 +101,7 @@ class WebsitetController extends Controller
             foreach($course_data as $r)
             {
                 $title = $r->title;
-                $image = "/images/course/".$r->image;
+                $image = "/images/admin/course/".$r->image;
                 $html.= '
 
                 <div class="courses-slide">

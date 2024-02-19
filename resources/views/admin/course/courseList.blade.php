@@ -60,7 +60,7 @@
                         {{ $r->course_type == $k ? $v :'' }}
                         @endforeach
                     </td>
-                    <td>{{ $r->status == 1 ?'Active':'' }}</td>
+                    <td>{{ $r->status == 1 ?'Active':'Inactive' }}</td>
                     <td>{{ $r->name }}</td>
                     <td><a href="{{  url('admin/courses/edit/'.$r->id) }}" class="btn btn-primary btn-sm">edit</a></td>
                 </tr>

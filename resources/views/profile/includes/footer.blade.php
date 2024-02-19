@@ -22,4 +22,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"> </script>
 
 <!-- Custom JS -->
-<script src="{{ url('assets/admin_assets/js/profile/custom.js') }}"></script>
+<script src="{{ url('assets/admin_assets/js/superadmin/profile/custom.js') }}"></script>

@@ -38,4 +38,34 @@ class Hod extends Model
         ->first();
         return $res;
     }
+
+    public function chk_availability($dept,$collegeID=0)
+    {
+        $res = DB::table('hods')
+        ->select(DB::raw('count(*) as cnt'))
+        ->where('hods.deptID', $dept)
+        ->where('hods.collegeID', $collegeID)
+        ->pluck('cnt');
+
+        return $res;
+    }
+
+    public function chkID($dept,$collegeID=0,$id)
+    {
+        $arr = [];
+        $res = DB::table('hods')
+        ->where('deptID', $dept)
+        ->where('collegeID', $collegeID)
+        ->where('id','!=', $id)
+        ->get();
+
+        if(!empty($res))
+        {
+            foreach($res as $r)
+            {
+                $arr[] = $r->id;
+            }
+        }
+        return $arr;
+    }
 }

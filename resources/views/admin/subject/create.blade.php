@@ -4,7 +4,7 @@
 
 
 <div class="container-xxl flex-grow-1 container-p-y">
-    <h4 class="py-3 mb-4"><span class="text-muted fw-light"><a href="{{ route('departments') }}">Subjects</a> /</span> {{ $title }}</h4>
+    <h4 class="py-3 mb-4"><span class="text-muted fw-light"><a href="{{ route('subjects') }}">Subjects</a> /</span> {{ $title }}</h4>
     <div class="row mb-4">
 
         <!-- Bootstrap Validation -->
@@ -17,6 +17,14 @@
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if(session()->has('error_message'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>{{ session()->get('error_message') }}</li>
                         </ul>
                     </div>
                 @endif

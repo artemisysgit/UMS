@@ -77,39 +77,6 @@ class ProfileController extends Controller
         return redirect()->route('profile')->with('message',"Data has been updated...!");
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Course $course)
-    {
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, $id)
-    {
-
-
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Course $course)
-    {
-        //
-    }
-
     public function uploadImage(Request $request)
     {
         //print_r($_FILES);die;
@@ -141,10 +108,6 @@ class ProfileController extends Controller
             $model->save();
             echo true;
         }
-        // else
-        // {
-        //     $imageName = $request->txt_file;
-        //     echo true;
-        // }
+
     }
 }

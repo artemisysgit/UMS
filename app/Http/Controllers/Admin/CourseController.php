@@ -53,7 +53,7 @@ class CourseController extends Controller
         //dd($request->all());die;
 
         $request->validate([
-            'title' => 'required|unique:courses,title',
+            'title' => 'required',
             'descr' => 'required',
             'startDate' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -78,6 +78,12 @@ class CourseController extends Controller
         $model->status = $request->input('status');
         $model->collegeID = (int)$this->collegeID;
         $model->createdBy = Auth::guard('admin')->user()->id;
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        if($validate[0] == 1)
+        {
+            return redirect()->route('addCourse')->with("error_message","Already exists !!");
+        }
 
         $res = $model->saveData($model);
         //$res = $model->saveData($data);
@@ -121,7 +127,7 @@ class CourseController extends Controller
     {
         $request->validate([
             //'title' => 'required|unique:courses,title,{$id}',
-            'title' => 'required|unique:courses,title,' . $id,
+            'title' => 'required',
             'descr' => 'required',
             'startDate' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -157,6 +163,14 @@ class CourseController extends Controller
         $model->startDate = date('Y-m-d',strtotime($request->input('startDate')));
         $model->course_type = $request->input('course_type');
         $model->status = $request->input('status');
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        $chkID = $model->chkID($request->input('title'),$this->collegeID,$id);
+        //echo "<pre>";print_r($chkID);die;
+        if($validate[0] == 1 && !empty($chkID))
+        {
+            return redirect()->route('editCourse',$id)->with("error_message","Already exists !!");
+        }
         $model->save();
 
         return redirect()->route('courses')->with('message',"Course has been updated...!");

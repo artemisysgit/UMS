@@ -49,12 +49,18 @@ class CmsController extends Controller
     {
         $collegeID = Auth::guard('admin')->user()->collegeID;
         $request->validate([
-            'title' => 'required|unique:cms,title,collegeID',
+            'title' => 'required',
             'descr' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $model = new Cms();
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        if($validate[0] == 1)
+        {
+            return redirect()->route('addPage')->with("error_message","Already exists !!");
+        }
 
         $upload_path = public_path().'/images/admin/cms/';
         $imageName = '';
@@ -105,7 +111,7 @@ class CmsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|unique:cms,title,' . $id,
+            'title' => 'required',
             'descr' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
@@ -136,6 +142,15 @@ class CmsController extends Controller
         $model->description = $request->input('descr');
         $model->image = $imageName;
         $model->status = $request->input('status');
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        $chkID = $model->chkID($request->input('title'),$this->collegeID,$id);
+        //echo "<pre>";print_r($chkID);die;
+        if($validate[0] == 1 && !empty($chkID))
+        {
+            return redirect()->route('editPage',$id)->with("error_message","Already exists !!");
+        }
+
         $model->save();
 
         return redirect()->route('pages')->with('message',"Data has been updated...!");

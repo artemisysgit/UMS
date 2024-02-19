@@ -16,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 //--------------------------------------Teacher Routes--------------------------------//
 Route::get('admin/teacher',[TeacherController::class,'login_form'])->name('teacher.login');
-Route::post('teacher-functionality',[TeacherController::class,'login_functionality'])->name('teacher.functionality');
+Route::post('admin/teacher-functionality',[TeacherController::class,'login_functionality'])->name('teacher.functionality');
 
 Route::group(['middleware'=>'teacher'],function(){
 
-    Route::get('teacher/logout',[TeacherController::class,'logout'])->name('teacher.logout');
-    Route::get('teacher/dashboard',[TeacherController::class,'dashboard'])->name('teacher.dashboard');
+    Route::get('admin/teacher/logout',[TeacherController::class,'logout'])->name('teacher.logout');
+    Route::get('admin/teacher/dashboard',[TeacherController::class,'dashboard'])->name('teacher.dashboard');
 });

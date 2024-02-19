@@ -48,7 +48,7 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:departments,title',
+            'title' => 'required',
             'descr' => 'required'
         ]);
 
@@ -59,6 +59,12 @@ class DepartmentController extends Controller
         $model->descr = $request->input('descr');
         $model->status = $request->input('status');
         $model->createdBy = Auth::guard('admin')->user()->id;
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        if($validate[0] == 1)
+        {
+            return redirect()->route('addDepartment')->with("error_message","Already exists !!");
+        }
 
         $res = $model->saveData($model);
         return redirect()->route('departments')->with('message',"Data has been saved...!");
@@ -91,8 +97,7 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            //'title' => 'required|unique:departments,title,{$id}',
-            'title' => 'required|unique:departments,title,' . $id,
+            'title' => 'required',
             'descr' => 'required'
         ]);
 
@@ -103,6 +108,14 @@ class DepartmentController extends Controller
         $model->title = $request->input('title');
         $model->descr = $request->input('descr');
         $model->status = $request->input('status');
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        $chkID = $model->chkID($request->input('title'),$this->collegeID,$id);
+        //echo "<pre>";print_r($chkID);die;
+        if($validate[0] == 1 && !empty($chkID))
+        {
+            return redirect()->route('editDepartment',$id)->with("error_message","Already exists !!");
+        }
         $model->save();
 
         return redirect()->route('departments')->with('message',"Data has been updated...!");

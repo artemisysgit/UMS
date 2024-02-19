@@ -18,15 +18,17 @@ class Course extends Model
         '4' => 'Popular',
     ];
 
-    public function getList($type=null)
+    public function getList($type=null,$collegeID=0)
     {
-        if(!empty($type) && ($type != 1))
+        //if(!empty($type) && ($type != 1))
+        if(!empty($type))
         {
             $res = DB::table('courses')
             ->select('admins.name','courses.*')
             ->join('admins','courses.createdBy','=','admins.id')
             ->where('courses.status',1)
             ->where('courses.course_type',$type)
+            ->where('courses.collegeID',$collegeID)
             ->get();
         }
         else
@@ -35,6 +37,7 @@ class Course extends Model
             ->select('admins.name','courses.*')
             ->join('admins','courses.createdBy','=','admins.id')
             ->where('courses.status',1)
+            ->where('courses.collegeID',$collegeID)
             ->get();
         }
 

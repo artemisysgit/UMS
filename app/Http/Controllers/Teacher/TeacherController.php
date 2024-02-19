@@ -16,7 +16,8 @@ class TeacherController extends Controller
     }
 
     //todo: admin login functionality
-    public function login_functionality(Request $request){
+    public function login_functionality(Request $request)
+    {
 
         $request->validate([
             'email'=>'required',
@@ -40,9 +41,9 @@ class TeacherController extends Controller
         return view('teacher.dashboard',compact('title'));
     }
 
-
     //todo: admin logout functionality
-    public function logout(){
+    public function logout()
+    {
         Auth::guard('teacher')->logout();
         return redirect()->route('teacher.login');
     }

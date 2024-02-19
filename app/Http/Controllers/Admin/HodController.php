@@ -81,6 +81,12 @@ class HodController extends Controller
         $model->status = $request->input('status');
         $model->createdBy = Auth::guard('admin')->user()->id;
 
+        $validate = $model->chk_availability($request->input('dept'),$this->collegeID);
+        if($validate[0] == 1)
+        {
+            return redirect()->route('addHod')->with("error_message","Already exists !!");
+        }
+
         $res = $model->saveData($model);
         return redirect()->route('hodList')->with('message',"Data has been saved...!");
     }
@@ -139,6 +145,15 @@ class HodController extends Controller
         $model->teacherID = $request->input('teacher');
         $model->deptID = $request->input('dept');
         $model->status = $request->input('status');
+
+        $validate = $model->chk_availability($request->input('dept'),$this->collegeID);
+        $chkID = $model->chkID($request->input('dept'),$this->collegeID,$id);
+        //echo "<pre>";print_r($chkID);die;
+        if($validate[0] == 1 && !empty($chkID))
+        {
+            return redirect()->route('editHod',$id)->with("error_message","Already exists !!");
+        }
+
         $model->save();
 
         return redirect()->route('hodList')->with('message',"Data has been updated...!");

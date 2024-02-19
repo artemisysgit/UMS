@@ -20,6 +20,13 @@
                         </ul>
                     </div>
                 @endif
+                @if(session()->has('error_message'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>{{ session()->get('error_message') }}</li>
+                        </ul>
+                    </div>
+                @endif
                 </h5>
 
                 <div class="card-body">
@@ -41,7 +48,7 @@
                           <select class="form-select" name="status" id="bs-validation-country" required>
                             <option value="">Select Status</option>
                             <option value="1" {{ $data->status == 1 ?'selected':'' }} >Active</option>
-                            <option value="0">Inactive</option>
+                            <option value="0" {{ $data->status == 0 ?'selected':'' }}>Inactive</option>
                           </select>
                           <div class="valid-feedback">Looks good!</div>
                           <div class="invalid-feedback">Please select status</div>

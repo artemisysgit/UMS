@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\SemesterController;
 use App\Http\Controllers\Admin\DepartmentController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\SubjectController;
+use App\Http\Controllers\Admin\SubjectCombinationController;
 use App\Http\Controllers\Admin\AdminuserController;
 use App\Http\Controllers\Admin\FacultyController;
 use App\Http\Controllers\Admin\ProfileController;
@@ -87,6 +88,14 @@ Route::group(['middleware'=>'admin'],function(){
     Route::post('admin/subjects/save-subject', [SubjectController::class,'store'])->name('saveSubject');
     Route::get('admin/subjects/edit/{id}', [SubjectController::class,'edit'])->name('editSubject');
     Route::put('admin/subjects/update/{id}', [SubjectController::class,'update'])->name('updateSubject');
+    //--------------------------------------End------------------------------------------//
+
+    //-------------------------------------Subject Combinations---------------------------------------//
+    Route::get('admin/subjects/combinations/list/{subid}', [SubjectCombinationController::class,'index'])->name('subject_combination_list');
+    Route::get('admin/subjects/combinations/add-subject-combination/{subid}', [SubjectCombinationController::class,'create'])->name('addSubjectCombination');
+    Route::post('admin/subjects/combinations/save-subject-combination', [SubjectCombinationController::class,'store'])->name('saveSubjectCombination');
+    Route::get('admin/subjects/combinations/edit/{subid}/{id}', [SubjectCombinationController::class,'edit'])->name('editSubjectCombination');
+    Route::put('admin/subjects/combinations/update/{subid}/{id}', [SubjectCombinationController::class,'update'])->name('updateSubjectCombination');
     //--------------------------------------End------------------------------------------//
 
     //-------------------------------------Admin Users---------------------------------------//

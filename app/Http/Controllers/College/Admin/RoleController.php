@@ -102,11 +102,9 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            //'title' => 'required|unique:roles,title,{$id}',
             'title' => 'required|unique:roles,title,' . $id,
             'descr' => 'required'
         ]);
-
 
         $imageName = '';
 

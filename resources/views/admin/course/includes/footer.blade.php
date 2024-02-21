@@ -46,3 +46,5 @@
 
 <!-- Custom JS -->
 <script src="{{ url('assets/admin_assets/js/superadmin/course/custom.js') }}"></script>
+
+<script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>

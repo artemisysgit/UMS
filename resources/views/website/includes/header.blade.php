@@ -8,18 +8,24 @@
     //echo (int)request()->is('admin/courses');die;
    // echo $controller;die;
 
+   $collegeData = getActiveColleges();
 
-
-   $home_menu_active = '';
-   if(activeMenu('/'))
+    $home_menu_active = '';
+    if(activeMenu('/'))
     {
         $home_menu_active = 'active';
     }
 
     $aboutus_menu_active = '';
-   if(activeMenu('about-us'))
+    if(activeMenu('about-us'))
     {
         $aboutus_menu_active = 'active';
+    }
+
+    $course_menu_active = '';
+    if(activeMenu('courses'))
+    {
+        $course_menu_active = 'active';
     }
 
 ?>
@@ -32,21 +38,23 @@
                 <ul class="main-menu menu-toggle">
                     <li><a href="/" class="{{ $home_menu_active }} ">Home</a></li>
                     <li><a href="{{ route('about-us') }}" class="{{ $aboutus_menu_active }}">About</a></li>
-                    <li class="dropdown "><a href="#">Product & Services <svg width="11" height="7" viewBox="0 0 11 7"
+                    <li class="dropdown "><a href="#">Colleges <svg width="11" height="7" viewBox="0 0 11 7"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.75 1.625L5.5 5.375L9.25 1.625" stroke="#5A5A5A" stroke-width="1.8"
                                     stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#">Product 1</a></li>
-                            <li><a href="#">Product 2</a></li>
-                            <li><a href="#">Product 3</a></li>
-                            <!-- <div class="arrow"></div> -->
+
+                        @if(!empty($collegeData))
+                            @foreach($collegeData as $college)
+                                <li><a href="{{ route('college-details',$college->collegeCode) }}">{{ $college->title }}</a></li>
+                            @endforeach
+                        @endif
                         </ul>
                     </li>
                     <li><a href="#">Features</a></li>
-                    <li><a href="#">Clients</a></li>
+                    <li><a href="{{ route('website.courses') }}" class="{{ $course_menu_active }}">Courses</a></li>
                     <li class="dropdown "><a href="#">Resources <svg width="11" height="7" viewBox="0 0 11 7"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.75 1.625L5.5 5.375L9.25 1.625" stroke="#5A5A5A" stroke-width="1.8"

@@ -28,7 +28,10 @@ Route::get('/', [App\Http\Controllers\WebsitetController::class, 'index'])->name
 Route::post('/ajax-filter-course', [App\Http\Controllers\WebsitetController::class, 'ajax_filter_type_data'])->name('course-filter');
 Route::get('/about-us', [App\Http\Controllers\WebsitetController::class, 'about_us'])->name('about-us');
 Route::get('/contact-us', [App\Http\Controllers\WebsitetController::class, 'contact_us'])->name('contact-us');
-Route::post('/enquiry', [App\Http\Controllers\WebsitetController::class, 'enquiry'])->name('saveEnquiry');
+Route::post('/enquiry', [App\Http\Controllers\WebsitetController::class, 'enquiry'])->name('website.saveEnquiry');
+Route::get('/courses', [App\Http\Controllers\WebsitetController::class, 'courses'])->name('website.courses');
+Route::get('/courses/course-details/{id}', [App\Http\Controllers\WebsitetController::class, 'course_details'])->name('website.course_details');
+Route::get('/colleges/{code}', [App\Http\Controllers\WebsitetController::class, 'college_details'])->name('college-details');
 
 Auth::routes();
 

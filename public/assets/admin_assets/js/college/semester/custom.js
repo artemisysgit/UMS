@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    CKEDITOR.replace('descr');
 
    $('#tbl').DataTable( {
 

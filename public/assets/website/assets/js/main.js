@@ -191,8 +191,8 @@ $('.courses-slider').slick({
     slidesToScroll: 1,
     infinite: true,
     swipeToSlide: true,
-    prevArrow: '<div class="a-left control-c prev slick-prev"><img src="assets/website/assets/images/news/move-right.png" alt=""></div>',
-    nextArrow: '<div class="a-right control-c next slick-next"><img src="assets/website/assets/images/news/move-right (1).png" alt=""></div>',
+    prevArrow: '<div class="a-left control-c prev slick-prev"><img src="assets/images/news/move-right.png" alt=""></div>',
+    nextArrow: '<div class="a-right control-c next slick-next"><img src="assets/images/news/move-right (1).png" alt=""></div>',
     dots: true,
     responsive: [
         {
@@ -242,13 +242,9 @@ $('.tablinks').on('click', function () {
 // date picker
 
 $(document).ready(function () {
-    $("#datepicker").datepicker({
-        dateFormat:'dd-mm-yy',
-        changeMonth:true,
-        changeYear:true
-    });
+    $("#datepicker").datepicker();
 
-    $('#date-icon').click(function(){
+    $('#date-icon').click(function () {
         $("#datepicker").datepicker('show');
     })
 });
@@ -266,8 +262,8 @@ $('.reviews-slider').slick({
     slidesToScroll: 1,
     infinite: true,
     swipeToSlide: true,
-    prevArrow: '<div class="a-left control-c prev slick-prev"><img src="assets/website/assets/images/reviews/move-right.png" alt=""></div>',
-    nextArrow: '<div class="a-right control-c next slick-next"><img src="assets/website/assets/images/reviews/move-left.png" alt=""></div>',
+    prevArrow: '<div class="a-left control-c prev slick-prev"><img src="assets/images/reviews/move-right.png" alt=""></div>',
+    nextArrow: '<div class="a-right control-c next slick-next"><img src="assets/images/reviews/move-left.png" alt=""></div>',
     dots: true,
     responsive: [
         {
@@ -317,22 +313,26 @@ $('.parents-testimonial-slider').slick({
     slidesToScroll: 1,
     infinite: true,
     swipeToSlide: true,
-    prevArrow: '<div class="a-left control-c prev slick-prev"><img src="assets/website/assets/images/reviews/move-right.png" alt=""></div>',
-    nextArrow: '<div class="a-right control-c next slick-next"><img src="assets/website/assets/images/reviews/move-left.png" alt=""></div>',
+    prevArrow: '<div class="a-left control-c prev slick-prev"><img src="assets/images/reviews/move-right.png" alt=""></div>',
+    nextArrow: '<div class="a-right control-c next slick-next"><img src="assets/images/reviews/move-left.png" alt=""></div>',
     dots: true,
     responsive: [
         {
-            breakpoint: 1024,
+            breakpoint: 1030,
             settings: {
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 infinite: true,
+                dots: true,
+                arrows: false,
             }
         },
         {
             breakpoint: 992,
             settings: {
                 slidesToShow: 2,
+                dots: true,
+                arrows: false,
                 slidesToScroll: 1
             }
         },
@@ -340,7 +340,8 @@ $('.parents-testimonial-slider').slick({
             breakpoint: 769,
             settings: {
                 slidesToShow: 2,
-                arrows: true,
+                arrows: false,
+                dots: true,
                 slidesToScroll: 1
             }
         },
@@ -414,62 +415,37 @@ document.addEventListener("DOMContentLoaded", () => {
     const bodyElement = document.body;
     const progressBar = document.getElementById("progress-bar");
     const pathLength = document
-      .querySelector("#progress-bar > svg > path")
-      .getTotalLength();
+        .querySelector("#progress-bar > svg > path")
+        .getTotalLength();
 
     scrollToTopBtn.addEventListener("click", () => {
-      rootElement.scrollTo({ top: 0, behavior: "smooth" });
+        rootElement.scrollTo({ top: 0, behavior: "smooth" });
     });
 
     document.addEventListener("scroll", () => {
-      const scrollAmount = pathLength / 100;
-      const scrollPosition = Math.round(
-        ((rootElement.scrollTop || bodyElement.scrollTop) /
-          ((rootElement.scrollHeight || bodyElement.scrollHeight) -
-            innerHeight)) *
-          100 *
-          scrollAmount
-      );
+        const scrollAmount = pathLength / 100;
+        const scrollPosition = Math.round(
+            ((rootElement.scrollTop || bodyElement.scrollTop) /
+                ((rootElement.scrollHeight || bodyElement.scrollHeight) -
+                    innerHeight)) *
+            100 *
+            scrollAmount
+        );
 
-      if (scrollPosition > 5) {
-        scrollToTopBtn.classList.add("showBtn");
-        progressBar.style.setProperty("--scrollAmount", scrollPosition + "px");
-      } else {
-        scrollToTopBtn.classList.remove("showBtn");
-      }
+        if (scrollPosition > 5) {
+            scrollToTopBtn.classList.add("showBtn");
+            progressBar.style.setProperty("--scrollAmount", scrollPosition + "px");
+        } else {
+            scrollToTopBtn.classList.remove("showBtn");
+        }
     });
-  });
+});
 
 
 
 //   Resources
 
 
-
-
-
-
-
-
-
-
-
-
-// $('.slider')
-//     .on('beforeChange', function () {
-//         $('.slider_title').removeClass("zoom-ani");
-//         $('.slider_subtitle').removeClass("zoom-ani");
-//         $('.small_cta').removeClass("zoom-ani");
-//         $('.big_cta').removeClass("zoom-ani");
-//         // AOS.refreshHard(); this didn't work
-//     })
-//     .on('afterChange', function (event, slick, currentSlide) {
-//         $('.slider_title').addClass("zoom-ani");
-//         $('.slider_subtitle').addClass("zoom-ani");
-//         $('.small_cta').addClass("zoom-ani");
-//         $('.big_cta').addClass("zoom-ani");
-//         // AOS.refreshHard(); this didn't work
-//     });
 
 
 //  professor-slider
@@ -488,17 +464,20 @@ $('.professor-slider').slick({
     dots: true,
     responsive: [
         {
-            breakpoint: 1024,
+            breakpoint: 1030,
             settings: {
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 infinite: true,
+                arrows: false,
             }
         },
         {
-            breakpoint: 992,
+            breakpoint: 993,
             settings: {
                 slidesToShow: 2,
+                dots: true,
+                arrows: false,
                 slidesToScroll: 1
             }
         },
@@ -506,7 +485,8 @@ $('.professor-slider').slick({
             breakpoint: 769,
             settings: {
                 slidesToShow: 2,
-                arrows: true,
+                dots: true,
+                arrows: false,
                 slidesToScroll: 1
             }
         },
@@ -521,6 +501,79 @@ $('.professor-slider').slick({
         }
     ]
 });
+
+
+
+// Sticky div on scroll
+
+function sticky_relocate() {
+    var window_top = $(window).scrollTop();
+    var div_top = $('.course-sec').offset().top;
+    if (window_top > div_top) {
+        $('.main-details-two').addClass('main-details-two-sticky');
+    } else {
+        $('.main-details-two').removeClass('main-details-two-sticky');
+    }
+}
+
+$(function () {
+    $(window).scroll(sticky_relocate);
+    sticky_relocate();
+});
+
+
+
+
+
+
+
+
+$(function() {
+    (function(name) {
+      var container = $('#pagination-' + name);
+      if (!container.length) return;
+      var sources = function () {
+        var result = [];
+
+        for (var i = 1; i < 196; i++) {
+          result.push(i);
+        }
+
+        return result;
+      }();
+
+      var options = {
+        dataSource: sources,
+        callback: function (response, pagination) {
+          window.console && console.log(response, pagination);
+
+          var dataHtml = '<ul>';
+
+          $.each(response, function (index, item) {
+            dataHtml += '<li>' + item + '</li>';
+          });
+
+          dataHtml += '</ul>';
+
+          container.prev().html(dataHtml);
+        }
+      };
+
+      //$.pagination(container, options);
+
+      container.addHook('beforeInit', function () {
+        window.console && console.log('beforeInit...');
+      });
+      container.pagination(options);
+
+      container.addHook('beforePageOnClick', function () {
+        window.console && console.log('beforePageOnClick...');
+        //return false
+      });
+    })('demo1');
+})
+
+
 
 
 

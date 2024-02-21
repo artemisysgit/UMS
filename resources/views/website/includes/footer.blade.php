@@ -84,7 +84,7 @@
                             <li><a href="/">Home</a></li>
                             <li><a href="{{ route('about-us') }}">About</a></li>
                             <li><a href="#">Product & Services</a></li>
-                            <li><a href="#">Features</a></li>
+                            <li><a href="{{ route('website.courses') }}">Courses</a></li>
                             <li><a href="#">Clients</a></li>
                             <li><a href="#">Resources</a></li>
                             <li><a href="{{ route('contact-us') }}">Contact Us</a></li>

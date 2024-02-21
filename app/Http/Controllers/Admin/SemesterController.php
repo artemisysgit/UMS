@@ -58,11 +58,11 @@ class SemesterController extends Controller
         $model = new Semester();
 
         $model->title = $request->input('title');
+        $model->descr = $request->input('descr');
         $model->status = $request->input('status');
         $model->createdBy = Auth::guard('admin')->user()->id;
 
         $validate = $model->chk_availability($request->input('title'),$this->collegeID);
-        //echo $validate_schedule;die;
         if($validate[0] == 1)
         {
             return redirect()->route('addSemester')->with("error_message","Already exists !!");
@@ -107,10 +107,11 @@ class SemesterController extends Controller
 
         $model = Semester::find($id);
         $model->title = $request->input('title');
+        $model->descr = $request->input('descr');
         $model->status = $request->input('status');
+
         $validate = $model->chk_availability($request->input('title'),$this->collegeID);
         $chkID = $model->chkID($request->input('title'),$this->collegeID,$id);
-        //echo "<pre>";print_r($chkID);die;
         if($validate[0] == 1 && !empty($chkID))
         {
             return redirect()->route('editSemester',$id)->with("error_message","Already exists !!");

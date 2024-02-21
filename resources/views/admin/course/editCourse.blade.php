@@ -46,8 +46,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="bs-validation-descr">Description</label>
-                            <textarea class="form-control" id="bs-validation-descr" name="descr" rows="3"
-                                required>{{ $data->descr }}</textarea>
+                            <textarea name="descr" id="descr" cols="30" rows="10" class="form-control">{{ $data->descr }}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="bs-validation-dob">Start Date</label>

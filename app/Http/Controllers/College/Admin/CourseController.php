@@ -136,7 +136,7 @@ class CourseController extends Controller
         $model = Course::find($id);
 
         $old_img = $model->image;
-        $upload_path = public_path().'/images/college/course/'.$id.'/';
+        $upload_path = public_path().'/images/college/course/';
 
         if($request->hasFile('file'))
         {

@@ -49,14 +49,25 @@ class CollegeController extends Controller
     {
         $request->validate([
             'title' => 'required|unique:colleges,title',
-            'descr' => 'required'
+            'descr' => 'required',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $model = new College();
 
+        $upload_path = public_path().'/images/admin/college/';
+        $imageName = '';
+
+        if($request->hasFile('file'))
+        {
+            $imageName = time().'.'.$request->file->extension();
+            $request->file->move($upload_path, $imageName);
+        }
+
         $model->title = $request->input('title');
         $model->collegeCode = Str::slug($request->input('title')).time();
         $model->descr = $request->input('descr');
+        $model->image = $imageName;
         $model->status = $request->input('status');
         $model->createdBy = Auth::guard('admin')->user()->id;
 
@@ -90,20 +101,40 @@ class CollegeController extends Controller
     {
         $request->validate([
             'title' => 'required|unique:colleges,title,' . $id,
-            'descr' => 'required'
+            'descr' => 'required',
+            'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $imageName = '';
-
         $model = College::find($id);
+
+        $imageName = '';
+        $old_img = $model->image;
+
+        $upload_path = public_path().'/images/admin/college/';
+
+        if($request->hasFile('file'))
+        {
+            if(!empty($old_img))
+            {
+                $file_path = $upload_path.$old_img;
+                unlink($file_path);
+            }
+            $imageName = time().'.'.$request->file->extension();
+            $request->file->move($upload_path, $imageName);
+        }
+        else
+        {
+            $imageName = $request->txt_file;
+        }
+
         $model->title = $request->input('title');
         $model->collegeCode = Str::slug($request->input('title')).time();
         $model->descr = $request->input('descr');
+        $model->image = $imageName;
         $model->status = $request->input('status');
         $model->save();
 
         return redirect()->route('colleges')->with('message',"Data has been updated...!");
-
     }
 
     /**

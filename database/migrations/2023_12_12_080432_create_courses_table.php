@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('collegeID')->default(0);
             $table->string('title')->unique();
-            $table->string('descr');
+            $table->text('descr')->default(null);
             $table->string('startDate');
             $table->tinyInteger('course_type');
             $table->tinyInteger('status')->default(1);

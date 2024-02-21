@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    CKEDITOR.replace('descr');
+
     $( "#startDate" ).datepicker({
         dateFormat:'dd-mm-yy',
         changeMonth:true,

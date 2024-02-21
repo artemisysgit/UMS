@@ -33,7 +33,7 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="bs-validation-descr">Description</label>
-                            <textarea class="form-control" id="bs-validation-descr" name="descr" rows="3"
+                            <textarea class="form-control" id="bs-validation-descr" id="descr" name="descr" rows="3"
                                 required></textarea>
                         </div>
                         <div class="mb-3">

@@ -47,7 +47,10 @@ class Course extends Model
 
     public function getCourseByID($id)
     {
-        $res = DB::table('courses')->where('id', $id)->first();
+        $res = DB::table('courses')
+        ->where('id', $id)
+        ->where('status', 1)
+        ->first();
         return $res;
     }
 }

@@ -74,7 +74,7 @@ class BenefitController extends Controller
         //$model->pageName = Str::slug($request->input('title'));
         $model->title = $request->input('title');
         $model->short_descr = $request->input('short_descr');
-        $model->descr = htmlentities($request->input('descr'));
+        $model->descr = $request->input('descr');
         $model->image = $imageName;
         $model->status = $request->input('status');
         $model->createdBy = Auth::guard('admin')->user()->id;
@@ -110,7 +110,7 @@ class BenefitController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|unique:benefits,title,' . $id,
+            'title' => 'required',
             'descr' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
@@ -137,7 +137,7 @@ class BenefitController extends Controller
 
         $model->title = $request->input('title');
         $model->short_descr = $request->input('short_descr');
-        $model->descr = htmlentities($request->input('descr'));
+        $model->descr = $request->input('descr');
         $model->image = $imageName;
         $model->status = $request->input('status');
 

@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="categories-text">
                                     <h3>{{ $b->title }}</h3>
-                                    <p>{!! html_entity_decode(Str::limit($b->descr,150,' ....')) !!}</p>
+                                    <p>{!! Str::limit($b->descr,150,' ....') !!}</p>
 
                                 </div>
                             </a>

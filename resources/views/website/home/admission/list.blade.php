@@ -133,7 +133,7 @@
                         @endif
 
                             <h3>Admissions</h3>
-                            <form action="{{ route('saveEnquiry') }}" id="enquiry_frm" method="POST">
+                            <form action="{{ route('website.saveEnquiry') }}" id="enquiry_frm" method="POST">
                                 @csrf
                                 <input type="text" name="name" id="name" placeholder="Full Name">
                                 <input type="email" name="email" id="email" placeholder="Email">

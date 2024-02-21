@@ -28,7 +28,7 @@
                 <h1>About Us</h1>
                 <p>From health care to education, policy to art, artificial intelligence <br> is rapidly changing our
                     world and our daily lives.</p>
-                <span><a href="index2.html">Home <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10"
+                <span><a href="/">Home <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10"
                             viewBox="0 0 7 10" fill="none">
                             <path d="M1.75 8.25L5.25 4.75L1.75 1.25" stroke="white" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" />

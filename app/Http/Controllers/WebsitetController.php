@@ -10,6 +10,10 @@ use App\Models\frontend\Benefit;
 use App\Models\frontend\Department;
 use App\Models\frontend\Course;
 use App\Models\frontend\Enquiry;
+use App\Models\frontend\College;
+use App\Models\frontend\Semester;
+
+use App\Helpers\helpers;
 
 class WebsitetController extends Controller
 {
@@ -47,7 +51,7 @@ class WebsitetController extends Controller
             // 'course_type' => $course_type,
             // 'course_data' =>$course_data,
         );
-        return view('about_us',$data);
+        return view('website.about_us',$data);
     }
 
     public function contact_us()
@@ -57,7 +61,7 @@ class WebsitetController extends Controller
         $data = array(
             'title' =>$title,
         );
-        return view('contact_us',$data);
+        return view('website.contact_us',$data);
     }
 
     public function enquiry(Request $request)
@@ -164,6 +168,69 @@ class WebsitetController extends Controller
             }
 
             echo $html;
+        }
+
+
+    }
+
+    public function courses()
+    {
+        $course_model = new Course();
+        $course_data = $course_model->getList(null,0);
+
+        $title = "Courses";
+
+        $data = array(
+            'title' =>$title,
+            'course_data' =>$course_data
+        );
+        return view('website.course.courses',$data);
+    }
+
+    public function course_details($id)
+    {
+        $title = "Course Details";
+
+        $course_model = new Course();
+        $course_data = $course_model->getCourseByID($id);
+        $collegeID = $course_data->collegeID;
+
+        $sem_model = new Semester();
+        $sem_data = $sem_model->getList($collegeID);
+
+        $data = array(
+            'title' =>$title,
+            'collegeID'=>$collegeID,
+            'course_data' =>$course_data,
+            'sem_data' =>$sem_data
+        );
+        return view('website.course.course_details',$data);
+    }
+
+    public function college_details($code)
+    {
+        $title = "College Details";
+        $model = new College();
+        $collegeData = $model->getDataByCode($code);
+        $collegeID = $collegeData->id;
+
+        $course_model = new Course();
+        $course_data = $course_model->getList(null,$collegeID);
+        //echo "<pre>"; print_r($course_data);die;
+
+        if(!empty($collegeData))
+        {
+            $data = array(
+                'title' =>$title,
+                'collegeID'=>$collegeID,
+                'collegeData' =>$collegeData,
+                'course_data' =>$course_data,
+            );
+            return view('website.college_details',$data);
+        }
+        else
+        {
+            abort('404');
         }
 
 

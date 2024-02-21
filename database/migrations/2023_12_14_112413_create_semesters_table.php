@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('collegeID')->default(0);
             $table->string('title');
+            $table->text('descr')->default(null);
             $table->tinyInteger('status');
             $table->integer('createdBy');
             $table->timestamps();

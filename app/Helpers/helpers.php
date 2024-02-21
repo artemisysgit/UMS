@@ -1,4 +1,5 @@
 <?php
+use App\Models\frontend\College;
 
 if (! function_exists('activeMenu')) {
 
@@ -21,10 +22,11 @@ if (! function_exists('test')) {
     }
 }
 
-if (! function_exists('uploadImage')) {
-    function uploadImage()
+if (! function_exists('getActiveColleges')) {
+    function getActiveColleges()
     {
-        //return Carbon::createFromFormat('m-d-Y', $date)->format('Y-m-d');
-        return "Uploaded";
+        $model = new College();
+        $data = $model->getList();
+        return $data;
     }
 }

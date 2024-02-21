@@ -11,12 +11,13 @@ class Benefit extends Model
     use HasFactory;
 
 
-    public function getList()
+    public function getList($collegeID=0)
     {
         $res = DB::table('benefits')
             ->select('admins.name','benefits.*')
             ->join('admins','benefits.createdBy','=','admins.id')
             ->where('benefits.status',1)
+            ->where('benefits.collegeID', $collegeID)
             ->get();
 
         return $res;
@@ -24,7 +25,11 @@ class Benefit extends Model
 
     public function getDataByID($id)
     {
-        $res = DB::table('benefits')->where('id', $id)->first();
+        $res = DB::table('benefits')
+        ->where('id', $id)
+        ->where('collegeID', $collegeID)
+        ->where('status', 1)
+        ->first();
         return $res;
     }
 }

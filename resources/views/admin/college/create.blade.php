@@ -36,10 +36,10 @@
                             <textarea class="form-control" id="descr" name="descr" rows="10"
                                 required></textarea>
                         </div>
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label class="form-label" for="bs-validation-upload-file">Image</label>
                             <input type="file" name="file" class="form-control" id="bs-validation-upload-file" accept="image/*" />
-                        </div> -->
+                        </div>
                         <div class="mb-3">
                           <label class="form-label" for="bs-validation-country">Status</label>
                           <select class="form-select" name="status" id="bs-validation-country" required>

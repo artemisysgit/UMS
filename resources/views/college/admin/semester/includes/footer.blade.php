@@ -35,8 +35,6 @@
 <!-- Main JS -->
 <script src="{{ url('assets/js/main.js') }}"></script>
 
-<!-- Page JS -->
-<script src="{{ url('assets/js/form-validation.js') }}"></script>
 <!----------------End------------------>
 
 <!--------------------Sweet Alert 2----------------------->
@@ -45,4 +43,6 @@
 <!----------------------End------------------------------>
 
 <!-- Custom JS -->
-<script src="{{ url('assets/admin_assets/js/semester/custom.js') }}"></script>
+<script src="{{ url('assets/admin_assets/js/college/semester/custom.js') }}"></script>
+
+<script src="https://cdn.ckeditor.com/4.22.1/full-all/ckeditor.js"></script>

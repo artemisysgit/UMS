@@ -40,16 +40,16 @@
                             <textarea class="form-control" id="descr" name="descr" rows="10"
                                 required>{{ $data->descr }}</textarea>
                         </div>
-                        <!-- <div class="mb-3">
+                        <div class="mb-3">
                             <label class="form-label" for="bs-validation-upload-file">Image</label>
                             <input type="hidden" name="txt_file" id="txt_file" value="{{ $data->image }}">
                             <input type="file" name="file" class="form-control" id="bs-validation-upload-file" accept="image/*" />
                             @if($data->image)
-                                <img src="/images/benefit/{{ $data->image }}" style="height: 50px;width:100px;">
+                                <img src="/images/admin/college/{{ $data->image }}" style="height: 150px;width:200px;">
                             @else
                                 <span>No image found!</span>
                             @endif
-                        </div> -->
+                        </div>
                         <div class="mb-3">
                           <label class="form-label" for="bs-validation-country">Status</label>
                           <select class="form-select" name="status" id="bs-validation-country" required>

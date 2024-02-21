@@ -35,4 +35,34 @@ class Semester extends Model
         ->first();
         return $res;
     }
+
+    public function chk_availability($title,$collegeID=0)
+    {
+        $res = DB::table('semesters')
+        ->select(DB::raw('count(*) as cnt'))
+        ->where('semesters.title', $title)
+        ->where('semesters.collegeID', $collegeID)
+        ->pluck('cnt');
+
+        return $res;
+    }
+
+    public function chkID($title,$collegeID=0,$id)
+    {
+        $arr = [];
+        $res = DB::table('semesters')
+        ->where('title', $title)
+        ->where('collegeID', $collegeID)
+        ->where('id','!=', $id)
+        ->get();
+
+        if(!empty($res))
+        {
+            foreach($res as $r)
+            {
+                $arr[] = $r->id;
+            }
+        }
+        return $arr;
+    }
 }

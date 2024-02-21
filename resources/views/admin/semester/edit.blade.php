@@ -44,6 +44,11 @@
                             <div class="invalid-feedback">Please enter your name.</div>
                         </div>
                         <div class="mb-3">
+                            <label class="form-label" for="bs-validation-name">Description</label>
+                            <textarea name="descr" id="descr" cols="30" rows="10" class="form-control">{{ $data->descr }}</textarea>
+                            <div class="valid-feedback">Looks good!</div>
+                        </div>
+                        <div class="mb-3">
                           <label class="form-label" for="bs-validation-country">Status</label>
                           <select class="form-select" name="status" id="bs-validation-country" required>
                             <option value="">Select Status</option>

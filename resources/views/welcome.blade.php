@@ -39,19 +39,19 @@
 
     @include('website.includes.header')
 
-    @include('website.banners.homebanner')
+    @include('website.home.banners.homebanner')
 
     @if(!empty($benefit_data))
 
-        @include('website.benifits.list')
+        @include('website.home.benifits.list')
 
     @endif
 
-    @include('website.cources.list')
+    @include('website.home.cources.list')
 
-    @include('website.admission.list')
+    @include('website.home.admission.list')
 
-    @include('website.introduce.list')
+    @include('website.home.introduce.list')
 
     <!-- <section class="reviews mb position-relative ">
         <div class="reviews-sec">
@@ -415,15 +415,15 @@
         <div class="reviewicon"><img src="{{ url('assets/website/assets/images/reviews/reviewicon.png') }}" alt=""></div>
     </section> -->
 
-    @include('website.experience.list')
+    @include('website.home.experience.list')
 
-    @include('website.agency.list')
+    @include('website.home.agency.list')
 
-    @include('website.testimonials.list')
+    @include('website.home.testimonials.list')
 
-    @include('website.subscribe.list')
+    @include('website.home.subscribe.list')
 
-    @include('website.blogs.list')
+    @include('website.home.blogs.list')
 
     @include('website.includes.footer')
 

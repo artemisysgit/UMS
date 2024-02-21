@@ -50,7 +50,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>
                         @if(!empty($r->image))
-                        <img src="/images/college/course/{{ $r->id }}/{{ $r->image }}" alt="" style="height: 50px;width:50px;">
+                        <img src="/images/college/course/{{ $r->image }}" alt="" style="height: 50px;width:50px;">
                         @endif
                     </td>
                     <td>{{ $r->title }}</td>

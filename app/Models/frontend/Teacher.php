@@ -10,14 +10,16 @@ class Teacher extends Model
 {
     use HasFactory;
 
-    public function getList()
+    public function getList($collegeID=0,$limit)
     {
-        $res = DB::table('assign_teacher_subject_wises as a')
-            ->select('a.*','b.name as teacher','b.image','c.title as deptName','d.title as subject')
-            ->join('teachers as b','b.id','=','a.teacherID')
-            ->join('departments as c','c.id','=','a.deptID')
-            ->join('subjects as d','d.id','=','a.subjectID')
-            ->where('b.status',1)
+        $res = DB::table('teachers as a')
+            ->select('a.*','c.title as dept','d.title as subject')
+            ->leftJoin('assign_teacher_subject_wises as b','a.id','=','b.teacherID')
+            ->leftJoin('departments as c','c.id','=','a.deptID')
+            ->leftJoin('subjects as d','d.id','=','b.subjectID')
+            ->where('a.status',1)
+            ->where('a.collegeID',$collegeID)
+            ->limit($limit)
             ->get();
 
         return $res;
@@ -25,12 +27,15 @@ class Teacher extends Model
 
     public function getDataByID($id)
     {
-        $res = DB::table('assign_teacher_subject_wises as a')
-            ->select('a.*','b.name as teacher','b.image','c.title as deptName','d.title as subject')
-            ->join('teachers as b','b.id','=','a.teacherID')
-            ->join('departments as c','c.id','=','a.deptID')
-            ->join('subjects as d','d.id','=','a.subjectID')
-            ->where('b.status',1)
+        $res = DB::table('teachers as a')
+            ->select('a.*','c.title as dept','d.title as subject','f.title as role')
+            ->leftJoin('assign_teacher_subject_wises as b','a.id','=','b.teacherID')
+            ->leftJoin('departments as c','c.id','=','a.deptID')
+            ->leftJoin('subjects as d','d.id','=','b.subjectID')
+            ->leftJoin('user_roles as e','e.userID','=','a.id')
+            ->leftJoin('roles as f','f.id','=','e.roleID')
+            ->where('a.status',1)
+            //->where('a.collegeID',$collegeID)
             ->where('a.id', $id)->first();
 
         return $res;

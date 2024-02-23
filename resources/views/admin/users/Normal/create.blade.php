@@ -52,9 +52,15 @@
                         <div class="mb-3">
                             <label class="form-label" for="bs-validation-dob">DOB</label>
                             <input type="text" class="form-control flatpickr-validation" name="dob"
-                                id="bs-validation-dob" autocomplete="off" readonly required />
+                                id="dob" autocomplete="off" readonly required />
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter your DOB.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="bs-validation-name">Qualification</label>
+                            <input type="text" class="form-control" id="qualification" name="qualification" placeholder="qualification" required />
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please enter your name.</div>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="roles">Roles</label>
@@ -73,8 +79,28 @@
                           <div class="invalid-feedback">Please selecct Role.</div>
                         </div>
                         <div class="mb-3">
+                          <label class="form-label" for="roles">Department</label>
+                          <select class="form-select" name="dept" id="dept" required>
+                          <option value="">--Select--</option>
+
+                            @if(!empty($dept_data))
+
+                            @foreach($dept_data as $dept)
+                            <option value="{{ $dept->id }}">{{ $dept->title }}</option>
+                            @endforeach
+
+                            @endif
+                          </select>
+                          <div class="valid-feedback">Looks good!</div>
+                          <div class="invalid-feedback">Please selecct Role.</div>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label" for="bs-validation-upload-file">Image</label>
                             <input type="file" name="file" class="form-control" id="bs-validation-upload-file" />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="descr" id="descr" cols="20" rows="10" class="form-control"></textarea>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="bs-validation-country">Status</label>

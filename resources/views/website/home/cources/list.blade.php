@@ -10,14 +10,14 @@
                     powerful interface in our comprehensive campus management solutions for educational institutions.
                 </p>
             </div>
-            <div class="tab">
+            <!-- <div class="tab">
 
             @if(!empty($course_type))
                 @foreach($course_type as $k=>$v)
                     <button class="tablinks {{ $loop->iteration == 1?'active':'' }}" onclick="openCity(event, '{{ $k }}')">{{ $v }}</button>
                 @endforeach
             @endif
-            </div>
+            </div> -->
 
         @if(!empty($course_type))
             @foreach($course_type as $k=>$v)
@@ -31,7 +31,11 @@
 
                     <div class="courses-slide">
                         <div class="courses-slide-main">
-                            <div class="courses-slider-img"><img src="/images/admin/course/{{ $course->image }}" alt=""></div>
+                            <div class="courses-slider-img">
+                            <a href="{{  url('/courses/course-details/'.$course->id) }}">
+                                <img src="/images/admin/course/{{ $course->image }}" alt="">
+                            </a>
+                            </div>
                             <div class="courses-slider-text">
                                 <ul class="course-detail d-flex align-items-center justify-content-between ">
                                     <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -95,7 +99,7 @@
         @endif
 
             <div class="btn-main">
-                <a href="#" class="master-btn">
+                <a href="{{ route('website.courses') }}" class="master-btn">
                     <button class=" d-flex align-items-center justify-content-center">Discover More
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                             <path d="M16.5 7.33325L20.1667 10.9999L16.5 14.6666" stroke="white" stroke-width="2"

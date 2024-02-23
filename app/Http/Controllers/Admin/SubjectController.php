@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
 use App\Models\superadmin\Subject;
+use App\Models\superadmin\Course;
 
 class SubjectController extends Controller
 {
@@ -37,8 +38,10 @@ class SubjectController extends Controller
      */
     public function create()
     {
+        $course_model = new Course();
+        $course_data = $course_model->getList($this->collegeID);
         $title = "Create Subject";
-        return view('admin.subject.create',array('title'=>$title));
+        return view('admin.subject.create',array('title'=>$title,'course_data'=>$course_data));
     }
 
 
@@ -49,6 +52,7 @@ class SubjectController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'course' => 'required',
             'descr' => 'required'
         ]);
 
@@ -56,6 +60,7 @@ class SubjectController extends Controller
 
         $model->title = $request->input('title');
         $model->subCode = Str::slug($request->input('title'));
+        $model->courseID = $request->input('course');
         $model->descr = $request->input('descr');
         $model->status = $request->input('status');
         $model->createdBy = Auth::guard('admin')->user()->id;
@@ -76,6 +81,9 @@ class SubjectController extends Controller
      */
     public function edit($id)
     {
+        $course_model = new Course();
+        $course_data = $course_model->getList($this->collegeID);
+
         $model = new Subject();
 
         $title = "Edit Subject";
@@ -83,7 +91,7 @@ class SubjectController extends Controller
         $data = $model->getDataByID($id,$this->collegeID);
         if(!empty($data))
         {
-            return view('admin.subject.edit',array('title'=>$title,'data'=>$data));
+            return view('admin.subject.edit',array('title'=>$title,'data'=>$data,'course_data'=>$course_data));
         }
         else
         {
@@ -99,12 +107,14 @@ class SubjectController extends Controller
     {
         $request->validate([
             'title' => 'required',
+            'course' => 'required',
             'descr' => 'required'
         ]);
 
         $model = Subject::find($id);
         $model->title = $request->input('title');
         $model->subCode = Str::slug($request->input('title'));
+        $model->courseID = $request->input('course');
         $model->descr = $request->input('descr');
         $model->status = $request->input('status');
 

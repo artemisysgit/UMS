@@ -56,9 +56,15 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="bs-validation-dob">DOB</label>
-                            <input type="text" class="form-control flatpickr-validation" name="dob" value="{{ $data->dob }}" id="bs-validation-dob" required />
+                            <input type="text" class="form-control flatpickr-validation" id="dob" name="dob" value="{{ date('d-m-Y',strtotime($data->dob)) }}" id="bs-validation-dob" readonly required />
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter your DOB.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="bs-validation-name">Qualification</label>
+                            <input type="text" class="form-control" id="qualification" name="qualification" value="{{ $data->qualification }}" placeholder="qualification" required />
+                            <div class="valid-feedback">Looks good!</div>
+                            <div class="invalid-feedback">Please enter your name.</div>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="roles">Roles</label>
@@ -76,23 +82,46 @@
                           <div class="valid-feedback">Looks good!</div>
                           <div class="invalid-feedback">Please selecct Role.</div>
                         </div>
+
+                        <div class="mb-3">
+                          <label class="form-label" for="roles">Department</label>
+                          <select class="form-select" name="dept" id="dept" required>
+                            <option value="">--Select--</option>
+
+                            @if(!empty($dept_data))
+
+                            @foreach($dept_data as $dept)
+                            <option value="{{ $dept->id }}" <?php echo $dept->id==$data->deptID ?'selected':'' ?>>{{ $dept->title }}</option>
+                            @endforeach
+
+                            @endif
+                          </select>
+                          <div class="valid-feedback">Looks good!</div>
+                          <div class="invalid-feedback">Please selecct Role.</div>
+                        </div>
+
                         <div class="mb-3">
                             <label class="form-label" for="bs-validation-upload-file">Image</label>
                             <input type="hidden" name="txt_file" id="txt_file" value="{{ $data->image }}">
                             <input type="file" name="file" class="form-control" id="bs-validation-upload-file" />
                             @if($data->image)
-                                <img src="/images/users/faculty/{{ $data->image }}" style="height: 50px;width:100px;">
+                                <img src="/images/users/faculty/{{ $data->image }}" style="height: 100px;width:100px;">
                             @else
                                 <span>No image found!</span>
                             @endif
                         </div>
 
                         <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea name="descr" id="descr" cols="20" rows="10" class="form-control">{!! $data->descr !!}</textarea>
+                        </div>
+
+                        <div class="mb-3">
                           <label class="form-label" for="bs-validation-country">Status</label>
                           <select class="form-select" name="status" id="bs-validation-country" required>
                             <option value="">Select Status</option>
-                            <option value="1" selected>Active</option>
-                            <option value="0">Inactive</option>
+                            <option value="1" {{ $data->status == 1 ?'selected':'' }}>Active</option>
+                            <option value="0" {{ $data->status == 0 ?'selected':'' }}>Inactive</option>
                           </select>
                           <div class="valid-feedback">Looks good!</div>
                           <div class="invalid-feedback">Please select status</div>

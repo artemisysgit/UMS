@@ -1,6 +1,13 @@
 $(document).ready(function() {
 
+    CKEDITOR.replace('descr');
     $("#roles").select2();
+    $( "#dob" ).datepicker({
+        dateFormat:'dd-mm-yy',
+        changeMonth:true,
+        changeYear:true,
+        yearRange: "-100:+0"
+    });
 
 
    $('#tbl').DataTable( {

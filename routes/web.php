@@ -33,6 +33,9 @@ Route::get('/courses', [App\Http\Controllers\WebsitetController::class, 'courses
 Route::get('/courses/course-details/{id}', [App\Http\Controllers\WebsitetController::class, 'course_details'])->name('website.course_details');
 Route::get('/colleges/{code}', [App\Http\Controllers\WebsitetController::class, 'college_details'])->name('college-details');
 
+Route::get('/faculties', [App\Http\Controllers\WebsitetController::class, 'faculties'])->name('website.faculties');
+Route::get('/faculties/faculty-details/{id}', [App\Http\Controllers\WebsitetController::class, 'faculty_details'])->name('website.faculty_details');
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -18,6 +18,7 @@
     <title>{{ $title }}</title>
 </head>
 
+
 <body>
 
     @include('website.includes.header')
@@ -57,12 +58,13 @@
                         {!! $course_data->descr !!}
 
                     </div>
+                    @if(!$subject_data->isEmpty())
                     <div class="semester">
-                        <h3>Semester details</h3>
+                        <h3>Subject Details</h3>
                         <div id="accordionExample" class="accordion shadow">
 
-                        @if(!empty($sem_data))
-                        @foreach($sem_data as $sem)
+                        @if(!empty($subject_data))
+                        @foreach($subject_data as $sub)
 
                             <!-- Accordion item 1 -->
                             <div class="card">
@@ -73,7 +75,7 @@
                                             class="btn btn-link text-dark font-weight-bold collapsible-link">
                                             <div class="accordionExample-title d-flex align-items-center">
                                                 <span class="">{{ $loop->iteration }}</span>
-                                                {{ $sem->title }}
+                                                {{ $sub->title }}
                                             </div>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                                 viewBox="0 0 24 24" fill="none">
@@ -86,7 +88,22 @@
                                 <div id="{{ $loop->iteration }}" aria-labelledby="headingOne" data-parent="#accordionExample"
                                     class="collapse {{ $loop->iteration == 1?'show':'' }}">
                                     <div class="card-body">
-                                        {!! $sem->descr !!}
+                                        {!! $sub->descr !!}
+                                        <hr>
+
+                                        <h3>Combinations :- </h3>
+
+                                        <!-- {{ getSubjectCombination($sub->id ,$sub->courseID, $sub->collegeID) }} -->
+
+                                        @foreach(getSubjectCombination($sub->id ,$sub->courseID, $sub->collegeID) as $r)
+                                        <ul>
+                                            <li class="d-flex align-items-center ">
+                                               {{ $loop->iteration }} .  {{ $r->sub1.' - '.$r->sub2 }}
+                                            </li>
+                                        </ul>
+
+                                        @endforeach
+
                                     </div>
                                 </div>
                             </div>
@@ -94,76 +111,9 @@
                         @endforeach
                         @endif
 
-                            <!-- Accordion item 2 -->
-                            <!-- <div class="card">
-                                <div id="headingTwo" class="card-header bg-white shadow-sm border-0">
-                                    <h2 class="mb-0">
-                                        <button type="button" data-toggle="collapse" data-target="#collapseTwo"
-                                            aria-expanded="false" aria-controls="collapseTwo"
-                                            class="btn btn-link collapsed text-dark font-weight-bold collapsible-link">
-                                            <div class="accordionExample-title d-flex align-items-center">
-                                                <span class="">02</span>
-                                                Semester Two
-                                            </div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path d="M6 9L12 15L18 9" stroke="#3D3D3D" stroke-width="2.3"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseTwo" aria-labelledby="headingTwo" data-parent="#accordionExample"
-                                    class="collapse">
-                                    <div class="card-body">
-                                        <p class="font-weight-light m-0">Unicampus Management System stands out for
-                                            its exceptional combination of user-friendly design and robust features,
-                                            providing educational. Unicampus Management System stands out for its
-                                            exceptional combination of
-                                            user-friendly design and robust features, providing educational.</p>
-                                        <p>Unicampus Management System stands out for its exceptional combination of
-                                            user-friendly design and robust features, providing educational.</p>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- End -->
-
-                            <!-- Accordion item 3 -->
-                            <!-- <div class="card">
-                                <div id="headingThree" class="card-header bg-white shadow-sm border-0">
-                                    <h2 class="mb-0">
-                                        <button type="button" data-toggle="collapse" data-target="#collapseThree"
-                                            aria-expanded="false" aria-controls="collapseThree"
-                                            class="btn btn-link collapsed text-dark font-weight-bold collapsible-link">
-                                            <div class="accordionExample-title d-flex align-items-center">
-                                                <span class="">03</span>
-                                                Semester Three
-                                            </div>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                viewBox="0 0 24 24" fill="none">
-                                                <path d="M6 9L12 15L18 9" stroke="#3D3D3D" stroke-width="2.3"
-                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                            </svg>
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseThree" aria-labelledby="headingThree" data-parent="#accordionExample"
-                                    class="collapse">
-                                    <div class="card-body">
-                                        <p class="font-weight-light m-0">Unicampus Management System stands out for
-                                            its exceptional combination of user-friendly design and robust features,
-                                            providing educational. Unicampus Management System stands out for its
-                                            exceptional combination of
-                                            user-friendly design and robust features, providing educational.</p>
-                                        <p>Unicampus Management System stands out for its exceptional combination of
-                                            user-friendly design and robust features, providing educational.</p>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <!-- End -->
-
                         </div><!-- End -->
                     </div>
+                    @endif
                     <div class="requirements">
                         <h3>Requirements</h3>
                         <ul>

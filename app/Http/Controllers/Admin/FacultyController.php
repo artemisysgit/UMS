@@ -12,9 +12,20 @@ use Illuminate\Support\Str;
 use App\Models\superadmin\Teacher;
 use App\Models\superadmin\Role;
 use App\Models\superadmin\UserRoles;
+use App\Models\superadmin\Department;
 
 class FacultyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            $this->collegeID = Auth::guard('admin')->user()->collegeID;
+            return $next($request);
+        });
+
+    }
+
     public function index()
     {
         $model = new Teacher();
@@ -30,10 +41,12 @@ class FacultyController extends Controller
      */
     public function create()
     {
+        $dept_model = new Department();
+        $dept_data = $dept_model->getList($this->collegeID);
         $model = new Role();
         $title = "Create User";
         $roleData = $model->getList();
-        return view('admin.users.normal.create',array('title'=>$title,'roleData'=>$roleData));
+        return view('admin.users.normal.create',array('title'=>$title,'roleData'=>$roleData,'dept_data'=>$dept_data));
     }
 
 
@@ -44,6 +57,7 @@ class FacultyController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'dept' => 'required',
             'email'=> 'required|email|unique:teachers,email',
             'pwd'=> 'required',
             'mobile'=> 'required|numeric|digits:10',
@@ -64,6 +78,7 @@ class FacultyController extends Controller
 
         $model->name = $request->input('name');
         $model->userName = Str::slug($request->input('name'));
+        $model->deptID = $request->input('dept');
         $model->email = $request->input('email');
 
         if(!empty($request->input('pwd')))
@@ -72,6 +87,8 @@ class FacultyController extends Controller
         }
 
         $model->mobile = $request->input('mobile');
+        $model->qualification = $request->input('qualification');
+        $model->descr = $request->input('descr');
         $model->dob = date('Y-m-d',strtotime($request->input('dob')));
         $model->image = $imageName;
         $model->status = $request->input('status');
@@ -98,6 +115,9 @@ class FacultyController extends Controller
      */
     public function edit($id)
     {
+        $dept_model = new Department();
+        $dept_data = $dept_model->getList($this->collegeID);
+
         $model = new Teacher();
         $role_model = new Role();
         $user_roles_model = new UserRoles();
@@ -121,7 +141,7 @@ class FacultyController extends Controller
 
             }
             //echo "<pre>";print_r($user_role_arr);die;
-            return view('admin.users.normal.edit',array('title'=>$title,'data'=>$data,'roleData'=>$roleData,'user_role_data'=>$user_role_arr));
+            return view('admin.users.normal.edit',array('title'=>$title,'data'=>$data,'roleData'=>$roleData,'dept_data'=>$dept_data,'user_role_data'=>$user_role_arr));
         }
         else
         {
@@ -139,8 +159,8 @@ class FacultyController extends Controller
 
         $request->validate([
             'name' => 'required|unique:teachers,userName,'.$id,
+            'dept' => 'required',
             'email'=> 'required|email|unique:teachers,email,'.$id,
-            //'pwd'=> 'required',
             'mobile'=> 'required|numeric|digits:10',
             'dob' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -168,12 +188,15 @@ class FacultyController extends Controller
 
         $model->name = $request->input('name');
         $model->userName = Str::slug($request->input('name'));
+        $model->deptID = $request->input('dept');
         $model->email = $request->input('email');
         if(!empty($request->input('pwd')))
         {
             $model->password = Hash::make($request->input('pwd'));
         }
         $model->mobile = $request->input('mobile');
+        $model->qualification = $request->input('qualification');
+        $model->descr = $request->input('descr');
         $model->dob = date('Y-m-d',strtotime($request->input('dob')));
         $model->image = $imageName;
         $model->status = $request->input('status');
@@ -182,7 +205,6 @@ class FacultyController extends Controller
         $cnt = count($request->input('roles'));
 
         $roles_model = new UserRoles();
-        //UserRoles::where('userID', $id)->delete();
         UserRoles::where(['userID'=> $id,'type'=>'faculty'])->delete();
 
         for($i=0;$i<$cnt;$i++)

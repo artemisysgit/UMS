@@ -242,7 +242,12 @@ $('.tablinks').on('click', function () {
 // date picker
 
 $(document).ready(function () {
-    $("#datepicker").datepicker();
+    $("#datepicker").datepicker({
+        dateFormat:'dd-mm-yy',
+        changeMonth:true,
+        changeYear:true,
+        yearRange: "-100:+0",
+    });
 
     $('#date-icon').click(function () {
         $("#datepicker").datepicker('show');

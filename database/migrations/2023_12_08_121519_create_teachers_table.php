@@ -14,12 +14,15 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->integer('collegeID')->default(0);
+            $table->integer('deptID')->default(0);
             $table->string('name');
             $table->string('userName')->unique();
             $table->string('userType')->default('teacher');
             $table->string('email')->unique();
             $table->string('password');
             $table->string('mobile');
+            $table->string('qualification')->nullable();
+            $table->text('descr')->nullable();
             $table->string('dob')->nullable();
             $table->string('image')->nullable();
             $table->integer('stateID')->default(0);

@@ -40,9 +40,19 @@
                             <div class="invalid-feedback">Please enter your name.</div>
                         </div>
                         <div class="mb-3">
+                            <label class="form-label" for="bs-validation-name">Course</label>
+                            <select name="course" id="course" class="form-control">
+                                <option value="">Select</option>
+                                @if(!empty($course_data))
+                                   @foreach($course_data as $course)
+                                        <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label" for="bs-validation-descr">Description</label>
-                            <textarea class="form-control" id="bs-validation-descr" name="descr" rows="3"
-                                required></textarea>
+                            <textarea class="form-control" id="descr" name="descr" rows="3" required></textarea>
                         </div>
                         <div class="mb-3">
                           <label class="form-label" for="bs-validation-country">Status</label>

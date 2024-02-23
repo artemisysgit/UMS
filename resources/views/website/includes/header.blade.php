@@ -53,9 +53,9 @@
                         @endif
                         </ul>
                     </li>
-                    <li><a href="#">Features</a></li>
+                    <li><a href="{{ route('website.faculties') }}">Faculties</a></li>
                     <li><a href="{{ route('website.courses') }}" class="{{ $course_menu_active }}">Courses</a></li>
-                    <li class="dropdown "><a href="#">Resources <svg width="11" height="7" viewBox="0 0 11 7"
+                    <!-- <li class="dropdown "><a href="#">Resources <svg width="11" height="7" viewBox="0 0 11 7"
                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1.75 1.625L5.5 5.375L9.25 1.625" stroke="#5A5A5A" stroke-width="1.8"
                                     stroke-linecap="round" stroke-linejoin="round" />
@@ -65,9 +65,8 @@
                             <li><a href="#">Resources 1</a></li>
                             <li><a href="#">Resources 2</a></li>
                             <li><a href="#">Resources 3</a></li>
-                            <!-- <div class="arrow"></div> -->
                         </ul>
-                    </li>
+                    </li> -->
                     <li><a href="{{ route('contact-us') }}">Contact Us</a></li>
                     <li class="login">
 

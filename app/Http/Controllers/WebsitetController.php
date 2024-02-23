@@ -12,6 +12,9 @@ use App\Models\frontend\Course;
 use App\Models\frontend\Enquiry;
 use App\Models\frontend\College;
 use App\Models\frontend\Semester;
+use App\Models\frontend\Teacher;
+use App\Models\frontend\Subject;
+
 
 use App\Helpers\helpers;
 
@@ -30,12 +33,16 @@ class WebsitetController extends Controller
         $course_type = Course::COURSE_TYPE;
         $course_data = $course_model->getList(null,0);
 
+        $teacher_model = new Teacher();
+        $teacher_data = $teacher_model->getList(0,4);
+
         $data = array(
             'title' =>$title,
             'benefit_data' =>$benefit_data,
             'dept_data' =>$dept_data,
             'course_type' => $course_type,
             'course_data' =>$course_data,
+            'teacher_data' =>$teacher_data,
         );
         return view('welcome',$data);
     }
@@ -195,14 +202,27 @@ class WebsitetController extends Controller
         $course_data = $course_model->getCourseByID($id);
         $collegeID = $course_data->collegeID;
 
+        $subject_model = new Subject();
+        $subject_data = $subject_model->getListCourseWise($id,$collegeID);
+        //echo "<pre>";print_r($subject_data);die;
+
+        // foreach($subject_data as $k => $v)
+        // {
+        //     $combination_data = $subject_model->getSubjectCombination($v->id,$v->courseID,$v->collegeID);
+        //     $subject_data[$k]['combination_data'] = $combination_data;
+        // }
+
         $sem_model = new Semester();
         $sem_data = $sem_model->getList($collegeID);
+
+
 
         $data = array(
             'title' =>$title,
             'collegeID'=>$collegeID,
             'course_data' =>$course_data,
-            'sem_data' =>$sem_data
+            'sem_data' =>$sem_data,
+            'subject_data' =>$subject_data
         );
         return view('website.course.course_details',$data);
     }
@@ -232,8 +252,38 @@ class WebsitetController extends Controller
         {
             abort('404');
         }
+    }
 
+    //---------------------------Faculties----------------------------//
 
+    public function faculties()
+    {
+        $teacher_model = new Teacher();
+        $teacher_data = $teacher_model->getList(0,'');
+
+        $title = "Faculties";
+
+        $data = array(
+            'title' =>$title,
+            'teacher_data' =>$teacher_data
+        );
+        return view('website.faculty.list',$data);
+    }
+
+    public function faculty_details($id)
+    {
+        $title = "Faculty Details";
+
+        $teacher_model = new Teacher();
+        $teacher_data = $teacher_model->getDataByID($id);
+        $collegeID = $teacher_data->collegeID;
+
+        $data = array(
+            'title' =>$title,
+            'collegeID'=>$collegeID,
+            'teacher_data' =>$teacher_data
+        );
+        return view('website.faculty.faculty_details',$data);
     }
 
 }

@@ -80,7 +80,7 @@
         </div>
     </section>
 
-    @if(!empty($course_data))
+    @if(!$course_data->isEmpty())
     <section class="courses course-sub-sec">
         <div class="container-fluid">
             <div class="Course-detail-icon2"><img src="assets/images/course-detail/Course-detail-icon2.png" alt="">

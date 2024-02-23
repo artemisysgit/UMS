@@ -10,7 +10,7 @@
                         <p>Experience seamless functionality with a range of cross-platform features and an intuitive
                             yet powerful.</p>
                         <div class="btn-main">
-                            <a href="#" class="master-btn">
+                            <a href="{{ route('website.faculties') }}" class="master-btn">
                                 <button class=" d-flex align-items-center justify-content-center">Discover More
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22"
                                         fill="none">
@@ -24,51 +24,31 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="introduce-team">
-                        <div class="introduce-team-img">
-                            <img src="{{ url('assets/website/assets/images/introduce/Introduce1.png') }}" alt="">
+
+                @php $cnt = 1 @endphp
+                @if(!empty($teacher_data))
+                    @foreach($teacher_data as $teacher)
+                        <div class="col-lg-3 col-md-6">
+                            <div class="introduce-team">
+                                <div class="introduce-team-img">
+                                    <a href="{{  url('/faculties/faculty-details/'.$teacher->id) }}">
+                                        <img src="/images/users/faculty/{{ $teacher->image }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="introduce-team-text">
+                                <a href="{{  url('/faculties/faculty-details/'.$teacher->id) }}"><h4>{{ $teacher->name }}</h4></a>
+                                    <p>Department: <span>{{ $teacher->dept }}</span></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="introduce-team-text">
-                            <h4>Willie Upshaw</h4>
-                            <p>Department: <span>Biology</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="introduce-team">
-                        <div class="introduce-team-img">
-                            <img src="{{ url('assets/website/assets/images/introduce/Introduce2.png') }}" alt="">
-                        </div>
-                        <div class="introduce-team-text">
-                            <h4>Faye Jackson</h4>
-                            <p>Department: <span>Math</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2"></div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="introduce-team">
-                        <div class="introduce-team-img">
-                            <img src="{{ url('assets/website/assets/images/introduce/Introduce3.png') }}" alt="">
-                        </div>
-                        <div class="introduce-team-text">
-                            <h4>Faye Jackson</h4>
-                            <p>Department: <span>Math</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="introduce-team">
-                        <div class="introduce-team-img">
-                            <img src="{{ url('assets/website/assets/images/introduce/Introduce4.png') }}" alt="">
-                        </div>
-                        <div class="introduce-team-text">
-                            <h4>Faye Jackson</h4>
-                            <p>Department: <span>Math</span></p>
-                        </div>
-                    </div>
-                </div>
+
+                        @if($cnt == 2 )
+                        <div class="col-lg-2"></div>
+                        @endif
+
+                        @php $cnt++ @endphp
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="Introduce-icon2"><img src="{{ url('assets/website/assets/images/introduce/Introduce-icon2.png') }}" alt=""></div>

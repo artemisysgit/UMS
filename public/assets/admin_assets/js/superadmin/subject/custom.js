@@ -1,5 +1,7 @@
 $(document).ready(function() {
 
+    CKEDITOR.replace('descr');
+    $("#course").select2();
 
    $('#tbl').DataTable( {
 

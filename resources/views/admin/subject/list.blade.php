@@ -33,7 +33,6 @@
                     <th>SL</th>
                     <th>Title</th>
                     <th>Subject Code</th>
-                    <th>Descr</th>
                     <th>Status</th>
                     <th>Created By</th>
                     <th>Action</th>
@@ -49,7 +48,6 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $r->title }}</td>
                     <td>{{ $r->subCode }}</td>
-                    <td>{{ $r->descr }}</td>
                     <td>{{ $r->status == 1 ?'Active':'Inactive' }}</td>
                     <td>{{ $r->name }}</td>
                     <td>

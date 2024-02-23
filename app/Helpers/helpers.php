@@ -1,5 +1,7 @@
 <?php
 use App\Models\frontend\College;
+use App\Models\frontend\Course;
+use App\Models\frontend\Subject;
 
 if (! function_exists('activeMenu')) {
 
@@ -28,5 +30,18 @@ if (! function_exists('getActiveColleges')) {
         $model = new College();
         $data = $model->getList();
         return $data;
+    }
+}
+
+if (! function_exists('getSubjectCombination')) {
+    function getSubjectCombination($subID,$courseID,$collegeID)
+    {
+        $model = new Subject();
+        $data = $model->getSubjectCombination($subID,$courseID,$collegeID);
+        if(!empty($data))
+        {
+            return $data;
+        }
+
     }
 }

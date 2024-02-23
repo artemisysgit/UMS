@@ -8,7 +8,7 @@
                 <h2>1800-188-3333</h2>
                 <h3>helpline@unicampus.com</h3>
                 <div class="agency-sub-btn">
-                    <a href="#" class="d-flex align-items-center ">
+                    <a href="{{ route('contact-us') }}" class="d-flex align-items-center ">
                         Contact Us
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                             xmlns="http://www.w3.org/2000/svg">

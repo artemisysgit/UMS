@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->integer('collegeID')->default(0);
+            $table->integer('courseID')->default(0);
             $table->string('title')->unique();
             $table->text('descr')->default(null);
             $table->string('startDate');

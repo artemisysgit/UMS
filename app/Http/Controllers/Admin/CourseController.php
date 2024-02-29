@@ -54,6 +54,7 @@ class CourseController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'short_descr' => 'required',
             'descr' => 'required',
             'startDate' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -71,6 +72,7 @@ class CourseController extends Controller
         }
 
         $model->title = $request->input('title');
+        $model->short_descr = $request->input('short_descr');
         $model->descr = $request->input('descr');
         $model->startDate = date('Y-m-d',strtotime($request->input('startDate')));
         $model->image = $imageName;
@@ -128,6 +130,7 @@ class CourseController extends Controller
         $request->validate([
             //'title' => 'required|unique:courses,title,{$id}',
             'title' => 'required',
+            'short_descr' => 'required',
             'descr' => 'required',
             'startDate' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -158,6 +161,7 @@ class CourseController extends Controller
         }
 
         $model->title = $request->input('title');
+        $model->short_descr = $request->input('short_descr');
         $model->descr = $request->input('descr');
         $model->image = $imageName;
         $model->startDate = date('Y-m-d',strtotime($request->input('startDate')));

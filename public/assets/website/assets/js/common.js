@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
     $("#enquiry_frm").validate({
 
         rules: {
@@ -15,6 +16,7 @@ $(document).ready(function(){
                 minlength: 10,
                 maxlength: 10,
             },
+            course: 'required',
 
         },
         messages: {
@@ -30,6 +32,7 @@ $(document).ready(function(){
                 minlength: 'Phone no must be at least 10 characters long',
                 maxlength: 'Phone no must be at most 10 characters long',
             },
+            course: 'Please select a course',
 
 
         },
@@ -44,6 +47,40 @@ $(document).ready(function(){
             //     showConfirmButton: false,
             //     timer: 1500
             // });
+
+        }
+
+    });
+
+    $("#frm_contact").validate({
+
+        rules: {
+            name: 'required',
+            email: {
+              required: true,
+              email: true,
+            },
+            subject: 'required',
+            msg: 'required',
+            "chk": {
+                required: true,
+                minlength: 1
+              },
+        },
+        messages: {
+
+            name: 'This field is required',
+            email: {
+                required: 'This field is required',
+                email: 'Must be an valid email',
+            },
+            subject: 'This field is required',
+            msg: 'This field is required',
+            chk: 'Please accept the terms',
+        },
+
+        submitHandler: function(form) {
+        form.submit();
 
         }
 

@@ -5,13 +5,11 @@
                     <div class="admissions-sub1">
                         <div class="heading">
                             <h5>Education Admissions</h5>
-                            <h2>Bridge opportunity gap support access education!</h2>
-                            <p>Experience seamless functionality with a range of cross-platform features and an
-                                intuitive yet powerful interface in our comprehensive campus management solutions for
-                                educational institutions.</p>
+                            <h2>{{ $about_data->short_description }}</h2>
+                            {!! $about_data->description !!}
                         </div>
 
-                        <ul>
+                        <!-- <ul>
                             <li><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"
                                     fill="none">
                                     <g clip-path="url(#clip0_212_1611)">
@@ -104,10 +102,10 @@
                                     </defs>
                                 </svg> Launch your course
                             </li>
-                        </ul>
+                        </ul> -->
 
                         <div class="admissions-sub-btn">
-                            <a href="#" class="d-flex align-items-center ">
+                            <a href="{{ route('about-us') }}" class="d-flex align-items-center ">
                                 Discover More
                                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -132,12 +130,20 @@
                             </div>
                         @endif
 
-                            <h3>Admissions</h3>
+                            <h3>Enquiry</h3>
                             <form action="{{ route('website.saveEnquiry') }}" id="enquiry_frm" method="POST">
                                 @csrf
                                 <input type="text" name="name" id="name" placeholder="Full Name">
                                 <input type="email" name="email" id="email" placeholder="Email">
                                 <input type="tel" id="phone" name="phone" placeholder="Phone">
+                                <select name="course" id="course" placeholder="Course">
+                                    <option value="">Courses</option>
+                                    @if(!empty($course_data))
+                                        @foreach($course_data as $course)
+                                        <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
                                 <p class="admissins-date">
                                     <input type="text" id="datepicker" name="dob" placeholder="DOB" readonly>
                                     <span id="date-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"

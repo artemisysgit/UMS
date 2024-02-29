@@ -1030,7 +1030,7 @@ header .navigation .main-menu > .registration > a::before {
   margin-bottom: 30px;
 }
 
-.admissions .admissions-sub2 .admissions-form form input {
+.admissions .admissions-sub2 .admissions-form form input,select {
   color: #717171;
   font-family: GT America Trial rg;
   font-size: 16px;
@@ -1042,6 +1042,10 @@ header .navigation .main-menu > .registration > a::before {
   text-indent: 15px;
   line-height: 50px;
   margin-bottom: 15px;
+  height: 50px;
+}
+.admissions .admissions-sub2 .admissions-form form select option{
+    line-height: 50px;
 }
 
 .admissions .admissions-sub2 .admissions-form form textarea {

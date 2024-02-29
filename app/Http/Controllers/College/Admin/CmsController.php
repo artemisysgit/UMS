@@ -48,12 +48,18 @@ class CmsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:cms,title,collegeID',
+            'title' => 'required',
             'descr' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $model = new Cms();
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        if($validate[0] == 1)
+        {
+            return redirect()->route('college.admin.addPage')->with("error_message","Already exists !!");
+        }
 
         $upload_path = public_path().'/images/college/cms/';
         $imageName = '';
@@ -136,6 +142,13 @@ class CmsController extends Controller
         $model->description = $request->input('descr');
         $model->image = $imageName;
         $model->status = $request->input('status');
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        $chkID = $model->chkID($request->input('title'),$this->collegeID,$id);
+        if($validate[0] == 1 && !empty($chkID))
+        {
+            return redirect()->route('college.admin.editPage',$id)->with("error_message","Already exists !!");
+        }
         $model->save();
 
         return redirect()->route('college.admin.pages')->with('message',"Data has been updated...!");

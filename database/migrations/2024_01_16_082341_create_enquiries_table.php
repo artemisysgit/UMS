@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('enquiries', function (Blueprint $table) {
             $table->id();
             $table->integer('collegeID')->default(0);
+            $table->integer('courseID')->default(0);
             $table->string('name');
             $table->string('email');
             $table->string('phone');

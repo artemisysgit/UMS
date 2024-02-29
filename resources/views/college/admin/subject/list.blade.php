@@ -52,7 +52,10 @@
                     <td>{{ $r->descr }}</td>
                     <td>{{ $r->status == 1 ?'Active':'Inactive' }}</td>
                     <td>{{ $r->name }}</td>
-                    <td><a href="{{  url('college/admin/subjects/edit/'.$r->id) }}" class="btn btn-primary btn-sm">edit</a></td>
+                    <td>
+                        <a href="{{  url('college/admin/subjects/edit/'.$r->id) }}" class="btn btn-primary btn-sm">edit</a>
+                        <a href="{{  url('college/admin/subjects/combinations/list/'.$r->id) }}" class="btn btn-primary btn-sm">Combinations</a>
+                    </td>
                 </tr>
 
                 @endforeach

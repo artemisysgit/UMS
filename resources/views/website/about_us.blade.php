@@ -25,7 +25,7 @@
     <section class="innere-banner about-banner">
         <div class="container">
             <div class="innere-banner-text">
-                <h1>About Us</h1>
+                <h1>{{ $about_data->title }}</h1>
                 <p>From health care to education, policy to art, artificial intelligence <br> is rapidly changing our
                     world and our daily lives.</p>
                 <span><a href="/">Home <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10"
@@ -34,7 +34,7 @@
                                 stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a></span>
-                <span>About Us</span>
+                <span>{{ $about_data->title }}</span>
             </div>
         </div>
     </section>
@@ -81,11 +81,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="about-univercity-img">
-                        <img src="{{ url('assets/website/assets/images/about-univercity/about-univercity.png') }}" alt="">
+                        <!-- <img src="{{ url('assets/website/assets/images/about-univercity/about-univercity.png') }}" alt="">
                         <div class="about-univercity-icon1"><img
                                 src="{{ url('assets/website/assets/images/about-univercity/about-univercity-icon1.png') }}" alt=""></div>
                         <div class="about-univercity-icon2"><img
-                                src="{{ url('assets/website/assets/images/about-univercity/about-univercity-icon2.png') }}" alt=""></div>
+                                src="{{ url('assets/website/assets/images/about-univercity/about-univercity-icon2.png') }}" alt=""></div> -->
+
+                        <img src="/images/admin/cms/{{ $about_data->image }}" alt="{{ $about_data->title }}">
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -94,19 +96,18 @@
                             <h5>About Our University <div class="sub-heading-bg"><img
                                         src="{{ url('assets/website/assets/images/heading/heading-bg.png') }}" alt=""></div>
                             </h5>
-                            <h2>A few words about the university</h2>
-                            <p>Experience seamless functionality with a range of cross-platform features and an
-                                intuitive yet powerful interface in our comprehensive campus management solutions for
-                                educational institutions.</p>
+                            <h2>{{ $about_data->short_description }}</h2>
+
                         </div>
-                        <ul>
+                        {!! $about_data->description !!}
+                        <!-- <ul>
                             <li class="d-flex align-items-center ">
                                 <span class="about-univercity-count">01</span> Doctoral Degrees
                             </li>
                             <li class="d-flex align-items-center ">
                                 <span class="about-univercity-count">02</span> Global Students
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>
@@ -122,7 +123,7 @@
                     powerful interface in our comprehensive campus management solutions for educational institutions.
                 </p>
                 <div class="scholarship-sub-btn">
-                    <a href="#" class="d-flex align-items-center ">
+                    <a href="{{ route('contact-us') }}" class="d-flex align-items-center ">
                         Contact Us
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="move-right">
@@ -138,6 +139,8 @@
         </div>
     </section>
 
+    @if(!empty($teacher_data))
+
     <section class="professor mb">
         <div class="professor-icon"><img src="{{ url('assets/website/assets/images/professor/profesor-icon.png') }}" alt=""></div>
         <div class="container">
@@ -150,87 +153,24 @@
                         institutions.</p>
             </div>
             <div class="professor-slider">
-                <div class="professor-slide">
-                    <a href="#">
-                        <div class="professor-team">
-                            <div class="professor-team-img">
-                                <img src="{{ url('assets/website/assets/images/professor/professor1.png') }}" alt="">
+                @foreach($teacher_data as $teacher)
+                    <div class="professor-slide">
+                        <a href="{{  url('/faculties/faculty-details/'.$teacher->id) }}">
+                            <div class="professor-team">
+                                <div class="professor-team-img">
+                                    <img src="/images/users/faculty/{{ $teacher->image }}" alt="">
+                                </div>
+                                <div class="professor-team-text">
+                                    <h4>{{ $teacher->name }}</h4>
+                                    <p>Department: <span>{{ $teacher->dept }}</span></p>
+                                </div>
                             </div>
-                            <div class="professor-team-text">
-                                <h4>Willie Upshaw</h4>
-                                <p>Department: <span>Biology</span></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="professor-slide">
-                    <a href="#">
-                        <div class="professor-team">
-                            <div class="professor-team-img">
-                                <img src="{{ url('assets/website/assets/images/professor/professor2.png') }}" alt="">
-                            </div>
-                            <div class="professor-team-text">
-                                <h4>Faye Jackson</h4>
-                                <p>Department: <span>Math</span></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="professor-slide">
-                    <a href="#">
-                        <div class="professor-team">
-                            <div class="professor-team-img">
-                                <img src="{{ url('assets/website/assets/images/professor/professor3.png') }}" alt="">
-                            </div>
-                            <div class="professor-team-text">
-                                <h4>Faye Jackson</h4>
-                                <p>Department: <span>Math</span></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="professor-slide">
-                    <a href="#">
-                        <div class="professor-team">
-                            <div class="professor-team-img">
-                                <img src="{{ url('assets/website/assets/images/professor/professor4.png') }}" alt="">
-                            </div>
-                            <div class="professor-team-text">
-                                <h4>Faye Jackson</h4>
-                                <p>Department: <span>Math</span></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="professor-slide">
-                    <a href="#">
-                        <div class="professor-team">
-                            <div class="professor-team-img">
-                                <img src="{{ url('assets/website/assets/images/professor/professor1.png') }}" alt="">
-                            </div>
-                            <div class="professor-team-text">
-                                <h4>Willie Upshaw</h4>
-                                <p>Department: <span>Biology</span></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="professor-slide">
-                    <a href="#">
-                        <div class="introduce-team">
-                            <div class="introduce-team-img">
-                                <img src="{{ url('assets/website/assets/images/professor/professor2.png') }}" alt="">
-                            </div>
-                            <div class="introduce-team-text">
-                                <h4>Faye Jackson</h4>
-                                <p>Department: <span>Math</span></p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
             <div class="btn-main">
-                <a href="#" class="master-btn">
+                <a href="{{ route('website.faculties') }}" class="master-btn">
                     <button class=" d-flex align-items-center justify-content-center">Discover More
                         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
                             <path d="M16.5 7.33325L20.1667 10.9999L16.5 14.6666" stroke="white" stroke-width="2"
@@ -244,6 +184,8 @@
         </div>
     </section>
 
+    @endif
+
     <section class="campus mb">
         <div class="container d-flex align-items-center ">
             <div class="campus-img"><img src="{{ url('assets/website/assets/images/campus/campus.png') }}" alt=""></div>
@@ -256,7 +198,7 @@
                         powerful interface in our comprehensive campus.</p>
                 </div>
                 <div class="campus-sub-btn">
-                    <a href="#" class="d-flex align-items-center ">
+                    <a href="{{ route('contact-us') }}" class="d-flex align-items-center ">
                         Contact Us
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="move-right">

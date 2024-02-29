@@ -62,7 +62,7 @@ class RoleController extends Controller
         $model->collegeID = (int)$this->collegeID;
         $model->createdBy = Auth::guard('collegeadmin')->user()->id;
 
-        $validate_title = $model->chk_role_availability($request->input('title'),$this->collegeID);
+        $validate_title = $model->chk_availability($request->input('title'),$this->collegeID);
 
         //echo $validate_title[0];die;
 
@@ -102,7 +102,7 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|unique:roles,title,' . $id,
+            'title' => 'required',
             'descr' => 'required'
         ]);
 
@@ -112,6 +112,13 @@ class RoleController extends Controller
         $model->title = $request->input('title');
         $model->descr = $request->input('descr');
         $model->status = $request->input('status');
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        $chkID = $model->chkID($request->input('title'),$this->collegeID,$id);
+        //echo "<pre>";print_r($chkID);die;
+        if($validate[0] == 1 && !empty($chkID))
+        {
+            return redirect()->route('editRole',$id)->with("error_message","Already exists !!");
+        }
         $model->save();
 
         return redirect()->route('college.admin.roles')->with('message',"Data has been updated...!");

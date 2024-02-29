@@ -114,8 +114,9 @@
                         @endif
                     </li>
                     <li class="registration">
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}">
+
+                    @if (Route::has('registration'))
+                        <a href="{{ route('registration') }}">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path

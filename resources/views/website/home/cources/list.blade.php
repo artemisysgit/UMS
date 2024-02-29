@@ -37,7 +37,7 @@
                             </a>
                             </div>
                             <div class="courses-slider-text">
-                                <ul class="course-detail d-flex align-items-center justify-content-between ">
+                                <!-- <ul class="course-detail d-flex align-items-center justify-content-between ">
                                     <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             viewBox="0 0 16 16" fill="none">
                                             <path
@@ -82,8 +82,9 @@
                                                 </clipPath>
                                             </defs>
                                         </svg> 3 Years</li>
-                                </ul>
+                                </ul> -->
                                 <a href="#">{{ $course->title }}</a>
+                                <div class="course-fee">{!! Str::limit($course->descr,150,' ....') !!}</div>
                             </div>
                         </div>
                     </div>

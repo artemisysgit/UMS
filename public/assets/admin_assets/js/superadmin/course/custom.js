@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    CKEDITOR.replace('short_descr');
     CKEDITOR.replace('descr');
 
     $( "#startDate" ).datepicker({

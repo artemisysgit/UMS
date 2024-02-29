@@ -20,6 +20,14 @@
                         </ul>
                     </div>
                 @endif
+
+                @if(session()->has('error_message'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>{{ session()->get('error_message') }}</li>
+                        </ul>
+                    </div>
+                @endif
                 </h5>
                 <div class="card-body">
                     <form action="{{ route('college.admin.saveSubject') }}" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>
@@ -30,6 +38,17 @@
                             <input type="text" class="form-control" id="bs-validation-name" name="title" placeholder="Subject Title" required />
                             <div class="valid-feedback">Looks good!</div>
                             <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="bs-validation-name">Course</label>
+                            <select name="course" id="course" class="form-control">
+                                <option value="">Select</option>
+                                @if(!empty($course_data))
+                                   @foreach($course_data as $course)
+                                        <option value="{{ $course->id }}">{{ $course->title }}</option>
+                                    @endforeach
+                                @endif
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="bs-validation-descr">Description</label>

@@ -57,6 +57,7 @@
                             </div>
                             <div class="courses-slider-text">
                                 <a href="{{  url('/courses/course-details/'.$course->id) }}">{{ $course->title }}</a>
+                                <div class="course-fee">{!! Str::limit($course->descr,150,' ....') !!}</div>
                             </div>
                         </div>
                     </div>

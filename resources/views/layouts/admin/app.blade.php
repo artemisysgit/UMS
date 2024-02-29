@@ -129,13 +129,18 @@
         @include('admin.college.includes.header');
     <?php }?>
 
+    <?php if($controller == 'EnquiryController'){?>
+        @include('admin.enquiry.includes.header');
+    <?php }?>
+
     <?php
 
     $admin_menu_active = '';
     if(activeMenu('admin/dashboard') || activeMenu('admin/courses') || activeMenu('admin/sessions') || activeMenu('admin/semesters')
     || activeMenu('admin/departments') || activeMenu('admin/roles') || activeMenu('admin/subjects') || activeMenu('admin/subject_combination_list')
     || activeMenu('admin/admins') || activeMenu('admin/faculties') || activeMenu('admin/assign-teachers') || activeMenu('admin/hod')
-    || activeMenu('admin/time')|| activeMenu('admin/routine') || activeMenu('admin/cms') || activeMenu('admin/benefits') || activeMenu('admin/colleges'))
+    || activeMenu('admin/time')|| activeMenu('admin/routine') || activeMenu('admin/cms') || activeMenu('admin/benefits') || activeMenu('admin/colleges')
+    || activeMenu('admin/enquiries') )
 
     {
         $admin_menu_active = 'active open';
@@ -176,6 +181,13 @@
     if(activeMenu('admin/benefits'))
     {
         $admin_benefit_menu_active = 'active open';
+    }
+
+    $admin_enquiry_menu_active = '';
+
+    if(activeMenu('admin/enquiries'))
+    {
+        $admin_enquiry_menu_active = 'active open';
     }
 
 
@@ -411,6 +423,23 @@
                     <li class="menu-item {{ activeMenu('admin/cms') }}">
                         <a href="{{ route('pages') }}" class="menu-link">
                             <div data-i18n="Page List">Page List</div>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <!-- Enquiry menu start -->
+            <li class="menu-item {{ $admin_enquiry_menu_active }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons ti ti-book"></i>
+                    <div data-i18n="Enquiry">Enquiry</div>
+                </a>
+                <ul class="menu-sub">
+
+                    <li class="menu-item {{ activeMenu('admin/enquiries') }}">
+                        <a href="{{ route('enquiries') }}" class="menu-link">
+                            <div data-i18n="Enquiry List">Enquiry List</div>
                         </a>
                     </li>
 
@@ -2240,6 +2269,10 @@
 
     <?php if($controller == 'CollegeController'){?>
         @include('admin.college.includes.footer');
+    <?php }?>
+
+    <?php if($controller == 'EnquiryController'){?>
+        @include('admin.enquiry.includes.footer');
     <?php }?>
 
 

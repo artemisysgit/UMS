@@ -35,4 +35,34 @@ class Department extends Model
         ->first();
         return $res;
     }
+
+    public function chk_availability($title,$collegeID=0)
+    {
+        $res = DB::table('departments')
+        ->select(DB::raw('count(*) as cnt'))
+        ->where('departments.title', $title)
+        ->where('departments.collegeID', $collegeID)
+        ->pluck('cnt');
+
+        return $res;
+    }
+
+    public function chkID($title,$collegeID=0,$id)
+    {
+        $arr = [];
+        $res = DB::table('departments')
+        ->where('title', $title)
+        ->where('collegeID', $collegeID)
+        ->where('id','!=', $id)
+        ->get();
+
+        if(!empty($res))
+        {
+            foreach($res as $r)
+            {
+                $arr[] = $r->id;
+            }
+        }
+        return $arr;
+    }
 }

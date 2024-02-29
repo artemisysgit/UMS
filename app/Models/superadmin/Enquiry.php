@@ -10,9 +10,13 @@ class Enquiry extends Model
 {
     use HasFactory;
 
-    public function getList()
+    public function getList($collegeID=0)
     {
-        $res = DB::table('enquiries')>get();
+        $res = DB::table('enquiries')
+        ->select('courses.title as course','enquiries.*')
+        ->join('courses','courses.id','=','enquiries.courseID')
+        ->where('enquiries.collegeID', $collegeID)
+        ->get();
         return $res;
     }
 }

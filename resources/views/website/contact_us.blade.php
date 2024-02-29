@@ -16,6 +16,12 @@
     <link rel="stylesheet" href="{{ url('assets/website/assets/css/style.css') }}">
 
     <title>{{ $title }}</title>
+
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
 </head>
 
 <body>
@@ -28,7 +34,7 @@
                 <h1>Contact Us</h1>
                 <p>From health care to education, policy to art, artificial intelligence <br> is rapidly changing our
                     world and our daily lives.</p>
-                <span><a href="index2.html">Home <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10"
+                <span><a href="/">Home <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10"
                             viewBox="0 0 7 10" fill="none">
                             <path d="M1.75 8.25L5.25 4.75L1.75 1.25" stroke="white" stroke-width="2"
                                 stroke-linecap="round" stroke-linejoin="round" />
@@ -42,16 +48,24 @@
     <section class="contact-message mb">
         <div class="container">
             <div class="message-form">
-                <form action="">
+
+            @if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+            @endif
+
+                <form action="{{ route('website.saveContact') }}" id="frm_contact" method="POST">
+                @csrf
                     <h3>Send us a quick message</h3>
                     <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
-                    <input type="text" placeholder="Name">
-                    <input type="email" placeholder="Email">
-                    <input type="text" placeholder="Subject">
-                    <textarea name="" id="" placeholder="Message"></textarea>
+                    <input type="text" id="name" name="name" placeholder="Name">
+                    <input type="text" id="email" name="email" placeholder="Email">
+                    <input type="text" id="subject" name="subject" placeholder="Subject">
+                    <textarea name="msg" id="msg" placeholder="Message"></textarea>
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" value="">
+                            <input type="checkbox" id="chk" name="chk" class="form-check-input" value="">
                             <p>Accept Terms & Conditions And Privacy Policy.</p>
                         </label>
                     </div>
@@ -212,6 +226,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
     <script src="{{ url('assets/website/assets/js/main.js') }}"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"> </script>
+    <script src="{{ url('assets/website/assets/js/common.js' ) }}"></script>
 </body>
 
 </html>

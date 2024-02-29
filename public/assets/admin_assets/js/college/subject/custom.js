@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+    $("#course").select2();
 
    $('#tbl').DataTable( {
 

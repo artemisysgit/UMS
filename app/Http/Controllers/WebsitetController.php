@@ -10,13 +10,16 @@ use App\Models\frontend\Benefit;
 use App\Models\frontend\Department;
 use App\Models\frontend\Course;
 use App\Models\frontend\Enquiry;
+use App\Models\frontend\Contact;
 use App\Models\frontend\College;
 use App\Models\frontend\Semester;
 use App\Models\frontend\Teacher;
 use App\Models\frontend\Subject;
+use App\Models\frontend\Cms;
 
 
 use App\Helpers\helpers;
+use Illuminate\Support\Str;
 
 class WebsitetController extends Controller
 {
@@ -36,6 +39,10 @@ class WebsitetController extends Controller
         $teacher_model = new Teacher();
         $teacher_data = $teacher_model->getList(0,4);
 
+        $cms_model = new Cms();
+        $pageName = Str::slug('about us');
+        $about_data = $cms_model->getDataBypageName($pageName);
+
         $data = array(
             'title' =>$title,
             'benefit_data' =>$benefit_data,
@@ -43,6 +50,7 @@ class WebsitetController extends Controller
             'course_type' => $course_type,
             'course_data' =>$course_data,
             'teacher_data' =>$teacher_data,
+            'about_data' =>$about_data,
         );
         return view('welcome',$data);
     }
@@ -51,12 +59,17 @@ class WebsitetController extends Controller
     {
         $title = "About Us";
 
+        $teacher_model = new Teacher();
+        $teacher_data = $teacher_model->getList(0,'');
+
+        $cms_model = new Cms();
+        $pageName = Str::slug($title);
+        $about_data = $cms_model->getDataBypageName($pageName);
+
         $data = array(
             'title' =>$title,
-            // 'benefit_data' =>$benefit_data,
-            // 'dept_data' =>$dept_data,
-            // 'course_type' => $course_type,
-            // 'course_data' =>$course_data,
+            'teacher_data' =>$teacher_data,
+            'about_data' =>$about_data,
         );
         return view('website.about_us',$data);
     }
@@ -71,6 +84,26 @@ class WebsitetController extends Controller
         return view('website.contact_us',$data);
     }
 
+    public function save_contact(Request $request)
+    {
+        $model = new Contact();
+
+        $request->validate([
+            'name'=>'required',
+            'email'=> 'required|email',
+            'subject'=> 'required',
+            'msg'=> 'required'
+        ]);
+
+        $model->name = $request->input('name');
+        $model->email = $request->input('email');
+        $model->subject = $request->input('subject');
+        $model->msg = htmlentities($request->input('msg'));
+        $res = $model->saveData($model);
+
+        return redirect()->route('contact-us')->with('message',"Data send successfully...!");
+    }
+
     public function enquiry(Request $request)
     {
         $model = new Enquiry();
@@ -79,12 +112,14 @@ class WebsitetController extends Controller
             'name'=>'required',
             'email'=> 'required|email|unique:enquiries,email',
             'phone'=> 'required|numeric',
+            'course'=> 'required',
             'dob'=> 'required'
         ]);
 
         $model->name = $request->input('name');
         $model->email = $request->input('email');
         $model->phone = $request->input('phone');
+        $model->courseID = $request->input('course');
         $model->dob = date('Y-m-d',strtotime($request->input('dob')));
         $model->message = htmlentities($request->input('message'));
         $res = $model->saveData($model);

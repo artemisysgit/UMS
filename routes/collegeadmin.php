@@ -8,6 +8,7 @@ use App\Http\Controllers\College\Admin\SemesterController;
 use App\Http\Controllers\College\Admin\DepartmentController;
 use App\Http\Controllers\College\Admin\RoleController;
 use App\Http\Controllers\College\Admin\SubjectController;
+use App\Http\Controllers\College\Admin\SubjectCombinationController;
 use App\Http\Controllers\College\Admin\AdminuserController;
 use App\Http\Controllers\College\Admin\FacultyController;
 use App\Http\Controllers\College\Admin\ProfileController;
@@ -87,6 +88,14 @@ Route::group(['middleware'=>'collegeadmin'],function(){
     Route::post('college/admin/subjects/save-subject', [SubjectController::class,'store'])->name('college.admin.saveSubject');
     Route::get('college/admin/subjects/edit/{id}', [SubjectController::class,'edit'])->name('college.admin.editSubject');
     Route::put('college/admin/subjects/update/{id}', [SubjectController::class,'update'])->name('college.admin.updateSubject');
+    //--------------------------------------End------------------------------------------//
+
+    //-------------------------------------Subject Combinations---------------------------------------//
+    Route::get('college/admin/subjects/combinations/list/{subid}', [SubjectCombinationController::class,'index'])->name('college.admin.subject_combination_list');
+    Route::get('college/admin/subjects/combinations/add-subject-combination/{subid}', [SubjectCombinationController::class,'create'])->name('college.admin.addSubjectCombination');
+    Route::post('college/admin/subjects/combinations/save-subject-combination', [SubjectCombinationController::class,'store'])->name('college.admin.saveSubjectCombination');
+    Route::get('college/admin/subjects/combinations/edit/{subid}/{id}', [SubjectCombinationController::class,'edit'])->name('college.admin.editSubjectCombination');
+    Route::put('college/admin/subjects/combinations/update/{subid}/{id}', [SubjectCombinationController::class,'update'])->name('college.admin.updateSubjectCombination');
     //--------------------------------------End------------------------------------------//
 
     //-------------------------------------Admin Users---------------------------------------//

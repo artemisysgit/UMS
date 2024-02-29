@@ -20,6 +20,14 @@
                         </ul>
                     </div>
                 @endif
+
+                @if(session()->has('error_message'))
+                    <div class="alert alert-danger">
+                        <ul>
+                            <li>{{ session()->get('error_message') }}</li>
+                        </ul>
+                    </div>
+                @endif
                 </h5>
                 <div class="card-body">
                     <form action="{{ route('college.admin.saveDepartment') }}" method="POST" class="needs-validation" enctype="multipart/form-data" novalidate>

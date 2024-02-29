@@ -48,12 +48,18 @@ class BenefitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|unique:benefits,title',
+            'title' => 'required',
             'descr' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $model = new Benefit();
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        if($validate[0] == 1)
+        {
+            return redirect()->route('college.admin.addBenefit')->with("error_message","Already exists !!");
+        }
 
         $upload_path = public_path().'/images/college/benefit/';
         $imageName = '';
@@ -105,7 +111,7 @@ class BenefitController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|unique:benefits,title,' . $id,
+            'title' => 'required',
             'descr' => 'required',
             'file' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
@@ -135,6 +141,13 @@ class BenefitController extends Controller
         $model->descr = htmlentities($request->input('descr'));
         $model->image = $imageName;
         $model->status = $request->input('status');
+
+        $validate = $model->chk_availability($request->input('title'),$this->collegeID);
+        $chkID = $model->chkID($request->input('title'),$this->collegeID,$id);
+        if($validate[0] == 1 && !empty($chkID))
+        {
+            return redirect()->route('editBenefit',$id)->with("error_message","Already exists !!");
+        }
         $model->save();
 
         return redirect()->route('college.admin.benefits')->with('message',"Data has been updated...!");

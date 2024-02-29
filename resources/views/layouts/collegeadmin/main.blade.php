@@ -90,6 +90,10 @@ if($segment == 'college')
         @include('college.admin.subject.includes.header');
     <?php }?>
 
+    <?php if($controller == 'SubjectCombinationController'){?>
+        @include('college.admin.subject_combination.includes.header');
+    <?php }?>
+
     <?php if($controller == 'FacultyController'){?>
         @include('college.admin.users.normal.includes.header');
     <?php }?>
@@ -1008,6 +1012,10 @@ if($segment == 'college')
 
     <?php if($controller == 'SubjectController'){?>
         @include('college.admin.subject.includes.footer');
+    <?php }?>
+
+    <?php if($controller == 'SubjectCombinationController'){?>
+        @include('college.admin.subject_combination.includes.footer');
     <?php }?>
 
     <?php if($controller == 'FacultyController'){?>

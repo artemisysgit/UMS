@@ -40,6 +40,10 @@
                             <div class="invalid-feedback">Please enter your name.</div>
                         </div>
                         <div class="mb-3">
+                            <label class="form-label" for="bs-validation-descr">Short Description</label>
+                            <textarea name="short_descr" id="short_descr" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label" for="bs-validation-descr">Description</label>
                             <textarea name="descr" id="descr" cols="30" rows="10" class="form-control"></textarea>
                         </div>

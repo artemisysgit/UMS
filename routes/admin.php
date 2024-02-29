@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\TimeController;
 use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\BenefitController;
 use App\Http\Controllers\Admin\CollegeController;
+use App\Http\Controllers\Admin\EnquiryController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -177,6 +178,10 @@ Route::group(['middleware'=>'admin'],function(){
     Route::post('admin/benefits/save-benefit', [BenefitController::class,'store'])->name('saveBenefit');
     Route::get('admin/benefits/edit/{id}', [BenefitController::class,'edit'])->name('editBenefit');
     Route::put('admin/benefits/update/{id}', [BenefitController::class,'update'])->name('updateBenefit');
+    //--------------------------------------End------------------------------------------//
+
+    //-------------------------------------Enquiries---------------------------------------//
+    Route::get('admin/enquiries', [EnquiryController::class,'index'])->name('enquiries');
     //--------------------------------------End------------------------------------------//
 
 });

@@ -1,6 +1,13 @@
 $(document).ready(function() {
 
-    CKEDITOR.replace('descr');
+    //CKEDITOR.replace('descr');
+
+    CKEDITOR.replace('descr', {
+        fullPage: true,
+        //extraPlugins: 'docprops',
+        allowedContent: true,
+
+    });
 
    $('#tbl').DataTable( {
 

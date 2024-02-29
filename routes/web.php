@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 // })->name('/');
 
 Route::get('/', [App\Http\Controllers\WebsitetController::class, 'index'])->name('/');
+Route::get('/registration', [App\Http\Controllers\RegisterController::class, 'index'])->name('registration');
 Route::post('/ajax-filter-course', [App\Http\Controllers\WebsitetController::class, 'ajax_filter_type_data'])->name('course-filter');
 Route::get('/about-us', [App\Http\Controllers\WebsitetController::class, 'about_us'])->name('about-us');
 Route::get('/contact-us', [App\Http\Controllers\WebsitetController::class, 'contact_us'])->name('contact-us');
@@ -35,6 +36,8 @@ Route::get('/colleges/{code}', [App\Http\Controllers\WebsitetController::class, 
 
 Route::get('/faculties', [App\Http\Controllers\WebsitetController::class, 'faculties'])->name('website.faculties');
 Route::get('/faculties/faculty-details/{id}', [App\Http\Controllers\WebsitetController::class, 'faculty_details'])->name('website.faculty_details');
+
+Route::post('/save-contact', [App\Http\Controllers\WebsitetController::class, 'save_contact'])->name('website.saveContact');
 
 Auth::routes();
 
